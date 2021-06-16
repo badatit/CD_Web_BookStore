@@ -57,6 +57,8 @@
 	src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
 <style data-styled data-styled-version="4.4.1"></style>
 
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js'></script>
+
 </head>
 
 

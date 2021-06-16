@@ -1,10 +1,10 @@
 package springmvc.api.admin;
 
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,7 +38,7 @@ public class BookAPI {
 	@SuppressWarnings("unchecked")
 	@PostMapping
 	public BookDTO saveBook(@RequestBody BookDTO bookDTO) {
-		Map<String, String > paramsImage = new HashedMap();
+		Map<String, String > paramsImage = new HashMap<String, String>();
 		if (StringUtils.isNotBlank(bookDTO.getBase64_1()) && StringUtils.isNotBlank(bookDTO.getImg1())) {
 			paramsImage.put(bookDTO.getImg1(), bookDTO.getBase64_1());
 		}

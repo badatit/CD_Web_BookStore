@@ -2,6 +2,7 @@ package springmvc.service;
 
 import java.util.List;
 
+import springmvc.dto.OrderDTO;
 import springmvc.dto.UserDTO;
 
 public interface IUserService {
@@ -29,4 +30,6 @@ public interface IUserService {
 	
 	public UserDTO updatePassword(UserDTO userDTO);
 	public long totalAmountOfUsers();
+	
+	
 }

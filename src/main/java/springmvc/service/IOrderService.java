@@ -8,4 +8,5 @@ import springmvc.dto.OrderDTO;
 public interface IOrderService {
 
 	public OrderDTO save(OrderDTO orderDTO);
+	public List<OrderDTO> findOrderById();
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import springmvc.Utils.SecurityUtils;
+import springmvc.Utils.VnCurrencyUtil;
 import springmvc.dto.BookDTO;
 import springmvc.dto.CartDTO;
 import springmvc.dto.CategoryDTO;
@@ -36,6 +37,9 @@ public class HomeController {
 	
 	@Autowired
 	private ICartService iCartService;
+	
+	@Autowired
+	private VnCurrencyUtil vn;
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView homePage() {
@@ -53,7 +57,8 @@ public class HomeController {
 			List<MiniCartDTO> listCart = iCartService.findAllByUserId();
 			mav.addObject("sizeCart", iCartService.countSizeCart());
 			mav.addObject("listCart",listCart);
-			mav.addObject("sumPrice", iCartService.subTotal());
+			String result = vn.currencyVn(iCartService.subTotal());
+			mav.addObject("subTotal", result);
 		}
 		
 		

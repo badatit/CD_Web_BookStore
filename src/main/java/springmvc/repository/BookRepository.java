@@ -39,4 +39,6 @@ public interface BookRepository extends JpaRepository<BookEntity, Long > ,BookRe
 	List<BookEntity> findByNameAndCategory(String name , String categoryName);
 	public long countByStatus(String status);
 
+	@Query(value = "select issuingcompany , count(name) from book group by issuingcompany" , nativeQuery = true)
+	public List<?> countBookByIssuingcompany();
 }
