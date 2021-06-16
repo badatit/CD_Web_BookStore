@@ -55,21 +55,6 @@
 										<p class="statusaddress"></p>
 									</div>
 
-<<<<<<< HEAD
-		                					<div class="col-sm-6">
-		                						<label>Phone *</label>
-		                						<input type="tel" class="form-control" required>
-		                					</div>End .col-sm-6
-		                				</div>End .row -->
-								<label>Phone *</label> <input type="tel"
-									value="${userDTO.phoneNumber }" class="form-control"
-									name="Phone Number" required> <label>Email
-									address *</label> <input type="email" name="email" class="form-control"
-									value="${userDTO.email }" required> <label>Order
-									notes (optional)</label>
-								<textarea class="form-control" cols="30" rows="4"
-									placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
-=======
 		                		<div class="form-group">
 								<label>Phone *</label> 
 								<input type="tel" value="${userDTO.phoneNumber }" class="form-control" name="Phone Number" id="phoneNumber" required> 
@@ -81,7 +66,6 @@
 								</div>
 								 <label>Order notes (optional)</label>
 								<textarea class="form-control" cols="30" rows="4" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
->>>>>>> 745320bd5a2112fb8ebf8a2b00bfdba62f966c54
 							</div>
 							<!-- End .col-lg-9 -->
 							<aside class="col-lg-3">
@@ -148,7 +132,7 @@
 									</div>
 									<!-- End .accordion -->
 										<input type="hidden" id="checkPayNumber" value="1" >
-									<button  onclick="checkOut()" type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+									<button id="btnCheckOut"  onclick="checkOut()" type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
 										<span class="btn-text">Place Order</span>
 										 <span class="btn-hover-text">Proceed to Checkout</span>
 									</button>
@@ -168,7 +152,6 @@
 	</main>
 	<!-- End .main -->
 	<script>
-<<<<<<< HEAD
 		function checkOut() {
 			
 				$.ajax({
@@ -186,15 +169,11 @@
 				});
 
 		}
-=======
 	function checkPay(number) {
 		$('#checkPayNumber').val(number);
 		
 	}
 	
-	
-		
->>>>>>> 745320bd5a2112fb8ebf8a2b00bfdba62f966c54
 
 		function saveOrderDetail(response) {
 			var id = $('#id').val();
