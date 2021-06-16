@@ -77,8 +77,26 @@ public class BookEntity extends BaseEntity {
 //	@ManyToMany(mappedBy = "bookEntities")
 //	private List<CartEntity> cartEntities = new ArrayList<>();
 //	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "bookEntity")
+	private List<BookFavoriteEntity> bookFavoriteEntities = new ArrayList<>();
 	
 	
+	public List<OrderDetailEntity> getOrderDetailEntities() {
+		return orderDetailEntities;
+	}
+
+	public void setOrderDetailEntities(List<OrderDetailEntity> orderDetailEntities) {
+		this.orderDetailEntities = orderDetailEntities;
+	}
+
+	public List<BookFavoriteEntity> getBookFavoriteEntities() {
+		return bookFavoriteEntities;
+	}
+
+	public void setBookFavoriteEntities(List<BookFavoriteEntity> bookFavoriteEntities) {
+		this.bookFavoriteEntities = bookFavoriteEntities;
+	}
+
 	@Column(name = "status")
 	private String status;
 	

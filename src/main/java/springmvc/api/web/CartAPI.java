@@ -1,6 +1,9 @@
 package springmvc.api.web;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -75,14 +78,20 @@ public class CartAPI {
 	}
 	
 	@GetMapping("/carts/totalClickShipping")
-	public String totalClickShipping(@RequestParam(required = false,value = "radio") double radio,@RequestParam(required = false,value = "total") double total) {
-		double result = total + radio;
-		result = result *1000;
+	public double totalClickShipping(@RequestParam(required = false,value = "radio") double radio,@RequestParam(required = false,value = "total") String total) {
+		NumberFormat format = NumberFormat.getInstance(Locale.GERMAN);
+		double value = 0;
+		try {
+			value = format.parse(total).doubleValue();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		double result = value + radio*1000;
 		if (result <0) {
 			result = 0;
 		}
-		String st = vn.currencyVn(result);
-		return st;
+		return result;
 	}
 
 }

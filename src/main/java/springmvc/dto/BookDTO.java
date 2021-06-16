@@ -7,9 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class BookDTO extends AbstractDTO {
 
 	private String name;
-
-	private double price;
-
+	 double price;
 	private Date productionDay;
 	private String issuingCompany;
 	private String size;
@@ -25,6 +23,23 @@ public class BookDTO extends AbstractDTO {
 	private Long categoryId;
 	private String categoryName;
 	private String base64_1;
+	private String favorite;
+	
+	
+	
+	
+	
+	
+	
+
+	public String getFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(String favorite) {
+		this.favorite = favorite;
+	}
+
 	public String getBase64_1() {
 		return base64_1;
 	}

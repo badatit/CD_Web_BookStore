@@ -2,6 +2,7 @@ package springmvc.controller.web;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,13 @@ public class CheckOutController {
 	public ModelAndView checkOutPage(HttpSession session ) {
 		ModelAndView mav = new ModelAndView("/web/checkout");
 		OrderDTO dto = (OrderDTO) session.getAttribute("orderDTO");
-		mav.addObject("total",dto.getTotal());
+		try {
+			mav.addObject("total",dto.getTotal());
+		} catch (Exception e) {
+			mav.addObject("total",0);
+		}
+		
+		
 		// show information user
 		MyUser myUser = SecurityUtils.getPrincipal();
 		UserDTO userDTO = iuserService.finbById(myUser.getId());

@@ -41,8 +41,7 @@ public class CartController {
 		mav.addObject("listCart", listCart);
 		mav.addObject("sizeCart", iCartService.countSizeCart());
 		mav.addObject("categorys", lists);
-		String result = vn.currencyVn(iCartService.subTotal());
-		mav.addObject("subTotal", result);
+		mav.addObject("sumPrice", iCartService.subTotal());
 		System.out.println(listCart.size());
 		return mav;
 		

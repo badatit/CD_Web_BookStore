@@ -16,25 +16,33 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import springmvc.Enums.CoverTypesEnums;
+import springmvc.Utils.SecurityUtils;
 import springmvc.converter.BookConverter;
 import springmvc.dto.BookDTO;
+import springmvc.dto.MyUser;
 import springmvc.dto.request.SearchBookDTO;
 import springmvc.entity.BookEntity;
+import springmvc.entity.BookFavoriteEntity;
 import springmvc.entity.CategoryEntity;
+import springmvc.repository.BookFavoriteRepository;
 import springmvc.repository.BookRepository;
 import springmvc.repository.CategoryRepository;
 import springmvc.service.IBookService;
 
 @Service
 public class BookServiceImpl implements IBookService {
-		@Autowired
-		private BookRepository bookRepository;
+	@Autowired
+	private BookRepository bookRepository;
 
 	@Autowired
 	private CategoryRepository categoryRepository;
-	
+
+	@Autowired
+	private BookFavoriteRepository bookFavoriteRepository;
 
 	private BookConverter bookConverter = new BookConverter();
+
+	
 
 	@Override
 	public List<BookDTO> findAll() {
@@ -48,7 +56,6 @@ public class BookServiceImpl implements IBookService {
 		}
 		return dtos;
 	}
-
 	@Override
 	@Transactional
 	public BookDTO updateBook(BookDTO bookDTO) {
@@ -80,6 +87,7 @@ public class BookServiceImpl implements IBookService {
 		BookEntity bookEntity = bookRepository.save(entity);
 		return bookConverter.converterToDTO(bookEntity);
 	}
+
 	@Override
 	public BookDTO findById(Long id) {
 		return bookConverter.converterToDTO(bookRepository.findOne(id));
@@ -91,25 +99,25 @@ public class BookServiceImpl implements IBookService {
 		for (Long item : ids) {
 			bookRepository.delete(item);
 		}
-		
+
 	}
 
 	@Override
-	public List<BookDTO> showBookByCategory(Long id ,Pageable pageable) {
+	public List<BookDTO> showBookByCategory(Long id, Pageable pageable) {
 		CategoryEntity categoryEntity = categoryRepository.findOne(id);
 		List<BookEntity> listBooks = bookRepository.findAll(pageable).getContent();
 		List<BookDTO> dtos = new ArrayList<>();
 		for (BookEntity item : listBooks) {
 			BookDTO bookDTO = bookConverter.converterToDTO(item);
-			if(bookDTO.getCategoryId() == categoryEntity.getId()) {
+			if (bookDTO.getCategoryId() == categoryEntity.getId()) {
 				dtos.add(bookDTO);
-			}			
+			}
 		}
 		return dtos;
 	}
 
 	@Override
-	public List<BookDTO> findAllPage(Pageable pageable , SearchBookDTO searchBookDTO) {
+	public List<BookDTO> findAllPage(Pageable pageable, SearchBookDTO searchBookDTO) {
 		List<BookEntity> listBooks = bookRepository.findAll(pageable, searchBookDTO);
 		List<BookDTO> dtos = new ArrayList<>();
 		for (BookEntity item : listBooks) {
@@ -122,16 +130,40 @@ public class BookServiceImpl implements IBookService {
 	}
 
 	@Override
-	public int  getTotalItem() {
+	public int getTotalItem() {
 		return (int) bookRepository.count();
 	}
 
 	@Override
 	public List<BookDTO> findAllOrderByPriceASC() {
+		MyUser myUser = SecurityUtils.getPrincipal();
 		List<BookEntity> listBooks = bookRepository.findAllOrderByPriceASC();
 		List<BookDTO> listDTO = new ArrayList<>();
 		for (BookEntity item : listBooks) {
 			BookDTO bookDTO = bookConverter.converterToDTO(item);
+//			try {
+//				if (myUser.getId() != null) {
+//					List<BookFavoriteEntity> bookFavoriteEntities = bookFavoriteRepository.findByUser(myUser.getId());
+//					for (BookFavoriteEntity bookFavoriteEntity : bookFavoriteEntities) {
+//						if (bookFavoriteEntity.getBookEntity().getId() == item.getId()) {
+//							bookDTO.setFavo("yes");
+//						}
+//					}
+//				}
+//			} catch (Exception e) {
+//				
+//			}
+			bookDTO.setFavorite(null);
+			if (myUser == null) {
+				bookDTO.setFavorite(null);
+			}else {
+				List<BookFavoriteEntity> bookFavoriteEntities = bookFavoriteRepository.findByUser(myUser.getId());
+				for (BookFavoriteEntity bookFavoriteEntity : bookFavoriteEntities) {
+					if (bookFavoriteEntity.getBookEntity().getId() == item.getId()) {
+						bookDTO.setFavorite("OK");
+					}
+				}
+			}
 			listDTO.add(bookDTO);
 		}
 		return listDTO;
@@ -139,19 +171,26 @@ public class BookServiceImpl implements IBookService {
 
 	@Override
 	public List<BookDTO> findAllOrderByPriceDESC() {
+		MyUser myUser = SecurityUtils.getPrincipal();
 		List<BookEntity> listBooks = bookRepository.findAllOrderByPriceDESC();
 		List<BookDTO> listDTO = new ArrayList<>();
 		for (BookEntity item : listBooks) {
 			BookDTO bookDTO = bookConverter.converterToDTO(item);
+//			if (myUser == null) {
+//				bookDTO.setFavo(1);
+//			}else {
+//				bookDTO.setFavo(2);
+//			}
 			listDTO.add(bookDTO);
 		}
 		return listDTO;
+//		return null;
 	}
 
 	@Override
 	@Transactional
-	public List<BookDTO> findByNameAndCategoryAndPage(String name , String categoryName, Pageable pageable) {
-		List<BookEntity> listBooks = bookRepository.findByNameAndCategoryAndPage(name , categoryName , pageable);
+	public List<BookDTO> findByNameAndCategoryAndPage(String name, String categoryName, Pageable pageable) {
+		List<BookEntity> listBooks = bookRepository.findByNameAndCategoryAndPage(name, categoryName, pageable);
 		List<BookDTO> listDTO = new ArrayList<>();
 		for (BookEntity item : listBooks) {
 			BookDTO bookDTO = bookConverter.converterToDTO(item);
@@ -197,7 +236,7 @@ public class BookServiceImpl implements IBookService {
 
 	@Override
 	public List<String> findAllIssuingcompany() {
-		
+
 		return bookRepository.findAllIssuingcompany();
 	}
 
@@ -208,7 +247,8 @@ public class BookServiceImpl implements IBookService {
 
 	@Override
 	public List<BookDTO> findByNameAndCategory(SearchBookDTO searchBookDTO) {
-		List<BookEntity> listBooks = bookRepository.findByNameAndCategory(searchBookDTO.getSearchName(), searchBookDTO.getCategoryName());
+		List<BookEntity> listBooks = bookRepository.findByNameAndCategory(searchBookDTO.getSearchName(),
+				searchBookDTO.getCategoryName());
 		List<BookDTO> listDTO = new ArrayList<>();
 		for (BookEntity item : listBooks) {
 			BookDTO bookDTO = bookConverter.converterToDTO(item);
@@ -216,6 +256,7 @@ public class BookServiceImpl implements IBookService {
 		}
 		return listDTO;
 	}
+
 	@Override
 	public List<Integer> years() {
 		List<Integer> listYears = new ArrayList<>();
@@ -233,6 +274,7 @@ public class BookServiceImpl implements IBookService {
 		}
 		return coverTypes;
 	}
+
 	@Override
 	public long totalAmountOfBooks() {
 		long result = bookRepository.count();

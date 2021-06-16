@@ -50,6 +50,9 @@ public class UserEntity extends BaseEntity {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private List<OrderEntity> orders = new ArrayList<>();
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private List<BookFavoriteEntity> bookFavoriteEntities = new ArrayList<>();
+	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "userEntity")
 	private List<CartEntity> cartEntities =new ArrayList<>();
 
@@ -131,6 +134,22 @@ public class UserEntity extends BaseEntity {
 
 	public void setBirthDay(Date birthDay) {
 		this.birthDay = birthDay;
+	}
+
+	public List<BookFavoriteEntity> getBookFavoriteEntities() {
+		return bookFavoriteEntities;
+	}
+
+	public void setBookFavoriteEntities(List<BookFavoriteEntity> bookFavoriteEntities) {
+		this.bookFavoriteEntities = bookFavoriteEntities;
+	}
+
+	public List<CartEntity> getCartEntities() {
+		return cartEntities;
+	}
+
+	public void setCartEntities(List<CartEntity> cartEntities) {
+		this.cartEntities = cartEntities;
 	}
 
 }

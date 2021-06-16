@@ -20,6 +20,7 @@ import springmvc.dto.CartDTO;
 import springmvc.dto.CategoryDTO;
 import springmvc.dto.MyUser;
 import springmvc.dto.request.MiniCartDTO;
+import springmvc.entity.BookFavoriteEntity;
 import springmvc.service.IBookService;
 import springmvc.service.ICartService;
 import springmvc.service.ICategoryService;
@@ -42,8 +43,9 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("/web/home");
 		List<CategoryDTO> lists = iCategoryService.showCategorys();
 		List<BookDTO> listDTO = bookService.findAll();
+		
 		List<BookDTO> listBookASC = bookService.findAllOrderByPriceASC();
-		List<BookDTO> listBookDESC = bookService.findAllOrderByPriceDESC();
+//		List<BookDTO> listBookDESC = bookService.findAllOrderByPriceDESC();
 		MyUser myUser = SecurityUtils.getPrincipal();
 		Long id ;
 		if (myUser == null) {
@@ -58,7 +60,7 @@ public class HomeController {
 		
 		
 		mav.addObject("listBookASC", listBookASC);
-		mav.addObject("listBookDESC", listBookDESC);
+//		mav.addObject("listBookDESC", listBookDESC);
 		mav.addObject("userId", id);
 		mav.addObject("books", listDTO);
 		mav.addObject("categorys", lists);

@@ -45,8 +45,15 @@ public class CategoryServiceImpl implements ICategoryService {
 	@Override
 	@Transactional
 	public CategoryDTO saveCategory(CategoryDTO categoryDTO) {
-		CategoryEntity categoryEntity = categoryRepository.save(categoryConverter.converterToEntity(categoryDTO));
-		categoryDTO = categoryConverter.converterToDTO(categoryEntity);
+		List<CategoryEntity> categoryEntitys = categoryRepository.findAll();
+		for (CategoryEntity categoryEntity : categoryEntitys) {
+			if (categoryEntity.getName().equalsIgnoreCase(categoryDTO.getName())) {
+				categoryDTO.setMessage("Tên bị trùng khớp !!!");
+				return categoryDTO;
+			}
+		}
+		CategoryEntity category = categoryRepository.save(categoryConverter.converterToEntity(categoryDTO));
+		categoryDTO = categoryConverter.converterToDTO(category);
 		return categoryDTO;
 	}
 
