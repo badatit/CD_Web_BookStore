@@ -1,6 +1,7 @@
 <%@ include file="/common/taglib.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 
 <section id="main-content">
 	<section class="wrapper">
@@ -55,46 +56,39 @@
 			</div>
 			<div class="col-lg-9 main-chart">
 				<!--CUSTOM CHART START -->
-				<div class="border-head">
+				<div class="border-head" >
 					<h3>CHI TIẾT SỐ LƯỢNG</h3>
 				</div>
 				<!--custom chart end-->
-				<div class="row mt">
-					 <div class="col-md-4 mb">
-		                <!-- INSTAGRAM PANEL -->
-		                <div class="instagram-panel pn">
+				<div class="row mt" style="margin-top: 0px;">
+					 <div class="col-md-4 col-sm-4 mb">
+						<!-- REVENUE PANEL -->
+						<div class="instagram-panel pn" >
+						  <!-- INSTAGRAM PANEL -->
+		                <div class="instagram-panel pn" style="height: 305px !important;">
 		                  <i class="fa fa-instagram fa-4x"></i>
 		                  <p>@Sách<br/> Inactive & Active
 		                  </p>
 		                  <p><i class="fa fa-comment"></i> ${amountOfStatusInactive } | <i class="fa fa-heart"></i> ${amountOfStatusActive }</p>
 		                </div>
-		              </div>
+						</div>
+					</div>
 					 <div class="col-md-4 mb">
                 <!-- WHITE PANEL - TOP USER -->
-		                <div class="white-panel pn">
-		                  <div class="white-header">
-		                    <h5>Inactive & Active USER</h5>
+		             <div class="white-panel pn" style="height: 300px !important;"> 
+		                 <div class="white-header" style="margin-bottom: 0px;">
+		                    <h5>Thống kê sách Theo Thể Loại</h5>
 		                  </div>
-		                  <p><img src="../template/admin/image/userstatus.png" class="img-circle" width="50"></p>
-		                  <p><b>Do ba Dat</b></p>
-		                  <div class="row">
-		                    <div class="col-md-6">
-		                      <p class="small mt">Active</p>
-		                      <p>2012</p>
-		                    </div>
-		                    <div class="col-md-6">
-		                      <p class="small mt">Inactive</p>
-		                      <p>47,60</p>
-		                    </div>
-		                  </div>
-		                </div>
+		                  <canvas id="cateogry" style="width: 230px !important;height: 210px !important;"></canvas>
+		                  
+		                </div> 
 		              </div>
 					<!-- /col-md-4 -->
 					<div class="col-md-4 col-sm-4 mb">
 						<!-- REVENUE PANEL -->
-						<div class="green-panel pn">
+						<div class="instagram-panel pn" >
 						  <!-- INSTAGRAM PANEL -->
-		                <div class="instagram-panel pn">
+		                <div class="instagram-panel pn" style="height: 305px !important;">
 		                  <i class="fa fa-instagram fa-4x"></i>
 		                  <p>@Sách<br/> Inactive & Active
 		                  </p>
@@ -108,7 +102,7 @@
 				<div class="row">
 					<!-- WEATHER PANEL -->
 					<div class="col-md-4 mb">
-						<div class="weather pn">
+						<div class="weather pn" style="height: 305px !important;">
 							<i class="fa fa-cloud fa-4x"></i>
 							<h2>Sách	</h2>
 						</div>
@@ -116,32 +110,11 @@
 					<!-- /col-md-4-->
 					<!-- DIRECT MESSAGE PANEL -->
 					<div class="col-md-8 mb">
-						<div class="message-p pn">
-							<div class="message-header">
-								<h5>DIRECT MESSAGE</h5>
+						<div class="message-p pn" style="height: 305px !important;">
+							<div class="message-header" style="margin-bottom: 0px;">
+								<h5>Thống kê sách theo công ty sản xuất</h5>
 							</div>
-							<div class="row">
-								<div class="col-md-3 centered hidden-sm hidden-xs">
-									<img src="img/ui-danro.jpg" class="img-circle" width="65">
-								</div>
-								<div class="col-md-9">
-									<p>
-										<name>Dan Rogers</name>
-										sent you a message.
-									</p>
-									<p class="small">3 hours ago</p>
-									<p class="message">Lorem Ipsum is simply dummy text of the
-										printing and typesetting industry. Lorem Ipsum has been the
-										industry's standard dummy text ever since the 1500s.</p>
-									<form class="form-inline" role="form">
-										<div class="form-group">
-											<input type="text" class="form-control" id="exampleInputText"
-												placeholder="Reply Dan">
-										</div>
-										<button type="submit" class="btn btn-default">Send</button>
-									</form>
-								</div>
-							</div>
+							 <canvas id="issuingcompany" ></canvas>
 						</div>
 						<!-- /Message Panel-->
 					</div>
@@ -154,7 +127,7 @@
 					<h4>COMPLETED ACTIONS & PROGRESS</h4>
 					<canvas id="newchart" height="130" width="130"></canvas>
 					<script>
-						var doughnutData = [ {
+						/* var doughnutData = [ {
 							value : 70,
 							color : "#4ECDC4"
 						}, {
@@ -163,7 +136,7 @@
 						} ];
 						var myDoughnut = new Chart(document.getElementById(
 								"newchart").getContext("2d"))
-								.Doughnut(doughnutData);
+								.Doughnut(doughnutData); */
 					</script>
 				</div>
 				<!--NEW EARNING STATS -->
@@ -241,3 +214,152 @@
 		<!-- /row -->
 	</section>
 </section>
+
+<script>
+ function grab() {
+    /* Promise to make sure data loads */
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: "http://localhost:8080/bookstore/api/admin/statisticalBook",
+            method: "GET",
+            dataType: 'JSON',
+            success: function(data) {
+                resolve(data)
+            },
+            error: function(error) {
+                reject(error);
+            }
+        })
+    })
+}
+
+$(document).ready(function() {
+    grab().then((data) => {
+        console.log('Recieved our data', data);
+        let regions = [];
+        let value = [];
+        var barColors = [
+        	  "#b91d47",
+        	  "#00aba9",
+        	  "#2b5797",
+        	  "#e8c3b9",
+        	  "#1e7145"
+        	];
+        try {
+            data.forEach((item) => {
+                regions.push(item[0])
+                value.push(item[1])
+            });
+
+            let chartdata = {
+                labels: [...regions],
+                datasets: [{
+                    label: 'Thể Loại',
+                    data: [...value],
+                    backgroundColor:barColors ,
+                    
+                      borderWidth: 1
+                   
+                }],
+                options: {
+                    scales: {
+                        yAxes: [{
+                        	
+                            ticks: {
+                                beginAtZero:true,
+                                min: 0
+                            }
+                        }]
+                    },
+                }
+                
+            };
+
+            let ctx = $("#cateogry");
+
+            let barGraph = new Chart(ctx, {
+                type: 'pie',
+                data: chartdata
+            });
+
+        } catch (error) {
+            console.log('Error parsing JSON data', error)
+        }
+
+    }).catch((error) => {
+        console.log(error);
+    })
+});
+
+</script> 
+
+<script>
+ function grab1() {
+    /* Promise to make sure data loads */
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: "http://localhost:8080/bookstore/api/admin/statisticalBookByIssuingcompany",
+            method: "GET",
+            dataType: 'JSON',
+            success: function(data) {
+                resolve(data)
+            },
+            error: function(error) {
+                reject(error);
+            }
+        })
+    })
+}
+
+$(document).ready(function() {
+    grab1().then((data) => {
+        console.log('Recieved our data', data);
+        let regions = [];
+        let value = [];
+        var barColors = ["red", "green","blue","orange","brown"];
+        try {
+            data.forEach((item) => {
+                regions.push(item[0])
+                value.push(item[1])
+            });
+
+            let chartdata = {
+                labels: [...regions],
+                datasets: [{
+                    label: 'Số Lượng',
+                    data: [...value],
+                    backgroundColor: barColors,
+                   
+                      borderWidth: 1
+                   
+                }],
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true,
+                                min: 0
+                            }
+                        }]
+                    },
+                }
+                
+            };
+
+            let ctx = $("#issuingcompany");
+
+            let barGraph = new Chart(ctx, {
+                type: 'bar',
+                data: chartdata
+            });
+
+        } catch (error) {
+            console.log('Error parsing JSON data', error)
+        }
+
+    }).catch((error) => {
+        console.log(error);
+    })
+});
+
+</script>

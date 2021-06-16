@@ -14,9 +14,11 @@ import org.springframework.stereotype.Service;
 
 import springmvc.constant.SystemConstant;
 import springmvc.converter.UserConverter;
+import springmvc.dto.OrderDTO;
 import springmvc.dto.UserDTO;
 import springmvc.entity.RoleEntity;
 import springmvc.entity.UserEntity;
+import springmvc.repository.OrderRepository;
 import springmvc.repository.RoleRepsitory;
 import springmvc.repository.UserRepository;
 import springmvc.service.IUserService;
@@ -31,6 +33,9 @@ public class UserServiceImpl implements IUserService{
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+	
+	@Autowired
+	private OrderRepository orderRepository;
 	
 	private UserConverter userConverter = new UserConverter();
 
@@ -189,6 +194,7 @@ public class UserServiceImpl implements IUserService{
 	public long totalAmountOfUsers() {
 		return userRepository.count();
 	}
+
 
 
 }

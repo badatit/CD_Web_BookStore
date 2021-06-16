@@ -1,16 +1,14 @@
 package springmvc.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
-import org.modelmapper.config.Configuration.AccessLevel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import springmvc.Utils.SecurityUtils;
 import springmvc.converter.OrderConverter;
-import springmvc.dto.CartDTO;
 import springmvc.dto.MyUser;
 import springmvc.dto.OrderDTO;
 import springmvc.entity.CartEntity;
@@ -60,6 +58,18 @@ public class OrderServiceImpl implements IOrderService {
 		entity.setAmount(count);
 		// save orderdetail
 		return orderConverter.converterToDTO(orderRepository.save(entity));
+	}
+
+	@Override
+	public List<OrderDTO> findOrderById() {
+		MyUser myUser = SecurityUtils.getPrincipal();
+		List<OrderEntity> orderList = orderRepository.finbOrderByIdUser(myUser.getId());
+		List<OrderDTO> dto = new ArrayList<>();
+		for (OrderEntity item : orderList) {
+			OrderDTO orderDTO = orderConverter.converterToDTO(item);
+			dto.add(orderDTO);
+		}
+		return dto;
 	}
 
 

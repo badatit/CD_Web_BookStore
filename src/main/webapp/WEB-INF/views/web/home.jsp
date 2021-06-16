@@ -252,8 +252,7 @@
 
 									<figure class="product-media">
 										<a href="<c:url value='/web/product/${item.id}' />"> <img
-											src="<c:url value='/template/web/assets/images/demos/demo-20/products/product-1.jpg'/>"
-											alt="Product image" class="product-image">
+									src="${item.img1}" alt="Product image" class="product-image">
 										</a>
 									</figure>
 									<!-- End .product-media -->
