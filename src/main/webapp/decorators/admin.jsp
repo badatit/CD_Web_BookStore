@@ -38,8 +38,10 @@
 	rel="stylesheet">
 <script src="<c:url value='/template/admin/lib/jquery/jquery.min.js'/> "></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="<c:url value='/template/admin/dist/jquery.validate.min.js'/> "></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="<c:url value='/template/admin/dist/jquery.validate.min.js'/> "></script>
 
 <!-- data table -->
 
@@ -57,6 +59,11 @@
 	src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
 <style data-styled data-styled-version="4.4.1"></style>
 
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
 </head>
 
 

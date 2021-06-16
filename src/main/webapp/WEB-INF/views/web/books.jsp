@@ -96,7 +96,7 @@
 												</h3>
 												<!-- End .product-title -->
 												<div class="product-price">
-													${item.price}<span style="margin-left: 7px;"> VND</span>
+														<fmt:formatNumber type="number" groupingUsed="true" value="${item.price}" /><span style="margin-left: 7px;"> VND</span>
 												</div>
 												<!-- End .product-price -->
 												<div class="ratings-container">

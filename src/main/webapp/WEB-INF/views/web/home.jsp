@@ -3,8 +3,10 @@
 <%@include file="/common/taglib.jsp"%>
 <c:url var="APICartUrl" value="/api/carts" />
 <c:url var="LoginUrl" value="/login" />
+<c:url var="APIBookFavorite" value="/api/bookfavorite" />
 <c:url var="ProductDetailsURL" value="/web/product/" />
-<c:url var="Pricture" value='/template/web/assets/images/products/cart/product-1.jpg' />
+<c:url var="Pricture"
+	value='/template/web/assets/images/products/cart/product-1.jpg' />
 <!DOCTYPE html>
 <html>
 <head>
@@ -267,7 +269,10 @@
 										</h3>
 										<!-- End .product-title -->
 										<div class="product-price">
-											<span class="new-price">${item.price}<span> VND</span></span>
+											<span class="new-price"> <fmt:formatNumber
+													type="number" groupingUsed="true" value="${item.price}" />
+
+												<span> VND</span></span>
 
 										</div>
 										<!-- End .product-price -->
@@ -284,10 +289,23 @@
 											<!-- End .rating-container -->
 											<div class="product-action">
 												<a class="btn-product btn-cart"
-													onclick="addCart(${item.id})"> <span>add to cart</span>
-												</a> <a href="#" class="btn-product btn-wishlist"> <span>Add
-														to Wishlist</span>
+													onclick="addCart(${item.id})"> <span>Thêm vào
+														giỏ hàng</span>
 												</a>
+												 <c:if test="${item.favorite == null}">
+													<a onclick="addFavourite(${item.id})"
+														class="btn-product btn-wishlist favorite_${item.id}">
+														<span class="messageFavorite_${item.id}">Thêm yêu
+															thích</span>
+													</a>
+												</c:if>
+												<c:if test="${item.favorite != null}">
+													<a style="color: red;" onclick="addFavourite(${item.id})"
+														class="btn-product btn-wishlist favorite_${item.id}">
+														<span style="color: red;" class="messageFavorite_${item.id}">Đã yêu
+															thích</span>
+													</a>
+												</c:if>
 											</div>
 											<!-- End .product-action -->
 										</div>
@@ -469,8 +487,10 @@
 											<a href="<c:url value='/web/product/${item.id}' />">${item.name}</a>
 										</h3>
 										<!-- End .product-title -->
-										<div class="product-price">${item.price}<span>
-												VND</span>
+										<div class="product-price">
+											<fmt:formatNumber type="number" groupingUsed="true"
+												value="${item.price}" />
+											<span> VND</span>
 										</div>
 										<!-- End .product-price -->
 
@@ -486,9 +506,23 @@
 											<!-- End .rating-container -->
 											<div class="product-action">
 												<a class="btn-product btn-cart"
-													onclick="addCart(${item.id})"><span>add to cart</span></a>
-												<a href="#" class="btn-product btn-wishlist"><span>Add
-														to Wishlist</span></a>
+													onclick="addCart(${item.id})"> <span>Thêm vào
+														giỏ hàng</span>
+												</a>
+												<c:if test="${item.favo =='No' }">
+													<a onclick="addFavourite(${item.id})"
+														class="btn-product btn-wishlist favorite_${item.id}">
+														<span class="messageFavorite_${item.id}">Thêm yêu
+															thích</span>
+													</a>
+												</c:if>
+												<c:if test="${item.favo =='Yes' }">
+													<a style="color: red;" onclick="addFavourite(${item.id})"
+														class="btn-product btn-wishlist favorite_${item.id}">
+														<span style="color: red;" class="messageFavorite_${item.id}">Đã yêu
+															thích</span>
+													</a>
+												</c:if>
 											</div>
 											<!-- End .product-action -->
 										</div>
@@ -1234,7 +1268,6 @@
   			$.ajax({
   				type : "POST",
   				url : "${APIGetSumCartUrl}",
-  				
   				 dataType: "json",
   				contentType : "application/json",
   				success : function(response) {
@@ -1247,6 +1280,38 @@
   				}
   			});
   		}
+	 function addFavourite(id){
+		 var userId= $('#userId').val();
+			if (userId == null || userId =='') {
+				alert("Vui lòng đăng nhập");
+			}else{
+		 var data ={};
+		 data['bookId'] =id;
+		   $.ajax({
+		         type: "POST",
+				 url: "${APIBookFavorite}",
+		         data: JSON.stringify(data),
+		         contentType: "application/json",
+		         success: function (response) { 
+		        	 var classWish = ".favorite_"+id;
+		        	 var messageWish =".messageFavorite_"+id;
+		        	 if (response == "success_save") {
+		         	 	$(classWish).css("color","red");
+		         	 	$(messageWish).text("Đã yêu thích");
+		         	 	$(messageWish).css("color","red");
+					}else{
+						 $(classWish).css("color","black");
+						 $(messageWish).text("Thêm yêu thích");
+			         	 	$(messageWish).css("color","black");
+					}
+		         }, 
+		         
+		         error: function (response) {
+		        	 swal("Thất bại", "Sản phẩm vẫn an toàn :)", "error");
+		         }
+		      });
+			}
+	 }
 	
 	</script>
 

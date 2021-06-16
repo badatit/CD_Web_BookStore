@@ -51,7 +51,7 @@
 													<!-- End .product-title -->
 												</div> <!-- End .product -->
 											</td>
-											<td class="price-col">${item.price }</td>
+											<td class="price-col">	<fmt:formatNumber type="number" groupingUsed="true" value="${item.price}"/></td>
 											<td class="quantity-col">
 												<div class="cart-product-quantity">
 													<button onclick="addCart(${item.bookId},${item.id})">
@@ -62,7 +62,9 @@
 													</button>
 												</div> <!-- End .cart-product-quantity -->
 											</td>
-											<td class="total-col" id="priceTotal_${item.id}">${item.amountTotal}</td>
+											<td class="total-col" id="priceTotal_${item.id}">
+											<fmt:formatNumber type="number" groupingUsed="true" value="${item.amountTotal}"/>
+										</td>
 											<td class="remove-col"><button class="btn-remove"
 													onclick="deleteCart(${item.id})">
 													<i class="icon-close"></i>
@@ -109,7 +111,12 @@
 									<tbody>
 										<tr class="summary-subtotal">
 											<td>Subtotal:</td>
-											<td><span class="sumprice"></span><span id="subTotal">${subTotal}</span>VND</td>
+											<td><span class="sumprice"></span><span id="subTotal">
+												<fmt:formatNumber type="number"  groupingUsed="true" value="${sumPrice}"  />
+											
+											</span>
+											<span id="vnd">VND</span>
+											</td>
 										</tr>
 										<!-- End .summary-subtotal -->
 										<tr class="summary-shipping">
@@ -166,7 +173,10 @@
 
 										<tr class="summary-total">
 											<td>Total:</td>
-											<td><span class="totalPrice" id="total">${subTotal}</span>
+											<td><span class="totalPrice" id="total">	
+											<c:set value="${sumPrice}"  var="names"></c:set> 
+											<fmt:formatNumber type="number" groupingUsed="true" value="${names}" />
+											</span>
 												<span id="vnd">VND</span></td>
 											<!-- <td class ="test">0</td> -->
 										</tr>
@@ -478,8 +488,7 @@ function addCart(bookId,id) {
 		         dataType: "json",
 		         contentType: "application/json",
 		         success : function(data){
-		        	 $('#total').text(data);
-		        	 $('#vnd').remove();
+		        	 $('#total').html(data);
 					},
 					error : function(error){
 						console.log(error)
@@ -491,7 +500,7 @@ function addCart(bookId,id) {
 		  $('#total').text(total);
 	}
 	}
- 
+
  
 </script>
 

@@ -10,6 +10,7 @@
 <c:url var="productURL" value="/web/product" />
 <c:url var="APICartUrl" value="/api/carts" />
 <c:url var="APIDeleteCartUrl" value="/api/delete" />
+<c:url var="accountUrl" value="/web/account" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -142,7 +143,7 @@
 						<div class="account">
 							<c:if test="${userId != null }">
 
-								<a href="<c:url value='account/${userId}' />" title="My account">
+								<a href="${accountUrl}/${userId}" title="My account">
 									<div class="icon">
 										<i class="icon-user"></i>
 									</div>
@@ -152,7 +153,7 @@
 
 							<c:if test="${userId == null }">
 
-								<a href="<c:url value='/account/${userId}'/>" title="My account"
+								<a href="${accountUrl}/${userId}" title="My account"
 									style="visibility: hidden;"> </a>
 							</c:if>
 
@@ -207,7 +208,8 @@
 													</h4>
 	
 													<span class="cart-product-info"> <span
-														class="cart-product-qty"></span>${item.amount} x ${item.price}
+														class="cart-product-qty"></span>
+														${item.amount} x <fmt:formatNumber type="number" groupingUsed="true" value="${item.price}" />
 													</span>
 												</div>
 												<!-- End .product-cart-details -->
@@ -228,7 +230,9 @@
 									<!-- End .cart-product -->
 
 									<div class="dropdown-cart-total">
-										<span>Total</span> <span class="cart-total-price ">${subTotal}</span><span>đ</span>
+										<span>Total</span> <span class="cart-total-price ">
+										<fmt:formatNumber type="number" groupingUsed="true" value="${sumPrice}" />
+										</span><span>đ</span>
 									</div>
 									<!-- End .dropdown-cart-total -->
 

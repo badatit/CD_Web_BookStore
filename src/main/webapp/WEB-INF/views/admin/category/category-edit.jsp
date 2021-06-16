@@ -55,7 +55,7 @@
 
 							</div>
 						</form>
-						<input type="text" name="id" id="id" value="${category.id}">
+						<input type="hidden" name="id" id="id" value="${category.id}">
 					</div>
 				</div>
 			</div>

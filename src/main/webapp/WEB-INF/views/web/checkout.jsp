@@ -62,7 +62,7 @@
 								<label>Phone *</label> <input type="tel"
 									value="${userDTO.phoneNumber }" class="form-control"
 									name="Phone Number" required> <label>Email
-									address *</label> <input type="email" class="form-control"
+									address *</label> <input type="email" name="email" class="form-control"
 									value="${userDTO.email }" required> <label>Order
 									notes (optional)</label>
 								<textarea class="form-control" cols="30" rows="4"
@@ -164,6 +164,7 @@
 	<!-- End .main -->
 	<script>
 		function checkOut() {
+			
 				$.ajax({
 					type : "GET",
 					url : "${APICheckout}",
@@ -174,11 +175,11 @@
 						}
 					},
 					error : function(response) {
-						alert('Loi subTotal');
+						
 					}
 				});
-			}
-		
+
+		}
 
 		function saveOrderDetail(response) {
 			var id = $('#id').val();
@@ -189,7 +190,7 @@
 				contentType : "application/json; charset=utf-8",
 				success : function(data) {
 					if (data == "success") {
-						alert('oki all');
+						swal("Thành công", "Sản phẩm đã được xóa", "success");
 						window.location.href = "${accountUrl}/" + id;
 					}
 				}

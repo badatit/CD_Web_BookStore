@@ -51,7 +51,10 @@ a, a:hover, a:focus {
 .modal-header {
 	background: #4ECDC4;
 }
-
+.error{
+	color:red;
+	
+}
 .modal-title {
 	color: white;
 }
