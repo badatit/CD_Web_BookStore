@@ -207,7 +207,7 @@
 					<div class="container">
 						<div class="heading heading-flex">
 							<div class="heading-left">
-								<h2 class="title">Sản Phẩm Giảm Giá</h2>
+								<h2 class="title">Sales Products</h2>
 								<!-- End .title -->
 							</div>
 							<!-- End .heading-left -->
@@ -470,7 +470,7 @@
 								<div class="product">
 									<figure class="product-media">
 										<a href="<c:url value='/web/product/${item.id}' />"> <img
-											src="<c:url value='/template/web/assets/images/demos/demo-20/products/product-6.jpg'/>"
+											src="<c:url value='${item.img1 }'/>"
 											alt="Product image" class="product-image">
 										</a>
 									</figure>
@@ -508,14 +508,14 @@
 													onclick="addCart(${item.id})"> <span>Thêm vào
 														giỏ hàng</span>
 												</a>
-												<c:if test="${item.favo =='No' }">
+											 <c:if test="${item.favorite == null}">
 													<a onclick="addFavourite(${item.id})"
 														class="btn-product btn-wishlist favorite_${item.id}">
 														<span class="messageFavorite_${item.id}">Thêm yêu
 															thích</span>
 													</a>
 												</c:if>
-												<c:if test="${item.favo =='Yes' }">
+												<c:if test="${item.favorite != null}">
 													<a style="color: red;" onclick="addFavourite(${item.id})"
 														class="btn-product btn-wishlist favorite_${item.id}">
 														<span style="color: red;" class="messageFavorite_${item.id}">Đã yêu
@@ -682,284 +682,72 @@
                                     }
                                 }
                             }'>
-						<div class="product">
-							<span class="product-label label-sale">Sale</span>
-							<figure class="product-media">
-								<a href="product.html"> <img
-									src="<c:url value='/template/web/assets/images/demos/demo-20/products/product-10.jpg'/>"
-									alt="Product image" class="product-image">
-								</a>
-							</figure>
-							<!-- End .product-media -->
+                            
+                        <c:forEach var="item" items="${listBookHighPrice}">
+								<div class="product">
+									<figure class="product-media">
+										<a href="<c:url value='/web/product/${item.id}' />"> <img
+											src="<c:url value='${item.img1 }'/>"
+											alt="Product image" class="product-image">
+										</a>
+									</figure>
+									<!-- End .product-media -->
 
-							<div class="product-body">
-								<div class="product-cat">
-									by <a href="#">John Gray</a>
-								</div>
-								<!-- End .product-cat -->
-								<h3 class="product-title">
-									<a href="product.html">Normal People</a>
-								</h3>
-								<!-- End .product-title -->
-								<div class="product-price">
-									<span class="new-price">$6.99</span> <span class="old-price">Was
-										$10.99</span>
-								</div>
-								<!-- End .product-price -->
-
-								<div class="product-footer">
-									<div class="ratings-container">
-										<div class="ratings">
-											<div class="ratings-val" style="width: 60%;"></div>
-											<!-- End .ratings-val -->
+									<div class="product-body">
+										<div class="product-cat">
+											by <a href="<c:url value='/web/product/${item.id}' />"
+												id="issuingCompany">${item.issuingCompany}</a>
 										</div>
-										<!-- End .ratings -->
-										<span class="ratings-text">( 5 Reviews )</span>
-									</div>
-									<!-- End .rating-container -->
-									<div class="product-action">
-										<a href="#" class="btn-product btn-cart"><span>add
-												to cart</span></a> <a href="#" class="btn-product btn-wishlist"><span>Add
-												to Wishlist</span></a>
-									</div>
-									<!-- End .product-action -->
-								</div>
-								<!-- End .product-footer -->
-							</div>
-							<!-- End .product-body -->
-						</div>
-						<!-- End .product -->
-
-						<div class="product">
-							<span class="product-label label-sale">Sale</span>
-							<figure class="product-media">
-								<a href="product.html"> <img
-									src="<c:url value='/template/web/assets/images/demos/demo-20/products/product-11.jpg'/>"
-									alt="Product image" class="product-image">
-								</a>
-							</figure>
-							<!-- End .product-media -->
-
-							<div class="product-body">
-								<div class="product-cat">
-									by <a href="#">John Gray</a>
-								</div>
-								<!-- End .product-cat -->
-								<h3 class="product-title">
-									<a href="product.html">The Silence of the Girls</a>
-								</h3>
-								<!-- End .product-title -->
-								<div class="product-price">
-									<span class="new-price">$6.99</span> <span class="old-price">Was
-										$9.99</span>
-								</div>
-								<!-- End .product-price -->
-
-								<div class="product-footer">
-									<div class="ratings-container">
-										<div class="ratings">
-											<div class="ratings-val" style="width: 100%;"></div>
-											<!-- End .ratings-val -->
+										<!-- End .product-cat -->
+										<h3 class="product-title">
+											<a href="<c:url value='/web/product/${item.id}' />">${item.name}</a>
+										</h3>
+										<!-- End .product-title -->
+										<div class="product-price">
+											<fmt:formatNumber type="number" groupingUsed="true"
+												value="${item.price}" />
+											<span> VND</span>
 										</div>
-										<!-- End .ratings -->
-										<span class="ratings-text">( 7 Reviews )</span>
-									</div>
-									<!-- End .rating-container -->
-									<div class="product-action">
-										<a href="#" class="btn-product btn-cart"><span>add
-												to cart</span></a> <a href="#" class="btn-product btn-wishlist"><span>Add
-												to Wishlist</span></a>
-									</div>
-									<!-- End .product-action -->
-								</div>
-								<!-- End .product-footer -->
-							</div>
-							<!-- End .product-body -->
-						</div>
-						<!-- End .product -->
+										<!-- End .product-price -->
 
-						<div class="product">
-							<figure class="product-media">
-								<a href="product.html"> <img
-									src="<c:url value='/template/web/assets/images/demos/demo-20/products/product-12.jpg'/>"
-									alt="Product image" class="product-image">
-								</a>
-							</figure>
-							<!-- End .product-media -->
-
-							<div class="product-body">
-								<div class="product-cat">
-									by <a href="#">John Gray</a>
-								</div>
-								<!-- End .product-cat -->
-								<h3 class="product-title">
-									<a href="product.html">You Got This</a>
-								</h3>
-								<!-- End .product-title -->
-								<div class="product-price">$7.99</div>
-								<!-- End .product-price -->
-
-								<div class="product-footer">
-									<div class="ratings-container">
-										<div class="ratings">
-											<div class="ratings-val" style="width: 60%;"></div>
-											<!-- End .ratings-val -->
+										<div class="product-footer">
+											<div class="ratings-container">
+												<div class="ratings">
+													<div class="ratings-val" style="width: 80%;"></div>
+													<!-- End .ratings-val -->
+												</div>
+												<!-- End .ratings -->
+												<span class="ratings-text">( 5 Reviews )</span>
+											</div>
+											<!-- End .rating-container -->
+											<div class="product-action">
+												<a class="btn-product btn-cart"
+													onclick="addCart(${item.id})"> <span>Thêm vào
+														giỏ hàng</span>
+												</a>
+											 <c:if test="${item.favorite == null}">
+													<a onclick="addFavourite(${item.id})"
+														class="btn-product btn-wishlist favorite_${item.id}">
+														<span class="messageFavorite_${item.id}">Thêm yêu
+															thích</span>
+													</a>
+												</c:if>
+												<c:if test="${item.favorite != null}">
+													<a style="color: red;" onclick="addFavourite(${item.id})"
+														class="btn-product btn-wishlist favorite_${item.id}">
+														<span style="color: red;" class="messageFavorite_${item.id}">Đã yêu
+															thích</span>
+													</a>
+												</c:if>
+											</div>
+											<!-- End .product-action -->
 										</div>
-										<!-- End .ratings -->
-										<span class="ratings-text">( 6 Reviews )</span>
+										<!-- End .product-footer -->
 									</div>
-									<!-- End .rating-container -->
-									<div class="product-action">
-										<a href="#" class="btn-product btn-cart"><span>add
-												to cart</span></a> <a href="#" class="btn-product btn-wishlist"><span>Add
-												to Wishlist</span></a>
-									</div>
-									<!-- End .product-action -->
+									<!-- End .product-body -->
 								</div>
-								<!-- End .product-footer -->
-							</div>
-							<!-- End .product-body -->
-						</div>
-						<!-- End .product -->
-
-						<div class="product">
-							<figure class="product-media">
-								<a href="product.html"> <img
-									src="<c:url value='/template/web/assets/images/demos/demo-20/products/product-1.jpg'/>"
-									alt="Product image" class="product-image">
-								</a>
-							</figure>
-							<!-- End .product-media -->
-
-							<div class="product-body">
-								<div class="product-cat">
-									by <a href="#">John Gray</a>
-								</div>
-								<!-- End .product-cat -->
-								<h3 class="product-title">
-									<a href="product.html">The Librarian of <br>Auschwitz
-									</a>
-								</h3>
-								<!-- End .product-title -->
-								<div class="product-price">$10.99</div>
-								<!-- End .product-price -->
-
-								<div class="product-footer">
-									<div class="ratings-container">
-										<div class="ratings">
-											<div class="ratings-val" style="width: 0%;"></div>
-											<!-- End .ratings-val -->
-										</div>
-										<!-- End .ratings -->
-										<span class="ratings-text">( 0 Reviews )</span>
-									</div>
-									<!-- End .rating-container -->
-									<div class="product-action">
-										<a href="#" class="btn-product btn-cart"><span>add
-												to cart</span></a> <a href="#" class="btn-product btn-wishlist"><span>Add
-												to Wishlist</span></a>
-									</div>
-									<!-- End .product-action -->
-								</div>
-								<!-- End .product-footer -->
-							</div>
-							<!-- End .product-body -->
-						</div>
-						<!-- End .product -->
-
-						<div class="product">
-							<span class="product-label label-sale">Sale</span>
-							<figure class="product-media">
-								<a href="product.html"> <img
-									src="<c:url value='/template/web/assets/images/demos/demo-20/products/product-14.jpg'/>"
-									alt="Product image" class="product-image">
-								</a>
-							</figure>
-							<!-- End .product-media -->
-
-							<div class="product-body">
-								<div class="product-cat">
-									by <a href="#">John Gray</a>
-								</div>
-								<!-- End .product-cat -->
-								<h3 class="product-title">
-									<a href="product.html">Moneyland: Why Thieves And Crooks
-										Now Rule ...</a>
-								</h3>
-								<!-- End .product-title -->
-								<div class="product-price">
-									<span class="new-price">$7.99</span> <span class="old-price">Was
-										$12.99</span>
-								</div>
-								<!-- End .product-price -->
-
-								<div class="product-footer">
-									<div class="ratings-container">
-										<div class="ratings">
-											<div class="ratings-val" style="width: 100%;"></div>
-											<!-- End .ratings-val -->
-										</div>
-										<!-- End .ratings -->
-										<span class="ratings-text">( 13 Reviews )</span>
-									</div>
-									<!-- End .rating-container -->
-									<div class="product-action">
-										<a href="#" class="btn-product btn-cart"><span>add
-												to cart</span></a> <a href="#" class="btn-product btn-wishlist"><span>Add
-												to Wishlist</span></a>
-									</div>
-									<!-- End .product-action -->
-								</div>
-								<!-- End .product-footer -->
-							</div>
-							<!-- End .product-body -->
-						</div>
-						<!-- End .product -->
-
-						<div class="product">
-							<figure class="product-media">
-								<a href="product.html"> <img
-									src="<c:url value='/template/web/assets/images/demos/demo-20/products/product-2.jpg'/>"
-									alt="Product image" class="product-image">
-								</a>
-							</figure>
-							<!-- End .product-media -->
-
-							<div class="product-body">
-								<div class="product-cat">
-									by <a href="#">John Gray</a>
-								</div>
-								<!-- End .product-cat -->
-								<h3 class="product-title">
-									<a href="product.html">This is Going to Hurt: Secret
-										Diaries of a Juni</a>
-								</h3>
-								<!-- End .product-title -->
-								<div class="product-price">$12.00</div>
-								<!-- End .product-price -->
-
-								<div class="product-footer">
-									<div class="ratings-container">
-										<div class="ratings">
-											<div class="ratings-val" style="width: 80%;"></div>
-											<!-- End .ratings-val -->
-										</div>
-										<!-- End .ratings -->
-										<span class="ratings-text">( 4 Reviews )</span>
-									</div>
-									<!-- End .rating-container -->
-									<div class="product-action">
-										<a href="#" class="btn-product btn-cart"><span>add
-												to cart</span></a> <a href="#" class="btn-product btn-wishlist"><span>Add
-												to Wishlist</span></a>
-									</div>
-									<!-- End .product-action -->
-								</div>
-								<!-- End .product-footer -->
-							</div>
-							<!-- End .product-body -->
-						</div>
-						<!-- End .product -->
+								<!-- End .product -->
+							</c:forEach>
 					</div>
 					<!-- End .owl-carousel -->
 				</div>
@@ -1226,7 +1014,7 @@
               						'</div>'+
               						' <figure class="product-image-container">'+
               						'<a href="${ProductDetailsURL}'+value.bookId+'">'+
-              						'<img src="${Pricture}" alt="product">'+
+              						'<img src="'+value.img1+'" alt="product">'+
               						'</a>'+
               						'</figure>'+
               						'<a onclick="deleteCart('+value.id+')" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>'+
@@ -1292,9 +1080,10 @@
 		         data: JSON.stringify(data),
 		         contentType: "application/json",
 		         success: function (response) { 
+		        	 $('.wishlist-count').text(response.count);
 		        	 var classWish = ".favorite_"+id;
 		        	 var messageWish =".messageFavorite_"+id;
-		        	 if (response == "success_save") {
+		        	 if (response.message == "success_save") {
 		         	 	$(classWish).css("color","red");
 		         	 	$(messageWish).text("Đã yêu thích");
 		         	 	$(messageWish).css("color","red");

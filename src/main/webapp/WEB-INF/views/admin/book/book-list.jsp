@@ -31,8 +31,8 @@
 						<td style="text-align: left;"> ${item.name} </td>
 						<td> ${item.price} đ</td>
 						<td>
-							<img src="${item.base64_1}" alt="Italian Trulli"
-							style="width: 60px; height: 80px">
+							<img src="${item.img1}" alt="Italian Trulli"
+							style="width: 80px; height: 60px">
 						</td>
 						<td> ${item.status} </td>
 						<td>

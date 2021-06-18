@@ -163,7 +163,7 @@
 						<div class="wishlist">
 							<a href="wishlist.html" title="Wishlist">
 								<div class="icon">
-									<i class="icon-heart-o"></i> <span class="wishlist-count badge">3</span>
+									<i class="icon-heart-o"></i> <span class="wishlist-count badge">${countFavo }</span>
 								</div>
 								<p>Wishlist</p>
 							</a>
@@ -206,18 +206,17 @@
 													<h4 class="product-title">
 														<a href="product.html">${item.name}</a>
 													</h4>
-	
+
 													<span class="cart-product-info"> <span
-														class="cart-product-qty"></span>
-														${item.amount} x <fmt:formatNumber type="number" groupingUsed="true" value="${item.price}" />
+														class="cart-product-qty"></span> ${item.amount} x <fmt:formatNumber
+															type="number" groupingUsed="true" value="${item.price}" />
 													</span>
 												</div>
 												<!-- End .product-cart-details -->
 
 												<figure class="product-image-container">
 													<a href="product.html" class="product-image"> <img
-														src="<c:url value='/template/web/assets/images/products/cart/product-1.jpg'/>"
-														alt="product">
+														alt="" src="${item.img1 }">
 													</a>
 												</figure>
 												<a onclick="deleteCart(${item.id})" class="btn-remove"
@@ -230,17 +229,15 @@
 									<!-- End .cart-product -->
 
 									<div class="dropdown-cart-total">
-										<span>Total</span> <span class="cart-total-price ">
-										<fmt:formatNumber type="number" groupingUsed="true" value="${sumPrice}" />
+										<span>Total</span> <span class="cart-total-price "> <fmt:formatNumber
+												type="number" groupingUsed="true" value="${subTotal}" />
 										</span><span>đ</span>
 									</div>
 									<!-- End .dropdown-cart-total -->
 
-									<div class="dropdown-cart-action">
+									<div style="margin-left: 80px" class="dropdown-cart-action">
 										<a href="<c:url value='/web/cart/${userId}'/>"
-											class="btn btn-primary">View Cart</a> <a href="checkout.html"
-											class="btn btn-outline-primary-2"><span>Checkout</span><i
-											class="icon-long-arrow-right"></i></a>
+											class="btn btn-primary">View Cart</a>
 									</div>
 									<!-- End .dropdown-cart-total -->
 								</div>
@@ -264,7 +261,7 @@
 							<a href="#" class="dropdown-toggle" role="button"
 								data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false" data-display="static"
-								title="Browse Categories"> Danh Mục Sản Phẩm </a>
+								title="Browse Categories"> Categorys </a>
 
 							<div class="dropdown-menu">
 
@@ -272,7 +269,7 @@
 									<ul class="menu-vertical sf-arrows">
 										<c:forEach var="item" items="${categorys}">
 											<li class="item-lead"><a
-												href="<c:url value='/web/category/${item.id}?page=1&limit=9'/>">${item.name}</a></li>
+												href="<c:url value='/web/product?page=1&limit=9&categoryId=${item.id}'/>">${item.name}</a></li>
 										</c:forEach>
 									</ul>
 									<!-- End .menu-vertical -->
@@ -290,58 +287,10 @@
 						<nav class="main-nav">
 							<ul class="menu sf-arrows">
 								<li class="megamenu-container active"><a
-									href="<c:url value='/web/home'/>">Trang chủ</a></li>
+									href="<c:url value='/web/home'/>">Home</a></li>
 								<li><a href="<c:url value='/web/product?page=1&limit=9'/>"
-									class="sf-with-ul">Sản Phẩm</a></li>
-								<li><a href="product.html" class="sf-with-ul">Product</a>
+									class="sf-with-ul">Products</a></li>
 
-									<div class="megamenu megamenu-sm">
-										<div class="row no-gutters">
-											<div class="col-md-6">
-												<div class="menu-col">
-													<div class="menu-title">Product Details</div>
-													<!-- End .menu-title -->
-													<ul>
-														<li><a href="product.html">Default</a></li>
-														<li><a href="product-centered.html">Centered</a></li>
-														<li><a href="product-extended.html"><span>Extended
-																	Info<span class="tip tip-new">New</span>
-															</span></a></li>
-														<li><a href="product-gallery.html">Gallery</a></li>
-														<li><a href="product-sticky.html">Sticky Info</a></li>
-														<li><a href="product-sidebar.html">Boxed With
-																Sidebar</a></li>
-														<li><a href="product-fullwidth.html">Full Width</a></li>
-														<li><a href="product-masonry.html">Masonry Sticky
-																Info</a></li>
-													</ul>
-												</div>
-												<!-- End .menu-col -->
-											</div>
-											<!-- End .col-md-6 -->
-
-											<div class="col-md-6">
-												<div class="banner banner-overlay">
-													<a href="category.html"> <
-														src="assets/images/menu/banner-2.jpg" alt="Banner">
-
-														<div class="banner-content banner-content-bottom">
-															<div class="banner-title text-white">
-																New Trends<br>
-																<span><strong>spring 2019</strong></span>
-															</div>
-															<!-- End .banner-title -->
-														</div>
-														<!-- End .banner-content -->
-													</a>
-												</div>
-												<!-- End .banner -->
-											</div>
-											<!-- End .col-md-6 -->
-										</div>
-										<!-- End .row -->
-									</div>
-									<!-- End .megamenu megamenu-sm --></li>
 								<li><a href="#" class="sf-with-ul">Pages</a>
 
 									<ul>

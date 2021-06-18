@@ -35,7 +35,7 @@ public class BookAPI {
 	@Autowired
 	private UploadFileUtils uploadFileUtils;
 
-	@SuppressWarnings("unchecked")
+
 	@PostMapping
 	public BookDTO saveBook(@RequestBody BookDTO bookDTO) {
 		Map<String, String > paramsImage = new HashMap<String, String>();

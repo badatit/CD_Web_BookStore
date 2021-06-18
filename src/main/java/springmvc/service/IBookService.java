@@ -19,6 +19,7 @@ public interface IBookService {
 	public int getTotalItem();
 	public List<BookDTO> findAllOrderByPriceASC();
 	public List<BookDTO> findAllOrderByPriceDESC();
+	public List<BookDTO> findAllByHigPrice();
 	public List<BookDTO> findByNameAndCategoryAndPage(String name , String categoryName , Pageable pageable);
 	public List<BookDTO> findByName(String name);
 	public List<BookDTO> findByIssuingcompany(String issuingcompany);

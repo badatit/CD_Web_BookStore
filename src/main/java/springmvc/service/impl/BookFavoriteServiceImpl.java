@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import springmvc.Utils.SecurityUtils;
 import springmvc.converter.BookFavoriteConverter;
@@ -30,23 +29,26 @@ public class BookFavoriteServiceImpl implements IBookFavoriteService {
 
 	private BookFavoriteConverter bookFavoriteConverter = new BookFavoriteConverter();
 
+	
 	@Override
-	public String save(BookFavoriteDTO bookFavoriteDTO) {
-		MyUser myUser = SecurityUtils.getPrincipal();
+	public BookFavoriteDTO save(BookFavoriteDTO bookFavoriteDTO) {
+		 MyUser myUser = SecurityUtils.getPrincipal();
 		if (checkBookInFavorite(bookFavoriteDTO.getBookId())) {
 			BookFavoriteEntity bookFavoriteEntity = bookfavorite.findOneByBookId(bookFavoriteDTO.getBookId());
 			bookfavorite.delete(bookFavoriteEntity);
-			return "success_delete";
+			int count = bookfavorite.countByUser(myUser.getId());
+			bookFavoriteDTO.setMessage("success_delete");
 		} else {
 			BookFavoriteEntity bookFavoriteEntity = new BookFavoriteEntity();
 			bookFavoriteEntity.setUser(userRepository.findOne(myUser.getId()));
 			bookFavoriteEntity.setBookEntity(bookRepository.findOne(bookFavoriteDTO.getBookId()));
 			bookFavoriteEntity = bookfavorite.save(bookFavoriteEntity);
 			if (bookFavoriteEntity != null) {
-				return "success_save";
+				bookFavoriteDTO.setMessage("success_save");
 			}
 		}
-		return "fail";
+		bookFavoriteDTO.setCount(countByUser());
+		return bookFavoriteDTO;
 	}
 
 	public boolean checkBookInFavorite(Long bookId) {
@@ -57,6 +59,12 @@ public class BookFavoriteServiceImpl implements IBookFavoriteService {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public int countByUser() {
+		 MyUser myUser = SecurityUtils.getPrincipal();
+		return bookfavorite.countByUser(myUser.getId());
 	}
 
 }
