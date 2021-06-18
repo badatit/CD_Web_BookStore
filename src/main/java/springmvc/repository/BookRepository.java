@@ -20,6 +20,9 @@ public interface BookRepository extends JpaRepository<BookEntity, Long > ,BookRe
 	@Query(value = "SELECT e.* FROM book e ORDER BY e.price desc LIMIT 7" , nativeQuery = true)
 	public List<BookEntity> findAllOrderByPriceDESC();
 	
+	@Query(value = "select * from book where price > 250000" , nativeQuery = true)
+	public List<BookEntity> findAllByHighPrice();
+	
 	@Query(value="SELECT * FROM book b INNER JOIN category c on b.categoryid = c.id where b.name LIKE '%?1%' AND c.name LIKE '%?2%' ORDER BY ?#{#pageable} ",nativeQuery = true )
 	List<BookEntity> findByNameAndCategoryAndPage(String name , String categoryName, Pageable pageable);
 	

@@ -189,6 +189,7 @@ public class CartServiceImpl implements ICartService {
 			miniCartDTO.setId(item.getId());
 			miniCartDTO.setAmountTotal(item.getAmount() * item.getBookEntity().getPrice());
 			miniCartDTO.setBookId(item.getBookEntity().getId());
+			miniCartDTO.setImg1(item.getBookEntity().getImg1());
 			lCartDTOs.add(miniCartDTO);
 		}
 		return lCartDTOs;

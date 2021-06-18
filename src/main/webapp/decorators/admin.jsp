@@ -59,13 +59,31 @@
 	src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
 <style data-styled data-styled-version="4.4.1"></style>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d66654c9ca887d1dbc2f27265afee5d5a040c7a8
 <style type="text/css">
 .error {
 	color: red;
 }
+
+#img1-error {
+	position: absolute;
+	left: 130px;
+	top: 80px;
+}
 </style>
+<<<<<<< HEAD
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js'></script>
 
+=======
+
+<script
+	src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js'></script>
+
+
+>>>>>>> d66654c9ca887d1dbc2f27265afee5d5a040c7a8
 </head>
 
 

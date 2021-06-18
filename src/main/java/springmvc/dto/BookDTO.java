@@ -1,14 +1,10 @@
 package springmvc.dto;
 
-import java.util.Date;
-
-import org.springframework.web.multipart.MultipartFile;
-
 public class BookDTO extends AbstractDTO {
 
 	private String name;
 	 double price;
-	private Date productionDay;
+	private String productionDay;
 	private String issuingCompany;
 	private String size;
 	private String coverType;
@@ -118,11 +114,11 @@ public class BookDTO extends AbstractDTO {
 		this.price = price;
 	}
 
-	public Date getProductionDay() {
+	public String getProductionDay() {
 		return productionDay;
 	}
 
-	public void setProductionDay(Date productionDay) {
+	public void setProductionDay(String productionDay) {
 		this.productionDay = productionDay;
 	}
 

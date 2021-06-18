@@ -91,57 +91,43 @@
 								</div>
 							</div>
 							<div class="form-group ">
-								<label for="img1" class="control-label col-lg-2">Chọn
-									Ảnh 1 </label>
+								<div>
+									<label for="img1" class="control-label col-lg-2">Chọn
+										Ảnh 1 </label>
 
-								<div class="col-lg-10">
-									<input type="file" name="img1" id="img1"
-										style="color: transparent;" value="${book.img1}"> <label
-										id="file-name_1">${book.img1}</label> <img
-										style="width: 70px; height: 80px;" id="id_img1"
-										src="${book.base64_1}">
+									<div class="col-lg-4">
+										<input type="file" name="img1" id="img1"> 
+										<img alt="" id="showimg1" style="height: 140px; width: 105px; margin-top: 10px" src="${book.img1}">
+									</div>
+								</div>
+								<div>
+									<label for="img1" class="control-label col-lg-2">Chọn
+										Ảnh 2 </label>
+
+									<div class="col-lg-4">
+										<input type="file" name="img2" id="img2"> <img alt="" id="showimg2"
+											style="height: 140px; width: 105px; margin-top: 10px" src="">
+									</div>
 								</div>
 							</div>
 							<div class="form-group ">
-								<label for="img2" class="control-label col-lg-2">Chọn
-									Ảnh 2</label>
-								<div class="col-lg-10">
-									<input type="file" name="img2" id="img2"
-										style="color: transparent;"> <label id="file-name_2"></label>
-									<img style="width: 70px; height: 80px" id="id_img2"
-										src="${book.base64_2}">
+								<div>
+									<label for="img1" class="control-label col-lg-2">Chọn
+										Ảnh 3 </label>
 
+									<div class="col-lg-4">
+										<input type="file" name="img1" id="img3"> <img alt="" id="showimg3"
+											style="height: 140px; width: 105px; margin-top: 10px" src="">
+									</div>
 								</div>
-							</div>
-							<div class="form-group ">
-								<label for="img3" class="control-label col-lg-2">Chọn
-									Ảnh 3</label>
-								<div class="col-lg-10">
-									<input type="file" name="img3" id="img3"
-										style="color: transparent;"> <label id="file-name_3"></label>
-									<img style="width: 70px; height: 80px" id="id_img3"
-										src="${book.base64_3}">
-								</div>
-							</div>
-							<div class="form-group ">
-								<label for="img4" class="control-label col-lg-2">Chọn
-									Ảnh 4</label>
+								<div>
+									<label for="img1" class="control-label col-lg-2">Chọn
+										Ảnh 4 </label>
 
-								<div class="col-lg-10">
-									<input type="file" name="img4" id="img4"
-										style="color: transparent;"> <label id="file-name_4"></label>
-									<img style="width: 70px; height: 80px" id="id_img4"
-										src="${book.base64_4}">
-								</div>
-							</div>
-							<div class="form-group ">
-								<label for="img4" class="control-label col-lg-2">Chọn
-									Ảnh 5</label>
-
-								<div class="col-lg-10">
-									<input type="file" name="img4" id="img4"
-										style="color: transparent;"> <label id="file-name_4"></label>
-									
+									<div class="col-lg-4">
+										<input type="file" name="img1" id="img4"> <img alt="" id="showimg4"
+											style="height: 140px; width: 105px; margin-top: 10px" src="">
+									</div>
 								</div>
 							</div>
 							<div class="form-group col-md-12">
@@ -184,7 +170,7 @@
 							</div>
 							<div class="form-group">
 								<div class="col-lg-offset-2 col-lg-10" style="margin-left: 39%;">
-									<button class="btn btn-theme .editBook" type="submit"
+									<button class="btn btn-theme editBook" type="submit"
 										id="editBook">Save</button>
 									<c:if test="${book.id > 0}">
 										<button class="btn btn-theme04">
@@ -205,6 +191,10 @@
 	</section>
 </section>
 <script>
+	$(document).ready(function() {
+
+	})
+	var data = {};
 	$("#formEdit").validate({
 		rules : {
 			name : {
@@ -232,10 +222,7 @@
 			productDescription : {
 				required : true,
 			},
-			img1 : {
-				required : true,
-				accept : "image/jpeg, image/pjpeg"
-			},
+			
 			categoryId : {
 				required : true,
 			},
@@ -272,10 +259,7 @@
 			productDescription : {
 				required : "Vui lòng không để trống"
 			},
-			img1 : {
-				required : "Vui lòng không để trống",
-				accept : "File hình ảnh là image/jpeg, image/pjpeg"
-			},
+			
 			categoryId : {
 				required : "Vui lòng không để trống"
 			},
@@ -301,179 +285,52 @@
 			});
 		}
 	});
-</script>
-<script>
-	$(document).ready(function() {
 
-	})
-
-	var data = {};
-	$('#img1').change(function() {
-		$("#file-name_1").text(this.files[0].name);
+	$("#img1").change(function() {
 		var files = $(this)[0].files[0];
 		if (files != undefined) {
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				data["base64_1"] = e.target.result;
 				data["img1"] = files.name;
-				$('#id_img1').attr('src', data["base64_1"]);
-				document.getElementById("id_img1").style.display = "block";
+				$('#showimg1').attr('src', data["base64_1"]);
 			};
-
 			reader.readAsDataURL(files);
 		}
 	});
-	$('#img2').change(function() {
-		$("#file-name_2").text(this.files[0].name);
+	$("#img2").change(function() {
 		var files = $(this)[0].files[0];
 		if (files != undefined) {
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				data["base64_2"] = e.target.result;
 				data["img2"] = files.name;
-				$('#id_img2').attr('src', data["base64_2"]);
-				document.getElementById("id_img2").style.display = "block";
+				$('#showimg2').attr('src', data["base64_2"]);
 			};
 			reader.readAsDataURL(files);
 		}
 	});
-	$('#img3').change(function() {
-		$("#file-name_3").text(this.files[0].name);
+	$("#img3").change(function() {
 		var files = $(this)[0].files[0];
 		if (files != undefined) {
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				data["base64_3"] = e.target.result;
 				data["img3"] = files.name;
-				$('#id_img3').attr('src', data["base64_3"]);
-				document.getElementById("id_img3").style.display = "block";
+				$('#showimg3').attr('src', data["base64_3"]);
 			};
 			reader.readAsDataURL(files);
 		}
 	});
-	$('#img4').change(function() {
-		$("#file-name_4").text(this.files[0].name);
+	$("#img4").change(function() {
 		var files = $(this)[0].files[0];
 		if (files != undefined) {
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				data["base64_4"] = e.target.result;
 				data["img4"] = files.name;
-				$('#id_img4').attr('src', data["base64_4"]);
-				document.getElementById("id_img4").style.display = "block";
-			};
-			reader.readAsDataURL(files);
-		}
-	});
-	function addingBook(data) {
-		$.ajax({
-			type : "POST",
-			url : "${ApiUrl}",
-			data : JSON.stringify(data),
-			dataType : "json",
-			contentType : "application/json",
-			success : function(response) {
-				swal("Thành Công!", "Hãy nhấn vào nút!", "success");
-			},
-			error : function(response) {
-				swal("Thất bại", "Sản phẩm vẫn an toàn :)", "error");
-			}
-		});
-	}
-	function editBook(data) {
-		$.ajax({
-			type : "PUT",
-			url : "${ApiUrl}",
-			data : JSON.stringify(data),
-			dataType : "json",
-			contentType : "application/json",
-			success : function(response) {
-				swal("Thành Công!", "Hãy nhấn vào nút!", "success");
-			},
-			error : function(response) {
-				swal("Thất bại", "Sản phẩm vẫn an toàn :)", "error");
-			}
-		});
-	}
-	<script>
-
-	$(document).ready(function() {
-
-	})
-	/*
-	 var src_1 = document.getElementById("id_img1").getAttribute('src');
-	 var src_2 = document.getElementById("id_img2").getAttribute('src');
-	 var src_3 = document.getElementById("id_img3").getAttribute('src');
-	 var src_4 = document.getElementById("id_img4").getAttribute('src');
-	 if (src_1 == '') {
-	 document.getElementById("id_img1").style.display = "none";
-	 }
-	 if (src_2 == '') {
-	 document.getElementById("id_img2").style.display = "none";
-	 }
-	 if (src_3 == '') {
-	 document.getElementById("id_img3").style.display = "none";
-	 }
-	 if (src_4 == '') {
-	 document.getElementById("id_img4").style.display = "none";
-	 }
-	 */
-	var data = {};
-	$('#img1').change(function() {
-		$("#file-name_1").text(this.files[0].name);
-		var files = $(this)[0].files[0];
-		if (files != undefined) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				data["base64_1"] = e.target.result;
-				data["img1"] = files.name;
-				/*
-				$('#id_img1').attr('src', data["base64_1"]);
-				document.getElementById("id_img1").style.display = "block";
-				 */
-			};
-
-			reader.readAsDataURL(files);
-		}
-	});
-	$('#img2').change(function() {
-		$("#file-name_2").text(this.files[0].name);
-		var files = $(this)[0].files[0];
-		if (files != undefined) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				data["base64_2"] = e.target.result;
-				data["img2"] = files.name;
-				$('#id_img2').attr('src', data["base64_2"]);
-				document.getElementById("id_img2").style.display = "block";
-			};
-			reader.readAsDataURL(files);
-		}
-	});
-	$('#img3').change(function() {
-		$("#file-name_3").text(this.files[0].name);
-		var files = $(this)[0].files[0];
-		if (files != undefined) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				data["base64_3"] = e.target.result;
-				data["img3"] = files.name;
-				$('#id_img3').attr('src', data["base64_3"]);
-				document.getElementById("id_img3").style.display = "block";
-			};
-			reader.readAsDataURL(files);
-		}
-	});
-	$('#img4').change(function() {
-		$("#file-name_4").text(this.files[0].name);
-		var files = $(this)[0].files[0];
-		if (files != undefined) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				data["base64_4"] = e.target.result;
-				data["img4"] = files.name;
-				$('#id_img4').attr('src', data["base64_4"]);
-				document.getElementById("id_img4").style.display = "block";
+				$('#showimg4').attr('src', data["base64_4"]);
+				
 			};
 			reader.readAsDataURL(files);
 		}
@@ -509,7 +366,3 @@
 		});
 	}
 </script>
-
-
-
-

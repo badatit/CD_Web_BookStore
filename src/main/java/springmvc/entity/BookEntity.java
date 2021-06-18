@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -27,7 +28,7 @@ public class BookEntity extends BaseEntity {
 	private double price;
 	
 	@Column(name = "productionday")
-	private Date productionDay;
+	private String productionDay;
 	
 	@Column(name = "issuingcompany")
 	private String issuingCompany;
@@ -59,7 +60,8 @@ public class BookEntity extends BaseEntity {
 	@Column(name = "img4")
 	private String img4;
 	
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="categoryid")
 	private CategoryEntity category;
 	
@@ -134,11 +136,11 @@ public class BookEntity extends BaseEntity {
 		this.price = price;
 	}
 
-	public Date getProductionDay() {
+	public String getProductionDay() {
 		return productionDay;
 	}
 
-	public void setProductionDay(Date productionDay) {
+	public void setProductionDay(String productionDay) {
 		this.productionDay = productionDay;
 	}
 

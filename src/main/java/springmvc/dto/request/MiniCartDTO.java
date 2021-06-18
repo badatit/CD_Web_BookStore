@@ -8,10 +8,19 @@ public class MiniCartDTO {
 	private double amountTotal;
 	private long bookId;
 	private double subTotal;
+	private String img1;
+	
+	
 	
 	
 	public long getBookId() {
 		return bookId;
+	}
+	public String getImg1() {
+		return img1;
+	}
+	public void setImg1(String img1) {
+		this.img1 = img1;
 	}
 	public void setBookId(long bookId) {
 		this.bookId = bookId;

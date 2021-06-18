@@ -14,4 +14,7 @@ public interface BookFavoriteRepository extends JpaRepository<BookFavoriteEntity
 	
 	@Query(value = "select * from favoritebook where userid =?1",nativeQuery = true)
 	public List<BookFavoriteEntity> findByUser(long userId);
+	
+	@Query(value = "select count(id) from favoritebook where userid =?1",nativeQuery = true)
+	public int countByUser(long userId);
 }

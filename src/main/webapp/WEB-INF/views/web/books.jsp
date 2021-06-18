@@ -63,7 +63,7 @@
 											<figure class="product-media">
 												<span class="product-label label-new">New</span>
 												<a href="<c:url value='/web/product/${item.id}' />"> <img
-													src="<c:url value='/template/web/assets/images/products/product-4.jpg'/>"
+													src="${item.img1}"
 													alt="Product image" class="product-image">
 
 												</a>
@@ -384,7 +384,7 @@ $(document).ready(function() {
               						'</div>'+
               						' <figure class="product-image-container">'+
               						'<a href="${ProductDetailsURL}'+value.bookId+'">'+
-              						'<img src="${Pricture}" alt="product">'+
+              						'<img src="'+value.img1+'" alt="product">'+
               						'</a>'+
               						'</figure>'+
               						'<a onclick="deleteCart('+value.id+')" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>'+
@@ -435,7 +435,7 @@ $(document).ready(function() {
 		     						'<div class="product product-7 text-center">'+
 		     						'<figure class="product-media">'+
 		     						'<span class="product-label label-new">New</span> '+
-		     						'<a href="${ProductDetail}'+value.id+'"><img src="<c:url value='/template/web/assets/images/products/product-4.jpg'/>" alt="Product image" class="product-image"></a>'+
+		     						'<a href="${ProductDetail}'+value.id+'"><img src="'+value.img1+'" alt="Product image" class="product-image"></a>'+
 		     						
 		     						' <div class="product-action-vertical">'+
 		     						'<a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>'+
@@ -487,7 +487,7 @@ $(document).ready(function() {
 		     						'<div class="product product-7 text-center">'+
 		     						'<figure class="product-media">'+
 		     						'<span class="product-label label-new">New</span> '+
-		     						'<a href="${ProductDetail}'+value.id+'"><img src="<c:url value='/template/web/assets/images/products/product-4.jpg'/>" alt="Product image" class="product-image"></a>'+
+		     						'<a href="${ProductDetail}'+value.id+'"><img src="'+value.img1+'" alt="Product image" class="product-image"></a>'+
 		     						
 		     						' <div class="product-action-vertical">'+
 		     						'<a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>'+

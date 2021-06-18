@@ -70,6 +70,10 @@ public class BookServiceImpl implements IBookService {
 				skip(destination.getCreatedDate());
 				skip(destination.getModifiedBy());
 				skip(destination.getModifiedDate());
+				skip(destination.getImg1());
+				skip(destination.getImg2());
+				skip(destination.getImg3());
+				skip(destination.getImg4());
 			}
 		});
 		modelMapper.map(bookDTO, bookEntity);
@@ -80,6 +84,10 @@ public class BookServiceImpl implements IBookService {
 	@Transactional
 	public BookDTO saveBook(BookDTO bookDTO) {
 		BookEntity entity = bookConverter.converterToEntity(bookDTO);
+		entity.setImg1(bookDTO.getBase64_1());
+		entity.setImg2(bookDTO.getBase64_2());
+		entity.setImg3(bookDTO.getBase64_3());
+		entity.setImg4(bookDTO.getBase64_4());
 		if (bookDTO.getCategoryId() != null) {
 			CategoryEntity categoryEntity = categoryRepository.findOne(bookDTO.getCategoryId());
 			entity.setCategory(categoryEntity);
@@ -141,18 +149,6 @@ public class BookServiceImpl implements IBookService {
 		List<BookDTO> listDTO = new ArrayList<>();
 		for (BookEntity item : listBooks) {
 			BookDTO bookDTO = bookConverter.converterToDTO(item);
-//			try {
-//				if (myUser.getId() != null) {
-//					List<BookFavoriteEntity> bookFavoriteEntities = bookFavoriteRepository.findByUser(myUser.getId());
-//					for (BookFavoriteEntity bookFavoriteEntity : bookFavoriteEntities) {
-//						if (bookFavoriteEntity.getBookEntity().getId() == item.getId()) {
-//							bookDTO.setFavo("yes");
-//						}
-//					}
-//				}
-//			} catch (Exception e) {
-//				
-//			}
 			bookDTO.setFavorite(null);
 			if (myUser == null) {
 				bookDTO.setFavorite(null);
@@ -176,15 +172,20 @@ public class BookServiceImpl implements IBookService {
 		List<BookDTO> listDTO = new ArrayList<>();
 		for (BookEntity item : listBooks) {
 			BookDTO bookDTO = bookConverter.converterToDTO(item);
-//			if (myUser == null) {
-//				bookDTO.setFavo(1);
-//			}else {
-//				bookDTO.setFavo(2);
-//			}
+			bookDTO.setFavorite(null);
+			if (myUser == null) {
+				bookDTO.setFavorite(null);
+			}else {
+				List<BookFavoriteEntity> bookFavoriteEntities = bookFavoriteRepository.findByUser(myUser.getId());
+				for (BookFavoriteEntity bookFavoriteEntity : bookFavoriteEntities) {
+					if (bookFavoriteEntity.getBookEntity().getId() == item.getId()) {
+						bookDTO.setFavorite("OK");
+					}
+				}
+			}
 			listDTO.add(bookDTO);
 		}
 		return listDTO;
-//		return null;
 	}
 
 	@Override
@@ -289,5 +290,27 @@ public class BookServiceImpl implements IBookService {
 	@Override
 	public long totalAmountOfBooksByInactive() {
 		return bookRepository.countByStatus("inactive");
+	}
+	@Override
+	public List<BookDTO> findAllByHigPrice() {
+		MyUser myUser = SecurityUtils.getPrincipal();
+		List<BookEntity> listBooks = bookRepository.findAllByHighPrice();
+		List<BookDTO> listDTO = new ArrayList<>();
+		for (BookEntity item : listBooks) {
+			BookDTO bookDTO = bookConverter.converterToDTO(item);
+			bookDTO.setFavorite(null);
+			if (myUser == null) {
+				bookDTO.setFavorite(null);
+			}else {
+				List<BookFavoriteEntity> bookFavoriteEntities = bookFavoriteRepository.findByUser(myUser.getId());
+				for (BookFavoriteEntity bookFavoriteEntity : bookFavoriteEntities) {
+					if (bookFavoriteEntity.getBookEntity().getId() == item.getId()) {
+						bookDTO.setFavorite("OK");
+					}
+				}
+			}
+			listDTO.add(bookDTO);
+		}
+		return listDTO;
 	}
 }

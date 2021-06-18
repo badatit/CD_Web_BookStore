@@ -17,11 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import springmvc.Utils.SecurityUtils;
 import springmvc.Utils.VnCurrencyUtil;
 import springmvc.dto.BookDTO;
-import springmvc.dto.CartDTO;
 import springmvc.dto.CategoryDTO;
 import springmvc.dto.MyUser;
 import springmvc.dto.request.MiniCartDTO;
-import springmvc.entity.BookFavoriteEntity;
+import springmvc.service.IBookFavoriteService;
 import springmvc.service.IBookService;
 import springmvc.service.ICartService;
 import springmvc.service.ICategoryService;
@@ -41,6 +40,9 @@ public class HomeController {
 	
 	@Autowired
 	private VnCurrencyUtil vn;
+	
+	@Autowired
+	private IBookFavoriteService iBookFavo;
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView homePage() {
@@ -49,7 +51,8 @@ public class HomeController {
 		List<BookDTO> listDTO = bookService.findAll();
 		
 		List<BookDTO> listBookASC = bookService.findAllOrderByPriceASC();
-//		List<BookDTO> listBookDESC = bookService.findAllOrderByPriceDESC();
+		List<BookDTO> listBookDESC = bookService.findAllOrderByPriceDESC();
+		List<BookDTO> listBookHighPrice = bookService.findAllByHigPrice();
 		MyUser myUser = SecurityUtils.getPrincipal();
 		Long id ;
 		if (myUser == null) {
@@ -59,13 +62,14 @@ public class HomeController {
 			List<MiniCartDTO> listCart = iCartService.findAllByUserId();
 			mav.addObject("sizeCart", iCartService.countSizeCart());
 			mav.addObject("listCart",listCart);
-			String result = vn.currencyVn(iCartService.subTotal());
-			mav.addObject("subTotal", result);
+			mav.addObject("countFavo", iBookFavo.countByUser());
+			mav.addObject("subTotal", iCartService.subTotal());
 		}
 		
 		
 		mav.addObject("listBookASC", listBookASC);
-//		mav.addObject("listBookDESC", listBookDESC);
+		mav.addObject("listBookDESC", listBookDESC);
+		mav.addObject("listBookHighPrice", listBookHighPrice);
 		mav.addObject("userId", id);
 		mav.addObject("books", listDTO);
 		mav.addObject("categorys", lists);

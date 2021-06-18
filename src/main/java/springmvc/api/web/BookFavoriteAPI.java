@@ -16,7 +16,7 @@ public class BookFavoriteAPI {
 	private IBookFavoriteService bookFavoriteSerivce;
 	
 	@PostMapping
-	public String saveBookFavorite(@RequestBody BookFavoriteDTO bookFavoriteDTO) {
+	public BookFavoriteDTO saveBookFavorite(@RequestBody BookFavoriteDTO bookFavoriteDTO) {
 		return bookFavoriteSerivce.save(bookFavoriteDTO);
 	}
 
