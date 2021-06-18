@@ -11,5 +11,6 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetailEntity,L
 	
 	@Query(value = "select * from orderdetail where orderid= ?1",nativeQuery = true)
 	public List<OrderDetailEntity> findAllByOrderid(Long orderId);
+	
 
 }

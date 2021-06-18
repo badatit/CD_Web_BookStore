@@ -45,6 +45,18 @@
 
             </ul>
           </li>
+          
+          <li class="sub-menu">
+            <a href="javascript:;">
+             <i class="fab fa-first-order-alt"></i>
+              <span>Quản lý Đơn Hàng</span>
+            </a>
+            <ul class="sub">
+              <li><a href="<c:url value="/admin/order/list" />">Danh Sách Đơn Hàng</a></li>
+              
+
+            </ul>
+          </li>
         </ul>
         <!-- sidebar menu end-->
       </div>

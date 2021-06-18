@@ -9,7 +9,8 @@ public class OrderDetailDTO extends AbstractDTO {
 	private String[] cartIds ;
 	private double total ;
 	private Long orderId;
-	
+	private String orderFullName;
+	private String nameBook;
 	
 
 	public Long getOrderId() {
@@ -51,6 +52,23 @@ public class OrderDetailDTO extends AbstractDTO {
 	public void setCartIds(String[] cartIds) {
 		this.cartIds = cartIds;
 	}
+
+	public String getOrderFullName() {
+		return orderFullName;
+	}
+
+	public void setOrderFullName(String orderFullName) {
+		this.orderFullName = orderFullName;
+	}
+
+	public String getNameBook() {
+		return nameBook;
+	}
+
+	public void setNameBook(String nameBook) {
+		this.nameBook = nameBook;
+	}
+	
 	
 	
 }

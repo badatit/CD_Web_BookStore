@@ -14,6 +14,8 @@ public class OrderDTO extends AbstractDTO {
 	private Double shipping;
 	private String[] cartIds;
 	private String message;
+	private String orderDate;
+	private String note;
 	
 	
 	
@@ -85,6 +87,18 @@ public class OrderDTO extends AbstractDTO {
 	}
 	public void setTotal(double total) {
 		this.total = total;
+	}
+	public String getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
+	}
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
 	}
 	
 	

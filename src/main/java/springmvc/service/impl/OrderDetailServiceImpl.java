@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import springmvc.converter.OrderDetailsConverter;
 import springmvc.dto.OrderDTO;
 import springmvc.dto.OrderDetailDTO;
 import springmvc.entity.BookEntity;
@@ -29,6 +30,9 @@ public class OrderDetailServiceImpl implements IOrderDetailService {
 	private OrderRepository orderRepository;
 	@Autowired
 	private OrderDetailRepository orderDetailRepository;
+	
+	private OrderDetailsConverter orderDetailsConverter = new OrderDetailsConverter();
+	
 
 	@Override
 	public String saveOrderDetail(OrderDetailDTO orderDetailDTO) {
@@ -61,4 +65,21 @@ public class OrderDetailServiceImpl implements IOrderDetailService {
 		}
 		return "fail";
 	}
+
+	@Override
+	public List<OrderDetailDTO> findAllByOrderId(Long orderId) {
+		List<OrderDetailEntity> entities = orderDetailRepository.findAllByOrderid(orderId);
+		List<OrderDetailDTO> detailDTOs = new ArrayList<>();
+		for (OrderDetailEntity item : entities) {
+			OrderEntity orderEntity = item.getOrderEntity();
+			BookEntity bookEntity = item.getBookEntity();
+			OrderDetailDTO dto = orderDetailsConverter.converterToDTO(item);
+			dto.setOrderFullName(orderEntity.getFullName());
+			dto.setNameBook(bookEntity.getName());
+			detailDTOs.add(dto);
+		}
+		return detailDTOs;
+	}
+
+	
 }
