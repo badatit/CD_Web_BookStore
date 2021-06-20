@@ -1,5 +1,6 @@
 package springmvc.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import springmvc.Utils.SecurityUtils;
 import springmvc.converter.BookFavoriteConverter;
 import springmvc.dto.BookFavoriteDTO;
 import springmvc.dto.MyUser;
+import springmvc.entity.BookEntity;
 import springmvc.entity.BookFavoriteEntity;
 import springmvc.repository.BookFavoriteRepository;
 import springmvc.repository.BookRepository;
@@ -65,6 +67,28 @@ public class BookFavoriteServiceImpl implements IBookFavoriteService {
 	public int countByUser() {
 		 MyUser myUser = SecurityUtils.getPrincipal();
 		return bookfavorite.countByUser(myUser.getId());
+	}
+
+	@Override
+	public List<BookFavoriteDTO> findById() {
+		 MyUser myUser = SecurityUtils.getPrincipal();
+		 List<BookFavoriteEntity> bookFavoriteEntities = bookfavorite.findByUser(myUser.getId());
+		 List<BookFavoriteDTO> dtos = new ArrayList<>();
+		 for (BookFavoriteEntity item : bookFavoriteEntities) {
+			BookEntity bookEntity = item.getBookEntity();
+			BookFavoriteDTO favoriteDTO = bookFavoriteConverter.converterToDTO(item);
+			favoriteDTO.setBookIMG1(bookEntity.getImg1());
+			favoriteDTO.setBookName(bookEntity.getName());
+			favoriteDTO.setBookPrice(bookEntity.getPrice());
+			dtos.add(favoriteDTO);
+		}
+		return dtos;
+	}
+
+	@Override
+	public void deleteFavoriteBook(Long id) {
+		bookfavorite.delete(id);
+		
 	}
 
 }

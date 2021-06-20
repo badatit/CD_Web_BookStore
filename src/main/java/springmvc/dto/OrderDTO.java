@@ -16,6 +16,7 @@ public class OrderDTO extends AbstractDTO {
 	private String message;
 	private String orderDate;
 	private String note;
+	private Long usersId;
 	
 	
 	
@@ -99,6 +100,12 @@ public class OrderDTO extends AbstractDTO {
 	}
 	public void setNote(String note) {
 		this.note = note;
+	}
+	public Long getUsersId() {
+		return usersId;
+	}
+	public void setUsersId(Long usersId) {
+		this.usersId = usersId;
 	}
 	
 	

@@ -1,22 +1,32 @@
 package springmvc.api.web;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import springmvc.dto.JsonResultDto;
+import springmvc.dto.OrderDTO;
+import springmvc.dto.OrderDetailDTO;
 import springmvc.dto.UserDTO;
 import springmvc.entity.UserEntity;
+import springmvc.service.IOrderDetailService;
+import springmvc.service.IOrderService;
 import springmvc.service.IUserService;
 
 @RestController
@@ -26,6 +36,29 @@ public class CustomerAPI {
 	@Autowired
 	private IUserService userService;
 	
+	@Autowired
+	private IOrderDetailService orderDetailService;
+	
+	@Autowired
+	private IOrderService orderSevice;
+	
+	// function hien thi order
+	
+	@GetMapping("/findall")
+	public List<OrderDetailDTO> findAllByOrderId(@RequestParam(value = "id") Long id){
+		return orderDetailService.findAllByOrderId(id);
+		
+	}
+	@GetMapping("/findone")
+	public OrderDTO findById(@RequestParam(value="id") Long id) {
+		return orderSevice.findById(id);
+	}
+	@PutMapping("/updatestatus")
+	public OrderDTO updateOrder(@Valid @RequestBody OrderDTO orderDTO ) {
+		return orderSevice.updateOrderStatus(orderDTO);
+		
+	}
+	//
 	
 	@PostMapping
 	public UserDTO saveUser(@RequestBody UserDTO userDTO) {

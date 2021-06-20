@@ -11,6 +11,7 @@ public class OrderDetailDTO extends AbstractDTO {
 	private Long orderId;
 	private String orderFullName;
 	private String nameBook;
+	private String img;
 	
 
 	public Long getOrderId() {
@@ -67,6 +68,14 @@ public class OrderDetailDTO extends AbstractDTO {
 
 	public void setNameBook(String nameBook) {
 		this.nameBook = nameBook;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 	
 	

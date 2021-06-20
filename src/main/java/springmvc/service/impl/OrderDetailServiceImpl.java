@@ -76,6 +76,7 @@ public class OrderDetailServiceImpl implements IOrderDetailService {
 			OrderDetailDTO dto = orderDetailsConverter.converterToDTO(item);
 			dto.setOrderFullName(orderEntity.getFullName());
 			dto.setNameBook(bookEntity.getName());
+			dto.setImg(bookEntity.getImg1());
 			detailDTOs.add(dto);
 		}
 		return detailDTOs;

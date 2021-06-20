@@ -7,7 +7,10 @@ public class BookFavoriteDTO extends BaseEntity{
 	private Long userId;
 	private String message;
 	private int count;
-	
+	private String bookIMG1;
+	private String bookName;
+	private double bookPrice;
+	private String bookCategory;
 	
 	public String getMessage() {
 		return message;
@@ -33,5 +36,31 @@ public class BookFavoriteDTO extends BaseEntity{
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+	public String getBookIMG1() {
+		return bookIMG1;
+	}
+	public void setBookIMG1(String bookIMG1) {
+		this.bookIMG1 = bookIMG1;
+	}
+	public String getBookName() {
+		return bookName;
+	}
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
+	
+	public String getBookCategory() {
+		return bookCategory;
+	}
+	public void setBookCategory(String bookCategory) {
+		this.bookCategory = bookCategory;
+	}
+	public double getBookPrice() {
+		return bookPrice;
+	}
+	public void setBookPrice(double bookPrice) {
+		this.bookPrice = bookPrice;
+	}
+	
 	
 }

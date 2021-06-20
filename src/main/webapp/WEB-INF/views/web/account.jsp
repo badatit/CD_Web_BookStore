@@ -6,6 +6,11 @@
 <c:url var="ApiUrl" value="/web/api/user" />
 <c:url var="ApiUrlName" value="/web/api/user/check" />
 <c:url var="ApiUrlPass" value="/web/api/user/password" />
+<c:url var="ApiFavoriteBookUrl" value="/api/bookfavorite" />
+<c:url var="listOrderDetailUrl" value="/web/api/user/findall" />
+<c:url var="OrderUrl" value="/web/api/user/findone" />
+<c:url var="updateStatusUrl" value="/web/api/user/updatestatus" />
+<c:url var="acountURL" value="/web/account" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +19,7 @@
 </head>
 <body>
 	<main class="main">
-        
+        <input type="hidden" class="form-control" id="idUser" name="id" value = "${user.id}">
             <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
                 <div class="container">
                     <ol class="breadcrumb">
@@ -28,14 +33,14 @@
             <div class="page-content">
             	<div class="dashboard">
 	                <div class="container">
-	                	<div class="row">
-	                		<aside class="col-md-4 col-lg-3" style="max-width: 25%;">
+	                	<div class="row" style="margin-right: -130px">
+	                		<aside class="col-md-4 col-lg-3" style="max-width: 20%; margin-left: 10px">
 	                			<ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
 								    <li class="nav-item">
 								        <a class="nav-link active" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Đơn Mua</a>
 								    </li>
 								    <li class="nav-item">
-								        <a class="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads" role="tab" aria-controls="tab-downloads" aria-selected="false">Downloads</a>
+								        <a class="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads" role="tab" aria-controls="tab-downloads" aria-selected="false">Đã Thích</a>
 								    </li>
 								    <li class="nav-item">
 								        <a class="nav-link " id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Hồ Sơ</a>
@@ -53,46 +58,89 @@
 	                			<table class="table table-cart table-mobile">
 									<thead>
 										<tr>
-											<th>Sản Phẩm</th>
-											<th>Giá</th>
-											<th>Số Lượng</th>
+											<th>Tên Người Nhận</th>
+											<th>Ngày Đặt Hàng</th>
+											<th> Sản Phẩm</th>
 											<th>Tổng Tiền</th>
 											<th>Trạng Thái</th>
+											<th></th>
+											<th></th>
 										</tr>
 									</thead>
 
 									<tbody>
+										<c:forEach var="item" items="${listOrders}">
 										<tr>
-											<td class="product-col">
-												<div class="product"style="padding-top: 13px;">
-													<figure class="product-media">
-														<a href="#">
-															<img src="<c:url value='/template/web/assets/images/products/product-4.jpg'/>" alt="Product image" class="product-image">
-														</a>
-													</figure>
-
-													<h3 class="product-title">
-														<a href="#">Beige knitted elastic runner shoes</a>
-													</h3><!-- End .product-title -->
-												</div><!-- End .product -->
-											</td>
-											<td class="price-col" >$84.00</td>
-											<td class="quantity-col"><p style="margin-left: 26px;">1</p></td>
-											<td class="price-col" style="width: 110px;">$84.00</td>
+											<td class="product-col" style="width: 130px">${item.name}</td>
+											<td class="price-col" style="width: 126px" >${item.orderDate}</td>
+											<td class="quantity-col" style="text-align: center;">${item.amount}</td>
+											<td class="price-col" style="width: 110px;">${item.total}đ</td>
 											<td class="remove-col">
-											<div class="product-title" style="text-align: center;width: 110px;">Hoàn Thành</div>
+											<div class="product-title" style="text-align: center;width: 110px;">${item.status}</div>
 											<!-- <div><a href="#" class="btn btn-outline-dark-2"><span>UPDATE CART</span><i class="icon-refresh"></i></a></div> -->
 											
 											</td>
+											<td> 
+												<button type="button" onclick="orderDetails(${item.id})" class="btn btn-info btn-lg" data-toggle="modal" data-target="#assignmentBuildingModal" style="height: 50px;background: #15A78A"> Xem Chi Tiết</button>
+											</td>
+											<td>
+											<c:if test="${item.status == 'Đã Hủy' }">
+											<button type="button" onclick="cancelOrder(${item.id})" class="btn btn-info btn-lg" data-toggle="modal" data-target="#cancelOrder" style="height: 50px;background: red ;display: none;"> Hủy Đơn Hàng</button>
+											</c:if>
+											<c:if test="${item.status != 'Đã Hủy' }">
+											<button type="button" onclick="cancelOrder(${item.id})" class="btn btn-info btn-lg" data-toggle="modal" data-target="#cancelOrder" style="height: 50px;background: red ;"> Hủy Đơn Hàng</button>
+											</c:if>
+											 
+											 </td>
 										</tr>
+										</c:forEach>
 									</tbody>
 								</table><!-- End .table table-wishlist -->
 	                		</div><!-- End .col-lg-9 -->
 							</div><!-- .End .tab-pane -->
 
 								    <div class="tab-pane fade" id="tab-downloads" role="tabpanel" aria-labelledby="tab-downloads-link">
-								    	<p>No downloads available yet.</p>
-								    	<a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
+								    	
+								    	 <div class="col-lg-9" style="max-width: 100%;">
+	                			<table class="table table-cart table-mobile">
+									<thead>
+										<tr>
+											<th>Sản Phẩm</th>
+											<th>Giá</th>
+											<th></th>
+											<th></th>
+										</tr>
+									</thead>
+
+									<tbody>
+									<c:forEach var="item" items="${favoriteBooks}">
+										<tr id="favorite_${item.id}">
+											<td class="product-col" style="width: 63%">
+												<div class="product"style="padding-top: 13px;">
+													<figure class="product-media">
+														<a >
+															<img src="${item.bookIMG1}" alt="Product image" class="product-image">
+														</a>
+													</figure>
+
+													<h3 class="product-title">
+														${item.bookName}
+													</h3><!-- End .product-title -->
+												</div><!-- End .product -->
+											</td>
+											<td class="price-col" >${item.bookPrice}<span> VND</span></td>
+											<td class="remove-col">
+											
+											<a href="<c:url value='/web/product/${item.bookId}' />" class="btn btn-outline-dark-2" style="background: lavender;"><span>Chi Tiết Sản Phẩm</span></a>
+											
+											</td>
+											<%-- <td class="remove-col"><button onclick="deleteFavoriteBook(${item.id})" class="btn-remove"><i class="icon-close"></i></button></td> --%>
+										</tr>
+										</c:forEach>
+									</tbody>
+								</table><!-- End .table table-wishlist -->
+	                		</div><!-- End .col-lg-9 -->
+								    	
 								    </div><!-- .End .tab-pane -->
 
 								    <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
@@ -170,6 +218,148 @@
             </div><!-- End .page-content -->
         </main><!-- End .main -->
         
+        <div class="modal fade" id="assignmentBuildingModal" role="dialog">
+	<div class="modal-dialog modal-lg" style="max-width: 930px">
+		<div class="modal-content">
+			<!-- <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" style="position: fixed;">Thông Tin Chi Tiết</h4>
+			</div> -->
+			<div class="group">
+				<div class="content has-table" style="margin-top: 7px">
+					<table >
+						<tbody>
+							<tr>
+								<td style="width: 220px;;color: rgb(79, 79, 79);font-size: 16px;font-weight: 500;background: rgb(239, 239, 239); padding: 10px 15px;">
+								Họ Và Tên
+								</td>
+								<td style="flex: 1 1 0%;border-right: 0px; "><input style="background:white; width: 700px; border-top-style: hidden;  border-right-style: hidden;border-left-style: hidden;border-bottom-style: hidden; font-size: 16px; padding: 10px 15px; color:black;"
+							type="text" id="name" name="name" disabled="disabled" /></td>
+							</tr>
+							<tr>
+								<td style="width: 220px;;color: rgb(79, 79, 79);font-size: 16px;font-weight: 500;background: rgb(239, 239, 239); padding: 10px 15px;">
+								Email
+								</td>
+								<td style="flex: 1 1 0%;border-right: 0px; "><input style="background:#FAFAFA; width: 700px; border-top-style: hidden;  border-right-style: hidden;border-left-style: hidden;border-bottom-style: hidden; font-size: 16px; padding: 10px 15px; color:black;"
+							type="text" id="email" name="email" disabled="disabled" /></td>
+							</tr>
+							<tr>
+								<td style="width: 220px;;color: rgb(79, 79, 79);font-size: 16px;font-weight: 500;background: rgb(239, 239, 239); padding: 10px 15px;">
+								 Số Điện Thoại
+								 </td>
+								<td style="flex: 1 1 0%;border-right: 0px; "><input style="background:white; width: 700px; border-top-style: hidden;  border-right-style: hidden;border-left-style: hidden;border-bottom-style: hidden; font-size: 16px; padding: 10px 15px; color:black;"
+							type="text" id="phoneNumber" name="phoneNumber" disabled="disabled" /></td>
+							</tr>
+							<tr>
+								<td style="width: 220px;;color: rgb(79, 79, 79);font-size: 16px;font-weight: 500;background: rgb(239, 239, 239); padding: 10px 15px;">
+								Địa Chỉ 
+								</td>
+								<td style="flex: 1 1 0%;border-right: 0px; "><input style="background:#FAFAFA; width: 700px; border-top-style: hidden;  border-right-style: hidden;border-left-style: hidden;border-bottom-style: hidden; font-size: 16px; padding: 10px 15px; color:black;"
+							type="text" id="address" name="address" disabled="disabled" /></td>
+							</tr>
+							<tr>
+								<td style="width: 220px;;color: rgb(79, 79, 79);font-size: 16px;font-weight: 500;background: rgb(239, 239, 239); padding: 10px 15px;">
+								Hình Thức Vận Chuyển
+								</td>
+								<td style="flex: 1 1 0%;border-right: 0px; "><input style="background:white; width: 700px; border-top-style: hidden;  border-right-style: hidden;border-left-style: hidden;border-bottom-style: hidden; font-size: 16px; padding: 10px 15px; color:black;"
+							type="text" id="shipping" name="shipping" disabled="disabled" /></td>
+							</tr>
+							<tr>
+								<td style="width: 220px;;color: rgb(79, 79, 79);font-size: 16px;font-weight: 500;background: rgb(239, 239, 239); padding: 10px 15px;">
+								Ghi Chú
+								</td>
+								<td style="flex: 1 1 0%;border-right: 0px; "><input style="background:#FAFAFA; width: 700px; border-top-style: hidden;  border-right-style: hidden;border-left-style: hidden;border-bottom-style: hidden; font-size: 16px; padding: 10px 15px; color:black;"
+							type="text" id="note" name="note" disabled="disabled" /></td>
+							</tr>
+							
+							<tr>
+								<td style="width: 220px;;color: rgb(79, 79, 79);font-size: 16px;font-weight: 500;background: rgb(239, 239, 239); padding: 10px 15px;">
+								Ngày Đặt Hàng
+								</td>
+								<td style="flex: 1 1 0%;border-right: 0px; "><input style="background:white; width: 700px; border-top-style: hidden;  border-right-style: hidden;border-left-style: hidden;border-bottom-style: hidden; font-size: 16px; padding: 10px 15px; color:black;"
+							type="text" id="orderDate" name="orderDate" disabled="disabled" /></td>
+							</tr>
+							<tr>
+								<td style="width: 220px;;color: rgb(79, 79, 79);font-size: 16px;font-weight: 500;background: rgb(239, 239, 239); padding: 10px 15px;">
+								Trạng Thái
+								</td>
+							<td style="flex: 1 1 0%;border-right: 0px; "><input style="background:#FAFAFA; width: 700px; border-top-style: hidden;  border-right-style: hidden;border-left-style: hidden;border-bottom-style: hidden; font-size: 16px; padding: 10px 15px; color:black;"
+							type="text" id="status" name="status" disabled="disabled" /></td>
+							
+							</tr>
+							<tr>
+								<td style="width: 220px;;color: rgb(79, 79, 79);font-size: 16px;font-weight: 500;background: rgb(239, 239, 239); padding: 10px 15px;">
+								Chi tiết Sản phẩm
+								</td>
+								
+							</tr>
+							<table class="table table-cart table-mobile" id="cartBody">
+								<thead>
+									<tr>
+										<th>Ảnh</th>
+										<th>Tên Sách</th>
+										<th>Giá</th>
+										<th>Số Lượng</th>
+									</tr>
+								</thead>
+
+								<tbody>
+										<tr class="prduct-cart" id="cart">
+											<td class="product-col">
+												<div class="product" style="padding: 0px;">
+													<figure class="product-media">
+														<a href="#"> <img
+															src=" <c:url value='/template/web/assets/images/products/cart/product-1.jpg'/>"
+															alt="Product image">
+														</a>
+													</figure>
+													<!-- End .product-title -->
+												</div> <!-- End .product -->
+											</td>
+											<td class="product-title"></td>
+											<td class="price-col"></td>
+											<td class="quantity-col"></td>
+										</tr>
+								</tbody>
+							</table>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" style="background: #15A78A">Đóng</button>
+			</div>
+		</div>
+	</div>
+</div>
+        
+        
+          <div class="modal fade" id="cancelOrder" role="dialog">
+	<div class="modal-dialog modal-lg" style="max-width: 630px">
+		<div class="modal-content">
+			<!-- <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" style="position: fixed;">Thông Tin Chi Tiết</h4>
+			</div> -->
+			<div class="group" id="bodyModalCancel">
+				<div class="content has-table" style="margin-top: 7px">
+					<h3>Bạn Muốn Hủy Đơn Hàng</h3>
+					<form class="cmxform form-horizontal style-form" id="formEditOrder">
+					<input id ="id" name = "id" type="hidden">
+					<input id = "status" name ="status" value="Đã Hủy" type="hidden">
+					<button class="btn btn-theme " type="submit" id="editOrder" style="background: #15A78A; margin-left: 10px;border-radius: 5px; ">Xác Nhận</button>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" style="background: center;">Đóng</button>
+			</div>
+		</div>
+	</div>
+</div>
+     
+
 	<script>
 	$('#editUser').click(function (e) {
 		 e.preventDefault();
@@ -299,6 +489,140 @@
 			}); 
 			
 		});
+		
+		function deleteFavoriteBook(id) {
+			var data = {};
+  			data['id'] = id;
+  			$.ajax({
+  				type : "DELETE",
+  				url : "${ApiFavoriteBookUrl}",
+  				data : JSON.stringify(data),
+  				contentType : "application/json",
+  				success : function(response) {
+  		         	 $('favorite_'+response.id).remove();
+  		         	swal("Thành công", "Sản phẩm đã được xóa", "success"); 
+  				},
+  				error : function(response) {
+  				}
+  			});
+			
+		}
+		function orderDetails(orderId){
+			openModalAsssignmentBuilding();
+			 findOneOrder(orderId);
+			 findAllOrderDetail(orderId) 
+			
+		}
+		/* Tìm 1 order theo orderId */
+		function findOneOrder(orderId) {
+			var id = orderId;
+			$.ajax({
+				type : 'GET',
+				url : '${OrderUrl}?id='+id,
+				dataType: "json",
+				contentType : "application/json",
+				success : function(data) {
+					var ship = data.shipping;
+					
+					 $('#assignmentBuildingModal #name').val(data.name);
+					$('#assignmentBuildingModal #email').val(data.email);
+					$('#assignmentBuildingModal #phoneNumber').val(data.phoneNumber);
+					$('#assignmentBuildingModal #address').val(data.address);
+					$('#assignmentBuildingModal #status').val(data.status);
+					$('#assignmentBuildingModal #orderDate').val(data.orderDate);
+					$('#assignmentBuildingModal #note').val(data.note);
+					if(ship  ==  0){
+						document.getElementById('shipping').value='Miễn Phí Vận Chuyển';
+					}
+					if(ship  ==  15){
+						document.getElementById('shipping').value='Giao Hàng Tiết Kiệm';
+					}
+					if(ship  ==  25){
+						document.getElementById('shipping').value='Giao Hàng Nhanh';
+					}
+					
+				}
+			});
+		}
+
+		/* Tìm tất cả order detail theo orderId  */
+		function findAllOrderDetail(orderId) {
+			var id = orderId;
+			$('#cartBody tbody').html('');
+			$.ajax({
+				type : 'GET',
+				url : '${listOrderDetailUrl}?id='+id,
+				dataType: "json",
+				contentType : "application/json",
+				success : function(data) {
+					 $.each(data, function (key, value) {
+							$('#cartBody tbody').append('<tr class="prduct-cart" id="cart">'+
+									'<td class="product-col">'+
+									'<figure class="product-media">'+
+									'<a > <img src="'+value.img+'" alt="Product image"></a>'+
+									'</figure>'+
+									'</div>'+
+									'</td>'+
+									'<td class="product-title">'+value.nameBook+'</td>'+
+									'<td class="quantity-col">'+value.price+'</td>'+
+									'<td class="price-col">'+value.amount+'</td>'+
+									'</tr>');
+			          	});
+					
+				},
+				error : function(response) {
+					alert("lỗi");
+					
+				}
+			});
+			
+		}
+		function cancelOrder(orderId) {
+			var id = orderId;
+			
+			$.ajax({
+				type : 'GET',
+				url : '${OrderUrl}?id='+id,
+				dataType: "json",
+				contentType : "application/json",
+				success : function(data) {
+					var ship = data.shipping;
+					 $('#cancelOrder #id').val(data.id);
+				}
+			});
+		}
+		
+		$("#editOrder").click(function (e) {
+			 e.preventDefault();
+			var data = {};
+			var formData = $('#formEditOrder').serializeArray();
+			$.each(formData, function(index, v) {
+				data["" + v.name + ""] = v.value;
+			});
+			updateStatusOrder(data);
+		});
+		
+		function updateStatusOrder(data) {
+			var id = $('#idUser').val();
+			$.ajax({
+				type : "PUT",
+				url : "${updateStatusUrl}",
+				data : JSON.stringify(data),
+				dataType : "json",
+				contentType : "application/json",
+				success : function(response) {
+					window.location.href = '${acountURL}/' + id ;
+				},
+				error : function(response) {
+					swal("Thất bại", "Sản phẩm vẫn an toàn :)", "error");
+				}
+			});
+		}
+		
+		function openModalAsssignmentBuilding() {
+			$('#assignmentBuildingModal').modal();
+		}
+
 	</script>
 
 
