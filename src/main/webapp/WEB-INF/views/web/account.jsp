@@ -100,8 +100,7 @@
 							</div><!-- .End .tab-pane -->
 
 								    <div class="tab-pane fade" id="tab-downloads" role="tabpanel" aria-labelledby="tab-downloads-link">
-								    	
-								    	 <div class="col-lg-9" style="max-width: 100%;">
+								     <div class="col-lg-9" style="max-width: 100%;">
 	                			<table class="table table-cart table-mobile">
 									<thead>
 										<tr>
@@ -134,7 +133,7 @@
 											<a href="<c:url value='/web/product/${item.bookId}' />" class="btn btn-outline-dark-2" style="background: lavender;"><span>Chi Tiết Sản Phẩm</span></a>
 											
 											</td>
-											<%-- <td class="remove-col"><button onclick="deleteFavoriteBook(${item.id})" class="btn-remove"><i class="icon-close"></i></button></td> --%>
+											 <td class="remove-col"><button onclick="deleteFavoriteBook(${item.id})" class="btn-remove"><i class="icon-close"></i></button></td> 
 										</tr>
 										</c:forEach>
 									</tbody>
@@ -489,7 +488,7 @@
 			}); 
 			
 		});
-		
+		/* function delete favorite book  */
 		function deleteFavoriteBook(id) {
 			var data = {};
   			data['id'] = id;
@@ -499,14 +498,17 @@
   				data : JSON.stringify(data),
   				contentType : "application/json",
   				success : function(response) {
-  		         	 $('favorite_'+response.id).remove();
+  		         	 $('#favorite_'+response.id).remove();
   		         	swal("Thành công", "Sản phẩm đã được xóa", "success"); 
+  		          $('.wishlist-count').text(response.count);
   				},
   				error : function(response) {
   				}
   			});
 			
 		}
+		
+
 		function orderDetails(orderId){
 			openModalAsssignmentBuilding();
 			 findOneOrder(orderId);
@@ -577,9 +579,9 @@
 			});
 			
 		}
+		/* p/t lấy id cho modal   */
 		function cancelOrder(orderId) {
 			var id = orderId;
-			
 			$.ajax({
 				type : 'GET',
 				url : '${OrderUrl}?id='+id,
@@ -591,7 +593,7 @@
 				}
 			});
 		}
-		
+		/* function save update cancel status  */
 		$("#editOrder").click(function (e) {
 			 e.preventDefault();
 			var data = {};

@@ -11,6 +11,7 @@ public class BookFavoriteDTO extends BaseEntity{
 	private String bookName;
 	private double bookPrice;
 	private String bookCategory;
+	private Long id;
 	
 	public String getMessage() {
 		return message;
@@ -60,6 +61,12 @@ public class BookFavoriteDTO extends BaseEntity{
 	}
 	public void setBookPrice(double bookPrice) {
 		this.bookPrice = bookPrice;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	
