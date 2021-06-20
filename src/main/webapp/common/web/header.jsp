@@ -163,7 +163,7 @@
 						<div class="wishlist">
 							<a href="wishlist.html" title="Wishlist">
 								<div class="icon">
-									<i class="icon-heart-o"></i> <span class="wishlist-count badge">${countFavo }</span>
+									<i class="icon-heart-o"></i> <span class="wishlist-count badge">${countFavo}</span>
 								</div>
 								<p>Wishlist</p>
 							</a>

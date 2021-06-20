@@ -22,6 +22,7 @@ import springmvc.dto.MyUser;
 import springmvc.dto.request.HeaderDTO;
 import springmvc.dto.request.MiniCartDTO;
 import springmvc.dto.request.SearchBookDTO;
+import springmvc.service.IBookFavoriteService;
 import springmvc.service.IBookService;
 import springmvc.service.ICartService;
 import springmvc.service.ICategoryService;
@@ -39,6 +40,8 @@ public class BookController {
 	@Autowired
 	private ICartService iCartService;
 
+	@Autowired
+	private IBookFavoriteService iBookFavo;
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
 	public ModelAndView productsPage(@ModelAttribute("searchBookDTO") SearchBookDTO searchBookDTO) {
 		System.out.println(searchBookDTO.getSearchName());
@@ -70,7 +73,8 @@ public class BookController {
 			List<MiniCartDTO> listCart = iCartService.findAllByUserId();
 			mav.addObject("sizeCart", iCartService.countSizeCart());
 			mav.addObject("listCart", listCart);
-			mav.addObject("sumPrice", iCartService.subTotal());
+			mav.addObject("subTotal", iCartService.subTotal());
+			mav.addObject("countFavo", iBookFavo.countByUser());
 		}
 		mav.addObject("userId", id);
 		mav.addObject("categorys", lists);
@@ -114,7 +118,9 @@ public class BookController {
 			List<MiniCartDTO> listCart = iCartService.findAllByUserId();
 			mav.addObject("sizeCart", iCartService.countSizeCart());
 			mav.addObject("listCart", listCart);
-			mav.addObject("sumPrice", iCartService.subTotal());
+			mav.addObject("subTotal", iCartService.subTotal());
+			mav.addObject("countFavo", iBookFavo.countByUser());
+
 		}
 
 		mav.addObject("userId", idUser);

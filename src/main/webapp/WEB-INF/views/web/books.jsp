@@ -10,6 +10,7 @@
 <c:url var="searchIssuingCompany" value="/web/api/search/catalog" />
 <c:url var="APISearchBook" value="/web/api/search/book" />
 <c:url var="productURL" value="/web/product" />
+<c:url var="APIBookFavorite" value="/api/bookfavorite" />
 <c:url var="Pricture"
 	value='/template/web/assets/images/products/cart/product-1.jpg' />
 <!DOCTYPE html>
@@ -63,18 +64,26 @@
 											<figure class="product-media">
 												<span class="product-label label-new">New</span>
 												<a href="<c:url value='/web/product/${item.id}' />"> <img
-													src="${item.img1}"
-													alt="Product image" class="product-image">
+													src="${item.img1}" alt="Product image"
+													class="product-image">
 
 												</a>
 
 												<div class="product-action-vertical">
-													<a href="#"
-														class="btn-product-icon btn-wishlist btn-expandable"><span>add
-															to wishlist</span></a> <a href="popup/quickView.html"
-														class="btn-product-icon btn-quickview" title="Quick view"><span>Quick
-															view</span></a> <a href="#" class="btn-product-icon btn-compare"
-														title="Compare"><span>Compare</span></a>
+													<c:if test="${item.favorite == null}">
+														<a onclick="addFavourite(${item.id})"
+															class="btn-product-icon btn-wishlist btn-expandable favorite_${item.id}">
+															<span class="messageFavorite_${item.id}">Thêm yêu
+																thích</span>
+														</a>
+													</c:if>
+													<c:if test="${item.favorite != null}">
+														<a  style="color: red;" onclick="addFavourite(${item.id})"
+															class="btn-product-icon btn-wishlist btn-expandable favorite_${item.id}">
+															<span  style="color: red;" class="messageFavorite_${item.id}">Đã yêu
+																thích</span>
+														</a>
+													</c:if>
 												</div>
 												<!-- End .product-action-vertical -->
 
@@ -96,7 +105,9 @@
 												</h3>
 												<!-- End .product-title -->
 												<div class="product-price">
-														<fmt:formatNumber type="number" groupingUsed="true" value="${item.price}" /><span style="margin-left: 7px;"> VND</span>
+													<fmt:formatNumber type="number" groupingUsed="true"
+														value="${item.price}" />
+													<span style="margin-left: 7px;"> VND</span>
 												</div>
 												<!-- End .product-price -->
 												<div class="ratings-container">
@@ -306,6 +317,7 @@
 	<!-- End .page-content -->
 
 	<script type="text/javascript"> 
+	/**/
 	var nameBook = $('#searchName').val();
 	var categoyBook = $('#categoryId').val();
     document.forms['formSubmit']['searchName'].value = nameBook;
@@ -585,18 +597,18 @@ $(document).ready(function() {
 	</script>
 
 	<script type="text/javascript">
+	
     $(function () {
     	var totalPage = $('#totalPage').val();
-    	var  currentPage = $('#page1').val();
-    	
-    	 var searchName = $('#searchName').val();
+    	var pageC = $('#page1').val();
+    	var searchName = $('#searchName').val();
     	var category = $('#categoryId').val(); 
         window.pagObj = $('#pagination').twbsPagination({
-            totalPages: totalPage,
+        	startPage : pageC,
+            totalPages: 10,
             visiblePages: 9,
-            startPage : currentPage,
             onPageClick: function (event, page) { // 1 2 3
-            	if (currentPage != page ) {
+            	if (pageC != page ) {
             		$('#limit1').val(9);
 					$('#page1').val(page); // 1 bam 2 thì 1 se thanh 2
 					$('#formSubmit').submit();
@@ -605,11 +617,39 @@ $(document).ready(function() {
         });
     });
    
-    
-</script>
-	<script type="text/javascript">
- var urlCurrent = window.location.href;
- console.log(urlCurrent);
+	 function addFavourite(id){
+		 var userId= $('#userId').val();
+			if (userId == null || userId =='') {
+				alert("Vui lòng đăng nhập");
+			}else{
+		 var data ={};
+		 data['bookId'] =id;
+		   $.ajax({
+		         type: "POST",
+				 url: "${APIBookFavorite}",
+		         data: JSON.stringify(data),
+		         contentType: "application/json",
+		         success: function (response) { 
+		        	 $('.wishlist-count').text(response.count);
+		        	 var classWish = ".favorite_"+id;
+		        	 var messageWish =".messageFavorite_"+id;
+		        	 if (response.message == "success_save") {
+		         	 	$(classWish).css("color","red");
+		         	 	$(messageWish).text("Đã yêu thích");
+		         	 	$(messageWish).css("color","red");
+					}else{
+						 $(classWish).css("color","black");
+						 $(messageWish).text("Thêm yêu thích");
+			         	 $(messageWish).css("color","black");
+					}
+		         }, 
+		         
+		         error: function (response) {
+		        	 swal("Thất bại", "Sản phẩm vẫn an toàn :)", "error");
+		         }
+		      });
+			}
+	 }
 </script>
 
 

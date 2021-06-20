@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import springmvc.Utils.VnCurrencyUtil;
 import springmvc.dto.CategoryDTO;
 import springmvc.dto.request.MiniCartDTO;
+import springmvc.service.IBookFavoriteService;
 import springmvc.service.ICartService;
 import springmvc.service.ICategoryService;
 
@@ -27,7 +28,8 @@ public class CartController {
 	
 	@Autowired
 	private VnCurrencyUtil vn;
-	
+	@Autowired
+	private IBookFavoriteService iBookFavo;
 
 	@RequestMapping(value ="/cart/{id}" , method = RequestMethod.GET)
 	public ModelAndView showCart(@PathVariable Long id) {
@@ -40,6 +42,7 @@ public class CartController {
 		mav.addObject("userId", id);
 		mav.addObject("listCart", listCart);
 		mav.addObject("sizeCart", iCartService.countSizeCart());
+		mav.addObject("countFavo", iBookFavo.countByUser());
 		mav.addObject("categorys", lists);
 		mav.addObject("sumPrice", iCartService.subTotal());
 		System.out.println(listCart.size());

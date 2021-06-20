@@ -123,15 +123,28 @@ public class BookServiceImpl implements IBookService {
 		}
 		return dtos;
 	}
-
+	//here
 	@Override
 	public List<BookDTO> findAllPage(Pageable pageable, SearchBookDTO searchBookDTO) {
+		MyUser myUser = SecurityUtils.getPrincipal();
 		List<BookEntity> listBooks = bookRepository.findAll(pageable, searchBookDTO);
 		List<BookDTO> dtos = new ArrayList<>();
 		for (BookEntity item : listBooks) {
 			CategoryEntity categoryEntity = item.getCategory();
 			BookDTO bookDTO = bookConverter.converterToDTO(item);
 			bookDTO.setCategoryName(categoryEntity.getName());
+			if (myUser == null) {
+				bookDTO.setFavorite(null);
+			}else {
+				List<BookFavoriteEntity> bookFavoriteEntities = bookFavoriteRepository.findByUser(myUser.getId());
+				for (BookFavoriteEntity bookFavoriteEntity : bookFavoriteEntities) {
+					if (bookFavoriteEntity.getBookEntity().getId() == item.getId()) {
+						bookDTO.setFavorite("OK");
+					}else {
+						bookDTO.setFavorite(null);
+					}
+				}
+			}
 			dtos.add(bookDTO);
 		}
 		return dtos;

@@ -40,7 +40,7 @@
 												<div class="product" style="padding: 0px;">
 													<figure class="product-media">
 														<a href="#"> <img
-															src=" <c:url value='/template/web/assets/images/products/cart/product-1.jpg'/>"
+															src="${item.img1 }"
 															alt="Product image">
 														</a>
 													</figure>
@@ -397,7 +397,7 @@ function addCart(bookId,id) {
           						'</div>'+
           						' <figure class="product-image-container">'+
           						'<a href="${ProductDetailsURL}'+value.bookId+'">'+
-          						'<img src="${Pricture}" alt="product">'+
+          						'<img src="'+value.img1+'" alt="product">'+
           						'</a>'+
           						'</figure>'+
           						'<a onclick="deleteCart('+value.id+')" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>'+

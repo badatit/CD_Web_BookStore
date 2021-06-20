@@ -49,8 +49,8 @@
 								<div class="row">
 									<figure class="product-main-image">
 										<img id="product-zoom"
-											src="<c:url value='/template/web/assets/images/demos/demo-20/banners/banner-1.jpg'/>"
-											data-zoom-image="/template/web/assets/images/products/single/centered/1-big.jpg"
+											src="${bookId.img1 }"
+											data-zoom-image="${bookId.img1 }"
 											alt="product image">
 
 										<!--  <a href="#" id="btn-product-gallery" class="btn-product-gallery">
@@ -61,28 +61,28 @@
 
 									<div id="product-zoom-gallery" class="product-image-gallery">
 										<a class="product-gallery-item active" href="#"
-											data-image="assets/images/products/single/centered/1.jpg"
-											data-zoom-image="assets/images/products/single/centered/1-big.jpg">
+											data-image="${bookId.img1 }"
+											data-zoom-image="${bookId.img1 }">
 											<img
-											src="<c:url value='/template/web/assets/images/demos/demo-20/banners/banner-1.jpg'/>"
+											src="${bookId.img1}"
 											alt="product side">
 										</a> <a class="product-gallery-item" href="#"
-											data-image="assets/images/products/single/centered/2.jpg"
-											data-zoom-image="assets/images/products/single/centered/2-big.jpg">
+											data-image="${bookId.img2 }"
+											data-zoom-image="${bookId.img2 }">
 											<img
-											src="<c:url value='/template/web/assets/images/demos/demo-20/banners/banner-1.jpg'/>"
+											src="${bookId.img2 }"
 											alt="product cross">
 										</a> <a class="product-gallery-item" href="#"
-											data-image="assets/images/products/single/centered/3.jpg"
-											data-zoom-image="assets/images/products/single/centered/3-big.jpg">
+											data-image="${bookId.img3 }"
+											data-zoom-image="${bookId.img3 }">
 											<img
-											src="<c:url value='/template/web/assets/images/demos/demo-20/banners/banner-1.jpg'/>"
+											src="${bookId.img3 }"
 											alt="product with model">
 										</a> <a class="product-gallery-item" href="#"
-											data-image="assets/images/products/single/centered/4.jpg"
-											data-zoom-image="assets/images/products/single/centered/4-big.jpg">
+											data-image="${bookId.img4 }"
+											data-zoom-image="${bookId.img4 }">
 											<img
-											src="<c:url value='/template/web/assets/images/demos/demo-20/banners/banner-1.jpg'/>"
+											src="${bookId.img4 }"
 											alt="product back">
 										</a>
 									</div>
@@ -111,7 +111,8 @@
 								<!-- End .rating-container -->
 
 								<div class="product-price">
-									${bookId.price}<span style="margin-left: 7px;"> VND</span>
+									<fmt:formatNumber type="number" groupingUsed="true" value="${bookId.price}" />
+									<span style="margin-left: 7px;"> VND</span>
 								</div>
 								<!-- End .product-price -->
 
@@ -360,10 +361,7 @@
 											<h4>Very good</h4>
 
 											<div class="review-content">
-												<p>Sed, molestias, tempore? Ex dolor esse iure hic
-													veniam laborum blanditiis laudantium iste amet. Cum non
-													voluptate eos enim, ab cumque nam, modi, quas iure illum
-													repellendus, blanditiis perspiciatis beatae!</p>
+												<p>${bookId.productDescription}</p>
 											</div>
 											<!-- End .review-content -->
 
@@ -733,7 +731,6 @@
 			contentType : "application/json",
 			success : function(response) {
 				 $('.cart-total-price').text(response);
-				 alert(response);
 			},
 			error : function(response) {
 				 alert('Loi subTotal');
