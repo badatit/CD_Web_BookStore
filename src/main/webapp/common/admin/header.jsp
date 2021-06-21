@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
  <%@include file="/common/taglib.jsp"%>
  <c:url var="homeUrl" value="/logout" />
+ <c:url var="clientUrl" value="/web/home" />
  
  
  <header class="header black-bg">
@@ -199,6 +200,11 @@
       <div class="top-menu">
         <ul class="nav pull-right top-menu">
           <li><a class="logout" href="${homeUrl}">Logout</a></li>
+        </ul>
+      </div>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+          <li><a class="logout" href="${clientUrl}">Page Client</a></li>
         </ul>
       </div>
     </header>

@@ -11,6 +11,7 @@
 <c:url var="APICartUrl" value="/api/carts" />
 <c:url var="APIDeleteCartUrl" value="/api/delete" />
 <c:url var="accountUrl" value="/web/account" />
+<c:url var="adminUrl" value="/admin/home" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,20 +55,34 @@
 		<div class="header-top">
 			<div class="container">
 				<div class="header-right">
-
 					<ul class="top-menu">
 						<li>
 							<ul class="dropdown-links">
-								<li><security:authorize access="isAuthenticated()">
+							 <li>
+							<security:authorize access="hasAnyRole('ADMIN')">
+							 <a class="logout" href="${adminUrl}">Page Admin</a>
+							 </security:authorize>
+							 </li>
+							
+								<li>
+								<security:authorize access="isAuthenticated()">
+								 
 										<a href="<c:url value='/web/logout'/>">LogOut</a>
 									</security:authorize> <security:authorize access="isAnonymous()">
 										<a href="<c:url value='/login'/>">Sign in / Sign up</a>
 									</security:authorize></li>
+							
 							</ul>
 						</li>
+						
+						
 					</ul>
+					
+					
+					
 					<!-- End .top-menu -->
 				</div>
+				
 				<!-- End .header-right -->
 
 			</div>
@@ -151,22 +166,41 @@
 								</a>
 							</c:if>
 
-							<c:if test="${userId == null }">
+							<security:authorize access="isAnonymous()">
 
-								<a href="${accountUrl}/${userId}" title="My account"
-									style="visibility: hidden;"> </a>
-							</c:if>
+								<a href="<c:url value='/login'/>" title="My account"> 
+									<div class="icon">
+										<i class="icon-user"></i>
+									</div>
+									<p>account</p>
+									</a>
+							</security:authorize>
 
 						</div>
 						<!-- End .compare-dropdown -->
 
 						<div class="wishlist">
-							<a href="wishlist.html" title="Wishlist">
-								<div class="icon">
+						
+						<c:if test="${userId != null }">
+								<a href="${accountUrl}/${userId}" title="Wishlist">
+									<div class="icon">
 									<i class="icon-heart-o"></i> <span class="wishlist-count badge">${countFavo}</span>
 								</div>
 								<p>Wishlist</p>
-							</a>
+									
+								</a>
+							</c:if>
+							
+								<security:authorize access="isAnonymous()">
+
+								<a href="<c:url value='/login'/>" title="Wishlist"> 
+								<div class="icon">
+									<i class="icon-heart-o"></i> <span class="wishlist-count badge">0</span>
+								</div>
+								<p>Wishlist</p>
+								</a>
+							</security:authorize>
+							
 						</div>
 						<!-- End .compare-dropdown -->
 
@@ -175,6 +209,7 @@
 								<a href="<c:url value='/login'/>" class="dropdown-toggle">
 									<div class="icon">
 										<i class="icon-shopping-cart"></i>
+										<span class="cart-count">0</span>
 									</div>
 									<p>Cart</p>
 								</a>

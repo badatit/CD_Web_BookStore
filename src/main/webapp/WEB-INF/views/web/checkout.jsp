@@ -35,7 +35,7 @@
 						</form>
 					</div>
 					<!-- End .checkout-discount -->
-					<form action="#" id="checkOutForm">
+					<form  id="checkOutForm">
 						<div class="row">
 							<div class="col-lg-9">
 								<h2 class="checkout-title">Billing Details</h2>
@@ -46,6 +46,7 @@
 									<label>FullName</label> <input type="text" class="form-control"
 										value="${userDTO.fullName }" name="fullName" id="fullName">
 									<p class="statusfullName"></p>
+									<p class="status"></p>
 								</div>
 
 								<div class="form-group">
@@ -53,6 +54,7 @@
 										value="${userDTO.address }" name="address" required
 										id="address">
 									<p class="statusaddress"></p>
+										<p class="status"></p>
 								</div>
 
 								<div class="form-group">
@@ -60,12 +62,14 @@
 										value="${userDTO.phoneNumber }" class="form-control"
 										name="Phone Number" id="phoneNumber" required>
 									<p class="statusphoneNumber"></p>
+										<p class="status"></p>
 								</div>
 								<div class="form-group">
 									<label>Email address *</label> <input type="email"
 										class="form-control" value="${userDTO.email }" required
 										id="email">
 									<p class="statusEmail"></p>
+										<p class="status"></p>
 								</div>
 								<label>Order notes (optional)</label>
 								<textarea class="form-control" cols="30" rows="4"
@@ -152,7 +156,7 @@
 									</div>
 									<!-- End .accordion -->
 									<input type="hidden" id="checkPayNumber" value="1">
-									<button id="btnCheckOut" onclick="checkOut()" type="submit"
+									<button id="btnCheckOut" type="submit"
 										class="btn btn-outline-primary-2 btn-order btn-block">
 										<span class="btn-text">Place Order</span> <span
 											class="btn-hover-text">Proceed to Checkout</span>
@@ -173,8 +177,22 @@
 	</main>
 	<!-- End .main -->
 	<script>
-		function checkOut() {
-
+	
+	$("#btnCheckOut").click(function (e) {
+		 e.preventDefault();
+		var fullName = $('#fullName').val();
+		var address = $('#address').val();
+		var email = $('#email').val();
+		var phoneNumber = $('#phoneNumber').val(); 
+		if(fullName == '' || address == '' || email =='' || phoneNumber== '' ){
+			swal("Thất bại", "Vui lòng điền đẩy đủ thông tin giao hàng :)", "error");
+		}else {
+			 checkOut(); 
+		}
+		
+	});
+	
+	 function checkOut() {
 			$.ajax({
 				type : "GET",
 				url : "${APICheckout}",
@@ -189,7 +207,8 @@
 				}
 			});
 
-		}
+		} 
+		
 		function checkPay(number) {
 			$('#checkPayNumber').val(number);
 
@@ -211,16 +230,11 @@
 			});
 		}
 
-		$("#email")
-				.blur(
-						function emailExists() {
-
+		$("#email").blur(function emailExists() {
 							var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 							var email = $("#email").val();
 							if (!regex.test(email)) {
-								$(".statusEmail")
-										.html(
-												"<font>Email không đúng định dạng</font>");
+								$(".statusEmail").html("<font>Email không đúng định dạng</font>");
 								$(".statusEmail").css("color", "red");
 								$("#btnCheckOut").prop('disabled', true);
 							} else {

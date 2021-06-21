@@ -11,6 +11,7 @@
 <c:url var="OrderUrl" value="/web/api/user/findone" />
 <c:url var="updateStatusUrl" value="/web/api/user/updatestatus" />
 <c:url var="acountURL" value="/web/account" />
+<c:url var="APICartUrl" value="/api/carts" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,13 +85,17 @@
 												<button type="button" onclick="orderDetails(${item.id})" class="btn btn-info btn-lg" data-toggle="modal" data-target="#assignmentBuildingModal" style="height: 50px;background: #15A78A"> Xem Chi Tiết</button>
 											</td>
 											<td>
-											<c:if test="${item.status == 'Đã Hủy' }">
+											<c:if test="${item.status == 'Đã Hủy'}">
 											<button type="button" onclick="cancelOrder(${item.id})" class="btn btn-info btn-lg" data-toggle="modal" data-target="#cancelOrder" style="height: 50px;background: red ;display: none;"> Hủy Đơn Hàng</button>
 											</c:if>
-											<c:if test="${item.status != 'Đã Hủy' }">
+											
+											<c:if test="${item.status == 'Đã Nhận Hàng'}">
+											<button type="button" onclick="cancelOrder(${item.id})" class="btn btn-info btn-lg" data-toggle="modal" data-target="#cancelOrder" style="height: 50px;background: red ;display: none;"> Hủy Đơn Hàng</button>
+											</c:if>
+											
+											<c:if test="${item.status == 'Chưa Nhận Hàng'}">
 											<button type="button" onclick="cancelOrder(${item.id})" class="btn btn-info btn-lg" data-toggle="modal" data-target="#cancelOrder" style="height: 50px;background: red ;"> Hủy Đơn Hàng</button>
 											</c:if>
-											 
 											 </td>
 										</tr>
 										</c:forEach>
@@ -178,7 +183,7 @@
 			                					<div class="col-sm-6">
 			                						<label>Tên Đăng Nhập *</label>
 			                						<input type="text" class="form-control" id="userName" name= "userName" value = "${user.userName}" required>
-			                						<small class="status"></small>
+			                						<small class="statusUserName"></small>
 			                					</div><!-- End .col-sm-6 -->
 			                				</div><!-- End .row -->
 			                				
@@ -186,13 +191,13 @@
 											<div >
 		            						<label>Số Điện Thoại *</label>
 		            						<input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value = "${user.phoneNumber}" required>
-		            						<small class="statusphoneNumber"></small>
+		            						<span class="statusphoneNumber"></span>
 											</div>
 												
 											<div class="row" style="margin-left: 1px;">
 		                					<label>Email  *</label>
 		        							<input type="email" class="form-control" id="email" name = "email" value= "${user.email}" required>
-		        							<span class="statusemail"></span>
+		        							<span class="statusEmail"></span>
 		        							</div>
 		        							
 		        							<div class="row" style="margin-left: 1px;" >
@@ -360,6 +365,7 @@
      
 
 	<script>
+	/* func click call form update user  */
 	$('#editUser').click(function (e) {
 		 e.preventDefault();
 		  var data={};
@@ -367,6 +373,15 @@
 		  $.each(formData, function (index, v) {
 		        data["" + v.name + ""] = v.value;
 		    });
+		  	var fullName = $('#fullName').val();
+			var address = $('#address').val();
+			var email = $('#email').val();
+			var phoneNumber = $('#phoneNumber').val(); 
+			var userName = $('#userName').val();
+		  if(fullName == '' || address == '' || email == '' || phoneNumber == '' || userName == ''){
+			  swal("Thất bại", "Vui lòng điền đẩy đủ thông tin :)", "error");
+			  
+		  }
 		  updateUser(data);
 			
 		});
@@ -382,10 +397,11 @@
 	            	swal("Thành Công!", "Hãy nhấn vào nút!", "success");
 	            },
 	            error: function (response) {
-	            	swal("Thất bại", "Sản phẩm vẫn an toàn :)", "error");
+	            	swal("Thất bại", "Thông tin vẫn chưa được thay đổi:)", "error");
 	            }
 	         });
 	}
+		/* func click call form update passowrd  */
 		$('#editPassword').click(function (e) {
 			 e.preventDefault();
 			  var data={};
@@ -396,15 +412,15 @@
 			  var password = $('#password').val();
 			  var repeatPass = $('#repeatPass').val();
 			  if(password !="" && repeatPass != ""){
-				  updateUser(data);
+				  updatePassword(data);
 			  }else {
-				  swal("Thất bại", "Sản phẩm vẫn an toàn :)", "error");
+				  swal("Thất bại", "Mật khẩu chưa được thay đổi :)", "error");
 			  }
 			
 				
 			});
 			
-			function updateUser(data) {
+			function updatePassword(data) {
 				   $.ajax({
 		            type: "PUT",
 		  		    url: "${ApiUrlPass}",
@@ -419,7 +435,23 @@
 		            }
 		         });
 		}
+			/* func validator form  */
 		$(document).ready(function() {		
+			$("#email").blur(function emailExists() {
+				var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+				var email = $("#email").val();
+				if (!regex.test(email)) {
+					$(".statusEmail").html("<font>Email không đúng định dạng</font>");
+					$(".statusEmail").css("color", "red");
+					$("#editUser").prop('disabled', true);
+				} else {
+					$(".statusEmail").html("<font></font>");
+					$("#editUser").prop('disabled', false);
+
+				}
+
+			});
+			
 			$("#password").blur(function password() {
 				var password = $("#password").val();
 				if (password.length > 6) {
@@ -436,11 +468,25 @@
 			$("#fullName").blur(function fullName() {
 				var fullName = $("#fullName").val();
 				if (fullName.length > 6) {
-					$(".statusfullName").html("<font> Hợp lệ</font>");
+					$(".statusfullName").html("<font></font>");
 					$("#editUser").prop('disabled', false);
 					return true;
 				} else {
 					$(".statusfullName").html("<font>Tên phải dài hơn 6 ký tự.</font>");
+					$(".statusfullName").css("color", "red");
+					$("#editUser").prop('disabled', true);
+					return false;
+				}
+			});
+			$("#userName").blur(function statusUserName() {
+				var statusUserName = $("#statusUserName").val();
+				if (statusUserName.length > 6) {
+					$("#editUser").prop('disabled', false);
+					$(".statusUserName").html("<font></font>");
+					return true;
+				} else {
+					$(".statusUserName").html("<font>Tên phải dài hơn 6 ký tự.</font>");
+					$(".statusUserName").css("color", "red");
 					$("#editUser").prop('disabled', true);
 					return false;
 				}
@@ -465,24 +511,26 @@
 			$("#phoneNumber").blur(function phoneNumber() {
 				var phoneNumber = $("#phoneNumber").val();
 				if (phoneNumber.length > 0) {
-					$(".statusphoneNumber").html("<font> Hợp lệ</font>");
+					$(".statusphoneNumber").html("<font></font>");
 					$("#editUser").prop('disabled', false);
 					return true;
 				} else {
 					$(".statusphoneNumber").html("<font>Vui lòng nhập số điện thoại</font>");
 					$("#editUser").prop('disabled', true);
+					$(".statusphoneNumber").css('color', 'red');
 					return false;
 				}
 			});
 			$("#address").blur(function address() {
 				var address = $("#address").val();
 				if (address.length > 0) {
-					$(".statusaddress").html("<font>Địa chỉ hợp lệ</font>");
+					$(".statusaddress").html("<font></font>");
 					$("#editUser").prop('disabled', false);
 					return true;
 				} else {
 					$(".statusaddress").html("<font>Vui lòng nhập địa chỉ</font>");
 					$("#editUser").prop('disabled', true);
+					$(".statusaddress").css('color', 'red');
 					return false;
 				}
 			}); 
@@ -625,6 +673,94 @@
 			$('#assignmentBuildingModal').modal();
 		}
 
+		/* show cart mini  */
+		
+		 function getSubTotal() {
+	 var radioValue = $("input[name='shipping']:checked").val();
+		$.ajax({
+			type : "GET",
+			url : "${APICartUrl}/subTotal",
+			contentType : "application/json",
+			success : function(response) {
+				 $('.cart-total-price').text(response);
+				 $('#subTotal').text(response);
+				 $('#total').text(response);
+				 if (radioValue != null) {
+				 myFunction();
+				}
+			},
+			error : function(response) {
+				 alert('Loi subTotal');
+			}
+		});
+}
+		
+		 function getCart() {
+			 $.ajax({
+		         url : '${APICartUrl}',
+		         type : 'GET',
+		         dataType: "json",
+		         contentType: "application/json",
+		         success : function(data){
+		        	 $("#cartMini").html('');
+		        	 $.each(data, function (key, value) {
+		          		$("#cartMini").append('<div class="product">' +
+		          						'<div class="product-cart-details">'+
+		          						'<h4 class="product-title">'+
+		          						'<a href="${ProductDetailsURL}'+value.bookId+'">'+value.name+'</a>'+
+		          						'</h4>'+
+		          						'<span class="cart-product-info"><span class="cart-product-qty">'+value.amount+'</span>x'+value.price+'</span>'+
+		          						'</div>'+
+		          						' <figure class="product-image-container">'+
+		          						'<a href="${ProductDetailsURL}'+value.bookId+'">'+
+		          						'<img src="'+value.img1+'" alt="product">'+
+		          						'</a>'+
+		          						'</figure>'+
+		          						'<a onclick="deleteCart('+value.id+')" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>'+
+		          						'</div>');
+		          	}); 
+					},
+					error : function(error){
+						console.log(error)
+						alert("Lỗi hệ thống");
+					}
+		     });
+		}
+		 
+		 function deleteCart(id) {
+				var data = {};
+				data['id'] = id;
+				var l = $('.id').length;
+				//Initialize default array
+				var result = [];
+				for (i = 0; i < l; i++) { 
+				  //Push each element to the array
+				  result.push($('.id').eq(i).val());
+				}
+				for (i = 0; i < result.length; i++) {
+					 if (result[i]== id) {
+					 $('#cart_'+id).remove();
+					}
+				}
+				
+				$.ajax({
+					type : "DELETE",
+					url : "${APICartUrl}/delete",
+					data : JSON.stringify(data),
+					contentType : "application/json",
+					success : function(response) {
+						swal("Thành công", "Sản phẩm đã được xóa", "success");
+						$('#sizeCart').text(response);
+						getCart();
+						 getSubTotal() ;
+			         
+					},
+					error : function(response) {
+						swal("Thất bại", "Sản phẩm vẫn an toàn :)", "error");
+						
+					}
+				});
+			}
 	</script>
 
 

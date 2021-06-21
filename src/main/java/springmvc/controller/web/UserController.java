@@ -12,7 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 import springmvc.dto.BookFavoriteDTO;
 import springmvc.dto.OrderDTO;
 import springmvc.dto.UserDTO;
+import springmvc.dto.request.MiniCartDTO;
 import springmvc.service.IBookFavoriteService;
+import springmvc.service.ICartService;
 import springmvc.service.IOrderService;
 import springmvc.service.IUserService;
 
@@ -28,6 +30,9 @@ public class UserController {
 	
 	@Autowired
 	private IBookFavoriteService bookFavariteService;
+	
+	@Autowired
+	private ICartService iCartService;
 
 	@RequestMapping(value = "/account/{id}" , method = RequestMethod.GET)
 	public ModelAndView accountPage(@PathVariable("id") Long id) {
@@ -36,8 +41,12 @@ public class UserController {
 		UserDTO dto = userService.finbById(id);
 		List<OrderDTO> listOrders = orderService.findOrderById();
 		List<BookFavoriteDTO> favoriteDTOs = bookFavariteService.findById();
+		List<MiniCartDTO> listCart = iCartService.findAllByUserId();
 		
 		mav.addObject("listOrders", listOrders);
+		mav.addObject("listCart",listCart);
+		mav.addObject("sizeCart", iCartService.countSizeCart());
+		mav.addObject("subTotal", iCartService.subTotal());
 		mav.addObject("countFavo", bookFavariteService.countByUser());
 		mav.addObject("favoriteBooks", favoriteDTOs);
 		mav.addObject("userId", id);

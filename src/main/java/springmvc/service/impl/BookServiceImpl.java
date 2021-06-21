@@ -326,4 +326,14 @@ public class BookServiceImpl implements IBookService {
 		}
 		return listDTO;
 	}
+	@Override
+	public List<BookDTO> findBookByCategoryIdOfBookDetail(Long categoryId) {
+		List<BookEntity> entities = bookRepository.findBookByCategoryOfBookDetail(categoryId);
+		List<BookDTO> dtos = new ArrayList<>();
+		for (BookEntity item : entities) {
+			BookDTO bookDTO = bookConverter.converterToDTO(item);
+			dtos.add(bookDTO);
+		}
+		return dtos;
+	}
 }

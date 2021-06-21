@@ -5,8 +5,6 @@
 <c:url var="APIOrderUrl" value="/api/orders" />
 <c:url var="APIOrderDetailUrl" value="/api/orderdetails" />
 <c:url var="CheckoutUrl" value="/web/checkout" />
-<c:url var="Pricture"
-	value='/template/web/assets/images/products/cart/product-1.jpg' />
 <!DOCTYPE html>
 <html>
 <head>

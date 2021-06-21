@@ -108,7 +108,7 @@ public class BookController {
 
 		BookDTO bookDTO = bookService.findById(id);
 		List<CategoryDTO> lists = iCategoryService.showCategorys();
-
+		List<BookDTO> listBooks = bookService.findBookByCategoryIdOfBookDetail(bookDTO.getCategoryId());
 		MyUser myUser = SecurityUtils.getPrincipal();
 		Long idUser;
 		if (myUser == null) {
@@ -126,7 +126,7 @@ public class BookController {
 		mav.addObject("userId", idUser);
 		mav.addObject("categorys", lists);
 		mav.addObject("bookId", bookDTO);
-
+		mav.addObject("listBooks", listBooks);
 		return mav;
 
 	}

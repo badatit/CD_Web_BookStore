@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import springmvc.Enums.OrderStatusEnum;
 import springmvc.Enums.StatusEnum;
 import springmvc.Utils.SecurityUtils;
+import springmvc.constant.SystemConstant;
 import springmvc.converter.OrderConverter;
 import springmvc.dto.CategoryDTO;
 import springmvc.dto.MyUser;
@@ -63,6 +64,7 @@ public class OrderServiceImpl implements IOrderService {
 		entity.setFullName(userEntity.getFullName());
 		entity.setEmail(userEntity.getEmail());
 		entity.setUser(userEntity);
+		entity.setStatus(SystemConstant.NOT_RECEIVED);
 		entity.setShipping(orderDTO.getShipping());
 		entity.setOrderDate(new Date());
 		entity.setTotal(orderDTO.getTotal());

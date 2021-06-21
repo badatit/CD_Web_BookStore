@@ -32,4 +32,5 @@ public interface IBookService {
 	public long totalAmountOfBooks();
 	public long totalAmountOfBooksByActive();
 	public long totalAmountOfBooksByInactive();
+	public List<BookDTO> findBookByCategoryIdOfBookDetail(Long categoryId);
 }
