@@ -232,7 +232,7 @@
 									<p>Cart</p>
 								</a>
 
-								<div class="dropdown-menu dropdown-menu-right">
+								<div class="dropdown-menu dropdown-menu-right" id="bodyCart">
 
 									<div class="dropdown-cart-products" id="cartMini">
 										<c:forEach var="item" items="${listCart}">

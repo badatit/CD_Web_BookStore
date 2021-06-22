@@ -27,6 +27,7 @@ import springmvc.dto.MyUser;
 import springmvc.dto.OrderDTO;
 import springmvc.dto.UserDTO;
 import springmvc.dto.request.MiniCartDTO;
+import springmvc.service.IBookFavoriteService;
 import springmvc.service.ICartService;
 import springmvc.service.IUserService;
 
@@ -41,6 +42,9 @@ public class CheckOutController {
 	private Logger log = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private ICartService iCartService;
+	
+	@Autowired
+	private IBookFavoriteService iBookFavo;
 	
 	
 	
@@ -71,11 +75,13 @@ public class CheckOutController {
 			mav.addObject("sizeCart", iCartService.countSizeCart());
 			mav.addObject("listCart",listCart);
 			mav.addObject("sumPrice", iCartService.subTotal());
+			mav.addObject("countFavo", iBookFavo.countByUser());
 		}
 		
 		
 		mav.addObject("userDTO",userDTO);
 		mav.addObject("orderDTO", dto);
+		mav.addObject("userId", id);
 		return mav;
 	}	
 

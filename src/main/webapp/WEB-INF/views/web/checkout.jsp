@@ -25,15 +25,6 @@
 		<div class="page-content">
 			<div class="checkout">
 				<div class="container">
-					<div class="checkout-discount">
-						<form action="#">
-							<input type="text" class="form-control" required
-								id="checkout-discount-input"> <label
-								for="checkout-discount-input" class="text-truncate">Have
-								a coupon? <span>Click here to enter your code</span>
-							</label>
-						</form>
-					</div>
 					<!-- End .checkout-discount -->
 					<form  id="checkOutForm">
 						<div class="row">
@@ -285,10 +276,10 @@
 			}
 		});
 
-		//function 
-		//get 
-		//var id gia
-		// url?gia=
+		$( document ).ready(function() {
+			 $('#bodyCart').css("display","none"); 
+			console.log( "ready!" );
+		});
 	</script>
 </body>
 </html>

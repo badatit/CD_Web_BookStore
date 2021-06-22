@@ -61,7 +61,7 @@
 										<tr>
 											<th>Tên Người Nhận</th>
 											<th>Ngày Đặt Hàng</th>
-											<th> Sản Phẩm</th>
+											<th style="text-align: center;"> Sản Phẩm</th>
 											<th>Tổng Tiền</th>
 											<th>Trạng Thái</th>
 											<th></th>

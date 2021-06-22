@@ -44,33 +44,13 @@ public class CartController {
 		mav.addObject("sizeCart", iCartService.countSizeCart());
 		mav.addObject("countFavo", iBookFavo.countByUser());
 		mav.addObject("categorys", lists);
+		
 		mav.addObject("sumPrice", iCartService.subTotal());
 		System.out.println(listCart.size());
 		return mav;
 		
 	}
 	
-//	@RequestMapping(value ="/addCart/{id}" , method = {RequestMethod.GET, RequestMethod.POST})
-//	public ModelAndView addCart(@PathVariable long id, HttpServletRequest request) {
-//		System.out.println(request.getRequestURL().toString());
-//		ModelAndView mav = new ModelAndView("/web/home");
-//		Long userId = SecurityUtils.getPrincipal().getId();
-//		//tim book
-//		//set book vao cart
-//		// tim user
-//		// set user vao cart
-//		// luu cart
-//		if(userId == null) {
-//			mav.addObject("message", "Chua dang nhap");
-//			
-//		}else {
-//			CartDTO cartDTO = new CartDTO();
-//			cartDTO.setUserId(userId);
-//			cartService.saveCart(id, cartDTO);
-//			
-//		}
-//		return mav;
-//	}
 	
 
 }
