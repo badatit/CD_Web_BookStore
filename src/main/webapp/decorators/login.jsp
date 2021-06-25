@@ -3,6 +3,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<style>
+label.error {
+	display: inline-block;
+	color:red !important;
+	}
+</style>
     <title><dec:title default="Đăng nhập" /></title>
 	
 	 <script src="<c:url value='/template/web/assets/js/jquery.min.js'/>"></script>
@@ -59,11 +65,14 @@
 	href='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.css'>
 <script
 	src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 </head>
 <body id="LoginForm">
     <dec:body/>
     
      <!-- Plugins JS File -->
+      <script src="<c:url value='/template/web/assets/js/jquery.validate.min.js'/>"></script>
+      
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

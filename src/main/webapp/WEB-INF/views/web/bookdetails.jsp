@@ -9,6 +9,7 @@
 <c:url var="LoginUrl" value="/login" />
 <c:url var="Pricture"
 	value='/template/web/assets/images/products/cart/product-1.jpg' />
+	<c:url var="APIBookFavorite" value="/api/bookfavorite" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,25 +20,6 @@
 	<main class="main">
 		<input type="hidden" value="${userId}" name="userId" id="userId">
 		<nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
-			<!--  <div class="container d-flex align-items-center">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Products</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Centered</li>
-                    </ol>
-
-                    <nav class="product-pager ml-auto" aria-label="Product">
-                        <a class="product-pager-link product-pager-prev" href="#" aria-label="Previous" tabindex="-1">
-                            <i class="icon-angle-left"></i>
-                            <span>Prev</span>
-                        </a>
-
-                        <a class="product-pager-link product-pager-next" href="#" aria-label="Next" tabindex="-1">
-                            <span>Next</span>
-                            <i class="icon-angle-right"></i>
-                        </a>
-                    </nav>End .pager-nav
-                </div>End .container -->
 		</nav>
 
 		<div class="page-content" style="margin-top: 42px;">
@@ -123,30 +105,6 @@
 								</div>
 								<!--End .product-content -->
 
-								<!-- <div class="details-filter-row details-row-size">
-                                        <label>Color:</label>
-
-                                        <div class="product-nav product-nav-dots">
-                                            <a href="#" class="active" style="background: #cc9966;"><span class="sr-only">Color name</span></a>
-                                            <a href="#" style="background: #333333;"><span class="sr-only">Color name</span></a>
-                                        </div>End .product-nav
-                                    </div>End .details-filter-row -->
-
-								<!--  <div class="details-filter-row details-row-size">
-                                        <label for="size">Size:</label>
-                                        <div class="select-custom">
-                                            <select name="size" id="size" class="form-control">
-                                                <option value="#" selected="selected">One Size</option>
-                                                <option value="s">Small</option>
-                                                <option value="m">Medium</option>
-                                                <option value="l">Large</option>
-                                                <option value="xl">Extra Large</option>
-                                            </select>
-                                        </div>End .select-custom
-
-                                        <a href="#" class="size-guide"><i class="icon-th-list"></i>size guide</a>
-                                    </div>End .details-filter-row -->
-
 								<div class="product-details-action">
 									<div class="details-action-col">
 										<div class="product-details-quantity">
@@ -161,19 +119,28 @@
 									<!-- End .details-action-col -->
 
 									<div class="details-action-wrapper">
-										<a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add
-												to Wishlist</span></a> <a href="#" class="btn-product btn-compare"
-											title="Compare"><span>Add to Compare</span></a>
+										 <c:if test="${bookId.favorite == '[]'}">
+													<a onclick="addFavourite(${bookId.id})"
+														class="btn-product btn-wishlist favorite_${bookId.id}">
+														<span class="messageFavorite_${bookId.id}">Thêm yêu
+															thích</span>
+													</a>
+												</c:if>
+												<c:if test="${bookId.favorite != '[]'}">
+													<a style="color: red;" onclick="addFavourite(${bookId.id})"
+														class="btn-product btn-wishlist favorite_${bookId.id}">
+														<span style="color: red;" class="messageFavorite_${bookId.id}">Đã yêu
+															thích</span>
+													</a>
+												</c:if>
+												 
 									</div>
 									<!-- End .details-action-wrapper -->
 								</div>
 								<!-- End .product-details-action -->
 
 								<div class="product-details-footer">
-									<div class="product-cat">
-										<span>Category:</span> <a href="#">Women</a>, <a href="#">Dresses</a>,
-										<a href="#">Yellow</a>
-									</div>
+									
 									<!-- End .product-cat -->
 
 									<div class="social-icons social-icons-sm">
@@ -425,14 +392,22 @@
 							</a>
 
 							<div class="product-action-vertical">
-								<a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add
-										to wishlist</span></a> 
+								<c:if test="${item.favorite == '[]'}">
+									<a onclick="addFavourite(${item.id})" class="btn-product-icon btn-wishlist btn-expandable favorite_${item.id}">
+										<span class="messageFavorite_${item.id}">Thêm yêu thích</span>
+									</a>
+								</c:if>
+								<c:if test="${item.favorite != '[]'}">
+									<a  style="color: red;" onclick="addFavourite(${item.id})" class="btn-product-icon btn-wishlist btn-expandable favorite_${item.id}">
+										<span  style="color: red;" class="messageFavorite_${item.id}">Đã yêu thích</span>
+									</a>
+									</c:if>
 										
 							</div>
 							<!-- End .product-action-vertical -->
 
 							<div class="product-action">
-								<a  class="btn-product btn-cart" onclick="addCart(${bookId.id})">
+								<a  class="btn-product btn-cart" onclick="addCart(${item.id})">
 								<span>add to cart</span>
 										</a>
 							</div>
@@ -544,7 +519,7 @@
               						'</div>'+
               						' <figure class="product-image-container">'+
               						'<a href="${ProductDetailsURL}'+value.bookId+'">'+
-              						'<img src="${Pricture}" alt="product">'+
+              						'<img src="'+value.img1+'" alt="product">'+
               						'</a>'+
               						'</figure>'+
               						'<a onclick="deleteCart('+value.id+')" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>'+
@@ -614,6 +589,41 @@
   				}
   			});
   		}
+	 
+	 function addFavourite(id){
+		 var userId= $('#userId').val();
+			if (userId == null || userId =='') {
+				alert("Vui lòng đăng nhập");
+			}else{
+		 var data ={};
+		 data['bookId'] =id;
+		   $.ajax({
+		         type: "POST",
+				 url: "${APIBookFavorite}",
+		         data: JSON.stringify(data),
+		         contentType: "application/json",
+		         success: function (response) { 
+		        	 $('.wishlist-count').text(response.count);
+		        	 var classWish = ".favorite_"+id;
+		        	 var messageWish =".messageFavorite_"+id;
+		        	 if (response.message == "success_save") {
+		         	 	$(classWish).css("color","red");
+		         	 	$(messageWish).text("Đã yêu thích");
+		         	 	$(messageWish).css("color","red");
+					}else{
+						 $(classWish).css("color","black");
+						 $(messageWish).text("Thêm yêu thích");
+			         	 	$(messageWish).css("color","black");
+					}
+		         }, 
+		         
+		         error: function (response) {
+		        	 swal("Thất bại", "Sản phẩm vẫn an toàn :)", "error");
+		         }
+		      });
+			}
+	 }
+	
 	</script>
 
 

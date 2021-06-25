@@ -13,6 +13,7 @@
 <c:url var="APIBookFavorite" value="/api/bookfavorite" />
 <c:url var="Pricture"
 	value='/template/web/assets/images/products/cart/product-1.jpg' />
+	<c:url var="APIBookFavorite" value="/api/bookfavorite" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,7 +62,7 @@
 								<c:forEach var="item" items="${books}">
 									<div class="col-6 col-md-4 col-lg-4">
 										<div class="product product-7 text-center">
-											<figure class="product-media">
+											<figure class="product-media" style="box-shadow: none">
 												<span class="product-label label-new">New</span>
 												<a href="<c:url value='/web/product/${item.id}' />"> <img
 													src="${item.img1}" alt="Product image"
@@ -120,18 +121,7 @@
 												</div>
 												<!-- End .rating-container -->
 
-												<div class="product-nav product-nav-thumbs">
-													<a href="#" class="active"> <img
-														src="<c:url value='/template/web/assets/images/products/product-4-thumb.jpg'/>"
-														alt="product desc">
-													</a> <a href="#"> <img
-														src="<c:url value='/template/web/assets/images/products/product-4-thumb.jpg'/>"
-														alt="product desc">
-													</a> <a href="#"> <img
-														src="<c:url value='/template/web/assets/images/products/product-4-thumb.jpg'/>"
-														alt="product desc">
-													</a>
-												</div>
+												
 												<!-- End .product-nav -->
 											</div>
 											<!-- End .product-body -->
@@ -145,26 +135,8 @@
 						</div>
 						<!-- End .products -->
 
-						<nav aria-label="Page navigation" style="margin-left: 240px;">
+						<nav aria-label="Page navigation" style="margin-left: 130px;">
 							<ul class="pagination" id="pagination">
-								<%-- <c:forEach var="i" begin="1" end="${totalPages}">
-									<c:url var="paging" value="/web/product">
-										<c:param name="name" value="${param.name}" />
-										<c:param name="categoryName" value="${param.categoryName}" />
-										<c:param name="limit" value="10" />
-										<c:param name="page" value="${i}" />
-									</c:url>
-									<c:if test="${ i == currentPage}">
-										<li class="page-item active"><a class="page-link"
-											href="${paging}">${i}</a></li>
-									</c:if>
-									<c:if test="${i != currentPage}">
-										<li class="page-item"><a class="page-link"
-											href="${paging}">${i}</a></li>
-									</c:if>
-								</c:forEach>
-								<li class="page-item-total">of ${totalPages}</li> --%>
-
 							</ul>
 						</nav>
 					</div>
@@ -450,10 +422,14 @@ $(document).ready(function() {
 		     						'<a href="${ProductDetail}'+value.id+'"><img src="'+value.img1+'" alt="Product image" class="product-image"></a>'+
 		     						
 		     						' <div class="product-action-vertical">'+
-		     						'<a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>'+
-		     						' <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>'+
-		     						'<a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>'+
+		     						'<c:if test="${value.favorite == null}">'+
+		     						'<a onclick="addFavourite('+value.id+')" class="btn-product-icon btn-wishlist btn-expandable favorite_'+value.id+'"><span class="messageFavorite_'+value.id+'">Thêm yêu thích</span></a>'+
+		     						'</c:if>'+
+		     						'<c:if test="${value.favorite != null}">'+
+		     						'<a style="color: red;" onclick="addFavourite('+value.id+')" class="btn-product-icon btn-wishlist btn-expandable favorite_'+value.id+'"><span class="messageFavorite_'+value.id+'">Đã yêu thích</span></a>'+
+		     						'</c:if>'+
 		     						'</div>'+
+		     						
 		     						'<div class="product-action">'+
 		     						'<a  class="btn-product btn-cart" onclick="addCart('+value.id+')"><span>add to cart</span></a>'+
 		     						'</div>'+
@@ -502,10 +478,14 @@ $(document).ready(function() {
 		     						'<a href="${ProductDetail}'+value.id+'"><img src="'+value.img1+'" alt="Product image" class="product-image"></a>'+
 		     						
 		     						' <div class="product-action-vertical">'+
-		     						'<a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>'+
-		     						' <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>'+
-		     						'<a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>'+
+		     						'<c:if test="${value.favorite == null}">'+
+		     						'<a onclick="addFavourite('+value.id+')" class="btn-product-icon btn-wishlist btn-expandable favorite_'+value.id+'"><span class="messageFavorite_'+value.id+'">Thêm yêu thích</span></a>'+
+		     						'</c:if>'+
+		     						'<c:if test="${value.favorite != null}">'+
+		     						'<a style="color: red;" onclick="addFavourite('+value.id+')" class="btn-product-icon btn-wishlist btn-expandable favorite_'+value.id+'"><span class="messageFavorite_'+value.id+'">Đã yêu thích</span></a>'+
+		     						'</c:if>'+
 		     						'</div>'+
+		     						
 		     						'<div class="product-action">'+
 		     						'<a  class="btn-product btn-cart" onclick="addCart('+value.id+')"><span>add to cart</span></a>'+
 		     						'</div>'+
@@ -650,6 +630,8 @@ $(document).ready(function() {
 		      });
 			}
 	 }
+	 
+	 
 </script>
 
 

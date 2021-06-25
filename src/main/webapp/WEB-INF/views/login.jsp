@@ -6,8 +6,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Đăng nhập</title>
+
 </head>
 	  <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17" style="background-image: url('assets/images/backgrounds/login-bg.jpg')">
             	<div class="container">
@@ -67,8 +70,8 @@
 
 									<div class="form-group ">
 										<label for="fullName">Họ và Tên *</label> <input type="text"
-											class="form-control" id="fullName" name="fullName" required />
-										<p class="statusfullName" style="color: red;"></p>
+											class="form-control" id="fullName" name="fullName"  />
+										<p class="statusfullName"></p>
 									</div>
 									<!-- End .form-group -->
 
@@ -77,14 +80,14 @@
 										<label for="userName">Tên Đăng Nhập *</label> <input
 											type="text" class="form-control" id="userName"
 											name="userName"  />
-										<p class="status" style="color: red;"></p>
+										<p class="status" ></p>
 									</div>
 									<!-- End .form-group -->
 
 									<div class="form-group ">
-										<label for="email">Email*</label> <input type="email"
+										<label for="email">Email*</label> <input type="text"
 											class="form-control" id="email" name="email"  />
-										<p class="statusEmail" style="color: red;"></p>
+										<p class="statusEmail" ></p>
 									</div>
 									<!-- End .form-group -->
 
@@ -98,24 +101,24 @@
 
 									<div class="form-group ">
 										<label for="address">Địa Chỉ *</label> <input type="text"
-											class="form-control" id="address" name="address" required />
-										<p class="statusaddress" style="color: red;"></p>
+											class="form-control" id="address" name="address"  />
+										<p class="statusaddress" ></p>
 									</div>
 									<!-- End .form-group -->
 
 									<div class="form-group ">
 										<label for="password">Mật Khẩu *</label> <input
 											type="password" class="form-control" id="password"
-											name="password" required />
-										<p class="statusPassword" style="color: red;"></p>
+											name="password"  />
+										<p class="statusPassword" ></p>
 									</div>
 									<!-- End .form-group -->
 
 									<div class="form-group ">
 										<label for="repeatPass">Nhập lại mật khẩu *</label> <input
 											type="password" class="form-control" id="repeatPass"
-											name="repeatPass" required />
-										<p class="statusrepeatPass" style="color: red;"></p>
+											name="repeatPass"  />
+										<p class="statusrepeatPass" ></p>
 									</div>
 									<!-- End .form-group -->
 
@@ -154,29 +157,86 @@
         
         
         <script>
-	$('#createUser').click(
-			function(e) {
-				e.preventDefault();
-				var data = {};
-				var formData = $('#formRegister').serializeArray();
-				$.each(formData, function(index, v) {
-					data["" + v.name + ""] = v.value;
-				});
-				var fullName = $('#fullName').val();
-				var userName = $('#userName').val();
-				var password = $('#password').val();
-				var email = $('#email').val();
-				var phoneNumber = $('#phoneNumber').val();
-				var address = $('#address').val();
-				var repeatPass = $('#repeatPass').val();
-				if (fullName != "" && userName != "" && password != ""
-						&& email != "" && phoneNumber != "" && address != ""
-						&& repeatPass != "") {
-					addingUser(data);
-				} else {
-					swal(" Đăng ký thất bại", " :)", "error");
-				}
-			});
+        
+        $("#formRegister").validate({
+    		rules : {
+    			fullName : {
+    				required : true,
+    			},
+    			userName : {
+    				required : true,
+    			},
+    			password:{
+    				required : true,
+    				minlength: 6,
+    				
+    			},
+    			email:{
+    				required : true,
+    				
+    			},
+    			phoneNumber:{
+    				required : true,
+    				minlength: 9
+    			},
+    			address:{
+    				required : true,
+    			},
+    			status:{
+    				required : true,
+    			},
+    			repeatPass:{
+    				required : true,
+    				minlength: 6,
+    				equalTo: "#password",	
+    			},
+    			
+    		},
+    		messages : {
+    			fullName : {
+    				required : "Vui lòng không để trống",
+    			},
+    			userName : {
+    				required : "Vui lòng không để trống",
+    			},
+    			password : {
+    				required : "Vui lòng không để trống",
+    				minlength: 'Vui lòng nhập ít nhất 6 kí tự'
+    			},
+    			email : {
+    				required : "Vui lòng không để trống",
+    				
+    			},
+    			phoneNumber : {
+    				required : "Vui lòng không để trống",
+    				minlength: "Số máy quý khách vừa nhập là số không có thực"
+    			},
+    			address : {
+    				required : "Vui lòng không để trống",
+    			},
+    			status:{
+    				required : "Vui lòng không để trống",
+    			},
+    			repeatPass:{
+    				required : "Vui lòng không để trống",
+    				minlength: 'Vui lòng nhập ít nhất 6 kí tự',
+					equalTo: 'Mật khẩu không trùng'
+    			},
+
+    		},
+    		submitHandler : function(form) {
+    			$("#createUser").load("submit", function(e) {
+    				var data = {};
+    				var formData = $('#formRegister').serializeArray();
+    				$.each(formData, function(index, v) {
+    					data["" + v.name + ""] = v.value;
+    				});
+    				 /* addingUser(data);  */
+    			});
+    		}
+    	});
+ 
+			
 
 	function addingUser(data) {
 		$.ajax({
@@ -195,23 +255,8 @@
 			}
 		});
 	}
-	function updateUser(data) {
-		$.ajax({
-			type : "PUT",
-			url : "${ApiUrl}",
-			data : JSON.stringify(data),
-			dataType : "json",
-			contentType : "application/json",
-			success : function(response) {
-				swal("Thành Công!", "Hãy nhấn vào nút!", "success");
-
-			},
-			error : function(response) {
-				swal("Thất bại", "Sản phẩm vẫn an toàn :)", "error");
-			}
-		});
-	}
 	$(document).ready(function() {
+		
 						$("#userName").blur(function userNameExists() {
 											var userName = $("#userName").val();
 											if (userName.length > 6 && userName.length < 32) {
@@ -225,10 +270,13 @@
 														success : function(result) {
 																if (result.code == 1) {
 																	$(".status").html(result.msg);
+																	$(".status").css("color","red");
+																	$("#createUser").prop('disabled', true);
 																	return false;
 																} else {
 																	$(".status").html(result.msg);
 																	$(".status").css("color","green");
+																	$("#createUser").prop('disabled', false);
 																	return true;
 
 																}
@@ -244,92 +292,43 @@
 										});
 
 						$("#email").blur(function emailExists() {
+									var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 									var email = $("#email").val();
-									var data = {};
-									data["email"] = email;
-									$.ajax({
-										type : "POST",
-										url : "/bookstore/web/checkEmail",
-										contentType : "application/json",
-										data : JSON.stringify(data),
-										success : function(result) {
-											if (result.code == 1) {
-												$(".statusEmail").html(result.msg);
-
-												return false;
-											} else {$(".statusEmail").html(result.msg);
-												$(".statusEmail").css("color","green");
-												return true;
+									if (!regex.test(email)) {
+										$(".statusEmail").html("<font>Email không đúng định dạng</font>");
+										$(".statusEmail").css("color", "red");
+									}else {
+										var data = {};
+										data["email"] = email;
+										$.ajax({
+											type : "POST",
+											url : "/bookstore/web/checkEmail",
+											contentType : "application/json",
+											data : JSON.stringify(data),
+											success : function(result) {
+												if (result.code == 1) {
+													$(".statusEmail").html(result.msg);
+													$(".statusEmail").css("color","red");
+													$("#createUser").prop('disabled', true);
+													return false;
+												} else {$(".statusEmail").html(result.msg);
+													$(".statusEmail").css("color","green");
+													$("#createUser").prop('disabled', false);
+													return true;
+												}
+											},
+											error : function(error) {
+												console.log(error);
+												alert("error");
 											}
-										},
-										error : function(error) {
-											console.log(error);
-											alert("error");
-										}
-									});
+										});
+									}
+									
+									
 								});
 
-						$("#password").blur(function password() {
-											var password = $("#password").val();
-											if (password.length > 6) {
-												$(".statusPassword").html("<font>Mật Khẩu hợp lệ</font>");
-												$(".statusPassword").css("color", "green");
-												return true;
-											} else {
-												$(".statusPassword")
-														.html("<font>Mật khẩu phải dài hơn 6 ký tự.</font>");
-												return false;
-											}
-										});
-						$("#phoneNumber").blur(function phoneNumber() {
-											var phoneNumber = $("#phoneNumber").val();
-											if (phoneNumber.length > 0) {
-												$(".statusphoneNumber").html("<font>Số điện thoại hợp lệ</font>");
-												$(".statusphoneNumber").css("color", "green");
-												return true;
-											} else {
-												$(".statusphoneNumber").html("<font>Vui lòng nhập số điện thoại</font>");
-												return false;
-											}
-										});
-
-						$("#fullName").blur(function phoneNumber() {
-											var fullName = $("#fullName").val();
-											if (fullName.length > 0) {$(".statusfullName").html("<font>Hợp lệ</font>");
-												$(".statusfullName").css("color", "green");
-												return true;
-											} else {
-												$(".statusfullName").html("<font>Vui lòng nhập họ và tên</font>");
-												return false;
-											}
-										});
-						$("#address").blur(function address() {
-											var address = $("#address").val();
-											if (address.length > 0) {
-												$(".statusaddress").html("<font>Hợp lệ</font>");
-												$(".statusaddress").css("color", "green");
-												return true;
-											} else {
-												$(".statusaddress").html("<font>Vui lòng nhập địa chỉ</font>");
-												return false;
-											}
-										});
-
-						$("#repeatPass").blur(function repeatPass() {
-		 									var repeatPass = $("#repeatPass").val();
-											var password = $("#password").val();
-											if (repeatPass == password) {
-												$(".statusrepeatPass").html("<font>Hợp lệ</font>");
-												$("#createUser").prop('disabled', false);
-												$(".statusrepeatPass").css("color", "red"); 
-												return true;
-											} else {
-												$(".statusrepeatPass").html("<font>Mật khẩu không trùng khớp</font>");
-												$("#createUser").prop('disabled', true);
-												return false;
-											}
-										});
-
 					});
+	
+	
 </script>
 </html>

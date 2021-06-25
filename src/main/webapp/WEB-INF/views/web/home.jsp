@@ -213,7 +213,7 @@
 							<!-- End .heading-left -->
 
 							<div class="heading-right">
-								<a href="category.html" class="title-link">View more
+								<a href="<c:url value='/web/product?page=1&limit=9'/>" class="title-link">View more
 									Products <i class="icon-long-arrow-right"></i>
 								</a>
 							</div>
@@ -250,7 +250,7 @@
 								<div class="product">
 									<span class="product-label label-sale">Sale</span>
 
-									<figure class="product-media">
+									<figure class="product-media" style="box-shadow: none">
 										<a href="<c:url value='/web/product/${item.id}' />"> <img
 									src="${item.img1}" alt="Product image" class="product-image">
 										</a>
@@ -336,7 +336,7 @@
 				<!-- End .heading-left -->
 
 				<div class="heading-right">
-					<a href="category.html" class="title-link">View more Products <i
+					<a href="<c:url value='/web/product?page=1&limit=9'/>" class="title-link">View more Products <i
 						class="icon-long-arrow-right"></i></a>
 				</div>
 				<!-- End .heading-right -->
@@ -352,44 +352,7 @@
                                 "dots": true,
                                 "margin": 10
                             }'>
-						<div class="product-big">
-							<img
-								src="<c:url value='/template/web/assets/images/demos/demo-20/products/product-big-1.jpg'/>"
-								alt="Product image" class="product-image">
-							<div class="product-wrap">
-								<figure class="product-media">
-									<a href="product.html"> <img
-										src="<c:url value='/template/web/assets/images/demos/demo-20/products/product-big-1.jpg'/>"
-										alt="Product image" class="product-image">
-									</a>
-								</figure>
-								<!-- End .product-media -->
-
-								<div class="product-body">
-									<div class="product-cat">
-										by <a href="#">Becky Albertalli</a> and <a href="#">Adam
-											Silvera</a>
-									</div>
-									<!-- End .product-cat -->
-									<h3 class="product-title">
-										<a href="product.html">What If <br>It's Us.
-										</a>
-									</h3>
-									<!-- End .product-title -->
-									<div class="product-price">$18.99</div>
-									<!-- End .product-price -->
-
-									<div class="product-action">
-										<a href="#" class="btn-product btn-cart"><span>add
-												to cart</span></a>
-									</div>
-									<!-- End .product-action -->
-								</div>
-								<!-- End .product-body -->
-							</div>
-							<!-- End .product-wrap -->
-						</div>
-						<!-- End .product-big -->
+				
 
 						<div class="product-big">
 							<img
@@ -468,7 +431,7 @@
                                 }'>
 							<c:forEach var="item" items="${listBookDESC}">
 								<div class="product">
-									<figure class="product-media">
+									<figure class="product-media" style="box-shadow: none">
 										<a href="<c:url value='/web/product/${item.id}' />"> <img
 											src="<c:url value='${item.img1 }'/>"
 											alt="Product image" class="product-image">
@@ -646,7 +609,7 @@
 						<!-- End .heading-left -->
 
 						<div class="heading-right">
-							<a href="category.html" class="title-link">View more Products
+							<a href="<c:url value='/web/product?page=1&limit=9'/>" class="title-link">View more Products
 								<i class="icon-long-arrow-right"></i>
 							</a>
 						</div>
@@ -685,7 +648,7 @@
                             
                         <c:forEach var="item" items="${listBookHighPrice}">
 								<div class="product">
-									<figure class="product-media">
+									<figure class="product-media" style="box-shadow: none">
 										<a href="<c:url value='/web/product/${item.id}' />"> <img
 											src="<c:url value='${item.img1 }'/>"
 											alt="Product image" class="product-image">

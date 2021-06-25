@@ -53,9 +53,21 @@
                                                 </a>
 
                                                 <div class="product-action-vertical">
-                                                    <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                                                  <c:if test="${item.favorite == null}">
+														<a onclick="addFavourite(${item.id})"
+															class="btn-product-icon btn-wishlist btn-expandable favorite_${item.id}">
+															<span class="messageFavorite_${item.id}">Thêm yêu
+																thích</span>
+														</a>
+													</c:if>
+													<c:if test="${item.favorite != null}">
+														<a  style="color: red;" onclick="addFavourite(${item.id})"
+															class="btn-product-icon btn-wishlist btn-expandable favorite_${item.id}">
+															<span  style="color: red;" class="messageFavorite_${item.id}">Đã yêu
+																thích</span>
+														</a>
+													</c:if>
+                                                    
                                                 </div><!-- End .product-action-vertical -->
 
                                                 <div class="product-action">
@@ -99,23 +111,6 @@
 
                 			<nav aria-label="Page navigation" style="margin-left: 240px;">
 							    <ul class="pagination" id="pagination">
-							    <%-- <c:forEach var="i" begin="1" end="${totalPages-1}">
-									<c:url var="paging" value="/web/search">
-										<c:param name="name" value="${param.name}" />
-										<c:param name="categoryName" value="${param.categoryName}" />
-										<c:param name="limit" value="10" />
-										<c:param name="page" value="${i}" />
-									</c:url>
-									<c:if test="${ i == currentPage}">
-										<li class="page-item active"><a class="page-link"
-											href="${paging}">${i}</a></li>
-									</c:if>
-									<c:if test="${i != currentPage}">
-										<li class="page-item"><a class="page-link"
-											href="${paging}">${i}</a></li>
-									</c:if>
-								</c:forEach>
-								<li class="page-item-total">of ${totalPages - 1 }</li> --%>
 							    </ul>
        						
 							
@@ -348,10 +343,14 @@ $(document).ready(function() {
 		     						'<a href="${ProductDetail}'+value.id+'"><img src="<c:url value='/template/web/assets/images/products/product-4.jpg'/>" alt="Product image" class="product-image"></a>'+
 		     						
 		     						' <div class="product-action-vertical">'+
-		     						'<a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>'+
-		     						' <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>'+
-		     						'<a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>'+
+		     						'<c:if test="${value.favorite == null}">'+
+		     						'<a onclick="addFavourite('+value.id+')" class="btn-product-icon btn-wishlist btn-expandable favorite_'+value.id+'"><span class="messageFavorite_'+value.id+'">Thêm yêu thích</span></a>'+
+		     						'</c:if>'+
+		     						'<c:if test="${value.favorite != null}">'+
+		     						'<a style="color: red;" onclick="addFavourite('+value.id+')" class="btn-product-icon btn-wishlist btn-expandable favorite_'+value.id+'"><span class="messageFavorite_'+value.id+'">Đã yêu thích</span></a>'+
+		     						'</c:if>'+
 		     						'</div>'+
+		     						
 		     						'<div class="product-action">'+
 		     						'<a  class="btn-product btn-cart" onclick="addCart('+value.id+')"><span>add to cart</span></a>'+
 		     						'</div>'+
@@ -441,6 +440,40 @@ $(document).ready(function() {
 	        	  				}
 	        	  			});
 	        	  		}
+	            	 function addFavourite(id){
+	            		 var userId= $('#userId').val();
+	            			if (userId == null || userId =='') {
+	            				alert("Vui lòng đăng nhập");
+	            			}else{
+	            		 var data ={};
+	            		 data['bookId'] =id;
+	            		   $.ajax({
+	            		         type: "POST",
+	            				 url: "${APIBookFavorite}",
+	            		         data: JSON.stringify(data),
+	            		         contentType: "application/json",
+	            		         success: function (response) { 
+	            		        	 $('.wishlist-count').text(response.count);
+	            		        	 var classWish = ".favorite_"+id;
+	            		        	 var messageWish =".messageFavorite_"+id;
+	            		        	 if (response.message == "success_save") {
+	            		         	 	$(classWish).css("color","red");
+	            		         	 	$(messageWish).text("Đã yêu thích");
+	            		         	 	$(messageWish).css("color","red");
+	            					}else{
+	            						 $(classWish).css("color","black");
+	            						 $(messageWish).text("Thêm yêu thích");
+	            			         	 $(messageWish).css("color","black");
+	            					}
+	            		         }, 
+	            		         
+	            		         error: function (response) {
+	            		        	 swal("Thất bại", "Sản phẩm vẫn an toàn :)", "error");
+	            		         }
+	            		      });
+	            			}
+	            	 }
+	            	 
 	
 	</script>
 

@@ -92,3 +92,7 @@ body#LoginForm {
 	font-size: 13px;
 	text-decoration: none;
 }
+label.error {
+		display: inline-block;
+		color:red;
+}
