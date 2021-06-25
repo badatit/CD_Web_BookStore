@@ -86,6 +86,14 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("login");
 		return mav;
 	}
+	
+	@RequestMapping(value = "/blog", method = RequestMethod.GET)
+	public ModelAndView blogPage() {
+		
+		ModelAndView mav = new ModelAndView("/web/blog");
+		return mav;
+	}
+	
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {

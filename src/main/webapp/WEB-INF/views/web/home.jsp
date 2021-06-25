@@ -21,23 +21,22 @@
 				<div class="row">
 					<div class="col-md-12 col-lg-6">
 						<div class="banner banner-big banner-overlay">
-							<a href="#"> <img
+							<a href="<c:url value='/web/blog'/>"> <img
 								src="<c:url value='/template/web/assets/images/demos/demo-20/banners/banner-1.jpg'/>"
 								alt="Banner">
 							</a>
 
 							<div class="banner-content">
 								<h4 class="banner-subtitle text-white">
-									<a href="#">Your Guide To The World</a>
+									<a href="<c:url value='/web/blog'/>">Hướng Dẫn Đến Thế Giới Của Bạn</a>
 								</h4>
 								<!-- End .banner-subtitle -->
 								<h2 class="banner-title text-white">
-									<a href="#">Must-Read <br>Travel Books
+									<a href="<c:url value='/web/blog'/>">Phải Đọc<br>Sách Hướng<br> Dẫn Du Lịch
 									</a>
 								</h2>
 								<!-- End .banner-title -->
-								<a href="#" class="btn btn-outline-white-3 banner-link">Find
-									out more<i class="icon-long-arrow-right"></i>
+								<a href="<c:url value='/web/blog'/>" class="btn btn-outline-white-3 banner-link">Xem Thêm<i class="icon-long-arrow-right"></i>
 								</a>
 							</div>
 							<!-- End .banner-content -->
@@ -48,23 +47,23 @@
 
 					<div class="col-sm-6 col-lg-3">
 						<div class="banner banner-overlay">
-							<a href="#"> <img
+							<a href="<c:url value='/web/product?page=1&limit=9&categoryId=3'/>"> <img
 								src="<c:url value='/template/web/assets/images/demos/demo-20/banners/banner-2.jpg'/>"
 								alt="Banner">
 							</a>
 
 							<div class="banner-content banner-content-stretch">
 								<h4 class="banner-subtitle text-white">
-									<a href="#">New This Week</a>
+									<a>Tin Mới</a>
 								</h4>
 								<!-- End .banner-subtitle -->
 								<h3 class="banner-title text-white">
-									<a href="#">Discover Our <br>Best Romance <br>Books
+									<a href="<c:url value='/web/product?page=1&limit=9&categoryId=3'/>">Khám Phá  <br>Những<br> Cuốn Sách <br>Tiểu Thuyết  <br>Hay Nhất<br>Của Chúng Tôi
 									</a>
 								</h3>
 								<!-- End .banner-title -->
-								<a href="#" class="btn btn-outline-white-3 banner-link">Discover
-									Now<i class="icon-long-arrow-right"></i>
+								<a href="<c:url value='/web/product?page=1&limit=9&categoryId=3'/>" class="btn btn-outline-white-3 banner-link">Khám Phá Ngay
+								<i class="icon-long-arrow-right"></i>
 								</a>
 							</div>
 							<!-- End .banner-content -->
@@ -75,22 +74,22 @@
 
 					<div class="col-sm-6 col-lg-3">
 						<div class="banner banner-small banner-overlay">
-							<a href="#"> <img
+							<a href="<c:url value='/web/product?page=1&limit=9&categoryId=1'/>"> <img
 								src="<c:url value='/template/web/assets/images/demos/demo-20/banners/banner-3.jpg'/>"
 								alt="Banner">
 							</a>
 
 							<div class="banner-content">
 								<h4 class="banner-subtitle text-white d-lg-none d-xl-block">
-									<a href="#">Deal Of The Day</a>
+									<a>Mới</a>
 								</h4>
 								<!-- End .banner-subtitle -->
 								<h3 class="banner-title text-white">
-									<a href="#">20% Off Use <br>Code: <span>mybook</span></a>
+									<a href="<c:url value='/web/product?page=1&limit=9&categoryId=1'/>">Sách Tư Duy<br><span>Đang Chờ bạn</span></a>
 								</h3>
 								<!-- End .banner-title -->
-								<a href="#" class="btn btn-outline-white-3 banner-link">Shop
-									Now<i class="icon-long-arrow-right"></i>
+								<a href="<c:url value='/web/product?page=1&limit=9&categoryId=1'/>" class="btn btn-outline-white-3 banner-link">Mua Ngay
+									<i class="icon-long-arrow-right"></i>
 								</a>
 							</div>
 							<!-- End .banner-content -->
@@ -98,23 +97,22 @@
 						<!-- End .banner -->
 
 						<div class="banner banner-small banner-overlay">
-							<a href="#"> <img
+							<a href="<c:url value='/web/product?page=1&limit=9&categoryId=6'/>"> <img
 								src="<c:url value='/template/web/assets/images/demos/demo-20/banners/banner-4.jpg'/>"
 								alt="Banner">
 							</a>
 
 							<div class="banner-content">
 								<h4 class="banner-subtitle text-white d-lg-none d-xl-block">
-									<a href="#">New Arrivals</a>
+									<a href="<c:url value='/web/product?page=1&limit=9&categoryId=6'/>">Mới Cập Nhập</a>
 								</h4>
 								<!-- End .banner-subtitle -->
 								<h3 class="banner-title text-white">
-									<a href="#">Business <br>& Economics
+									<a href="<c:url value='/web/product?page=1&limit=9&categoryId=6'/>">Làm Việc <br>& Kỹ Năng
 									</a>
 								</h3>
 								<!-- End .banner-title -->
-								<a href="#" class="btn btn-outline-white-3 banner-link">Discover
-									Now<i class="icon-long-arrow-right"></i>
+								<a href="<c:url value='/web/product?page=1&limit=9&categoryId=6'/>" class="btn btn-outline-white-3 banner-link">Mua Ngay<i class="icon-long-arrow-right"></i>
 								</a>
 							</div>
 							<!-- End .banner-content -->
@@ -135,9 +133,9 @@
 								<span class="icon-box-icon"> <i class="icon-truck"></i>
 								</span>
 								<div class="icon-box-content">
-									<h3 class="icon-box-title">Payment & Delivery</h3>
+									<h3 class="icon-box-title">Thanh Toán & Vận Chuyển</h3>
 									<!-- End .icon-box-title -->
-									<p>Free shipping for orders over $50</p>
+									<p>Giao hàng miễn phí cho các đơn đặt hàng trên 200.000 đ</p>
 								</div>
 								<!-- End .icon-box-content -->
 							</div>
@@ -151,9 +149,9 @@
 								</span>
 
 								<div class="icon-box-content">
-									<h3 class="icon-box-title">Return & Refund</h3>
+									<h3 class="icon-box-title">Hoàn Tiền Lại</h3>
 									<!-- End .icon-box-title -->
-									<p>Free 100% money back guarantee</p>
+									<p>Đảm bảo hoàn tiền miễn phí 100%</p>
 								</div>
 								<!-- End .icon-box-content -->
 							</div>
@@ -167,9 +165,9 @@
 								</span>
 
 								<div class="icon-box-content">
-									<h3 class="icon-box-title">Quality Support</h3>
+									<h3 class="icon-box-title">Hỗ trợ</h3>
 									<!-- End .icon-box-title -->
-									<p>Alway online feedback 24/7</p>
+									<p>Luôn phản hồi trực tuyến 24/7</p>
 								</div>
 								<!-- End .icon-box-content -->
 							</div>
@@ -183,9 +181,9 @@
 								</span>
 
 								<div class="icon-box-content">
-									<h3 class="icon-box-title">Join Our Newsletter</h3>
+									<h3 class="icon-box-title">Tham gia bản tin của chúng tôi</h3>
 									<!-- End .icon-box-title -->
-									<p>10% off by subscribing to our newsletter</p>
+									<p>Giảm giá 10% bằng cách đăng ký nhận bản tin của chúng tôi</p>
 								</div>
 								<!-- End .icon-box-content -->
 							</div>
@@ -361,7 +359,7 @@
 
 							<div class="product-wrap">
 								<figure class="product-media">
-									<a href="product.html"> <img
+									<a > <img
 										src="<c:url value='/template/web/assets/images/demos/demo-20/products/product-12.jpg'/>"
 										class="product-image">
 									</a>
@@ -370,20 +368,17 @@
 
 								<div class="product-body">
 									<div class="product-cat">
-										by <a href="#">Nicola Yoon </a>
+										by <a >Nicola Yoon </a>
 									</div>
 									<!-- End .product-cat -->
 									<h3 class="product-title">
-										<a href="product.html">The Sun Is Also a Star.</a>
+										<a >The Sun Is Also a Star.</a>
 									</h3>
 									<!-- End .product-title -->
-									<div class="product-price">$10.99</div>
+									<div class="product-price"></div>
 									<!-- End .product-price -->
 
-									<div class="product-action">
-										<a href="#" class="btn-product btn-cart"><span>add
-												to cart</span></a>
-									</div>
+									
 									<!-- End .product-action -->
 								</div>
 								<!-- End .product-body -->
@@ -513,23 +508,22 @@
 				<div class="row justify-content-center">
 					<div class="col-md-6 col-lg-4">
 						<div class="banner banner-overlay">
-							<a href="#"> <img
+							<a> <img
 								src="<c:url value='/template/web/assets/images/demos/demo-20/banners/banner-6.jpg'/>"
 								alt="Banner">
 							</a>
 
 							<div class="banner-content">
 								<h4 class="banner-subtitle text-white">
-									<a href="#">A Perfect Choice For Your Children</a>
+									<a >Một sự lựa chọn hoàn hảo cho con bạn</a>
 								</h4>
 								<!-- End .banner-subtitle -->
 								<h3 class="banner-title text-white">
-									<a href="#">Children's <br>Bestselling Books
+									<a >Kiến Thức<br>Bách Khoa
 									</a>
 								</h3>
 								<!-- End .banner-title -->
-								<a href="#" class="btn btn-outline-white-3 banner-link">Discover
-									Now<i class="icon-long-arrow-right"></i>
+								<a href="<c:url value='/web/product?page=1&limit=9&categoryId=5'/>" class="btn btn-outline-white-3 banner-link">Khám Phá Ngay<i class="icon-long-arrow-right"></i>
 								</a>
 							</div>
 							<!-- End .banner-content -->
@@ -540,23 +534,23 @@
 
 					<div class="col-md-6 col-lg-4">
 						<div class="banner banner-overlay">
-							<a href="#"> <img
+							<a > <img
 								src="<c:url value='/template/web/assets/images/demos/demo-20/banners/banner-7.jpg'/>"
 								alt="Banner">
 							</a>
 
 							<div class="banner-content">
 								<h4 class="banner-subtitle text-white">
-									<a href="#">Mental Health Awareness Week</a>
+									<a >Tuần lễ nâng cao nhận thức về kỹ năng sống</a>
 								</h4>
 								<!-- End .banner-subtitle -->
 								<h3 class="banner-title text-white">
-									<a href="#">Self-Help For <br>Your Future.
+									<a >Kỹ Năng Sống
 									</a>
 								</h3>
 								<!-- End .banner-title -->
-								<a href="#" class="btn btn-outline-white-3 banner-link">Discover
-									Now<i class="icon-long-arrow-right"></i>
+								<a href="<c:url value='/web/product?page=1&limit=9&categoryId=2'/>" class="btn btn-outline-white-3 banner-link">Khám Phá Ngay
+									<i class="icon-long-arrow-right"></i>
 								</a>
 							</div>
 							<!-- End .banner-content -->
@@ -574,16 +568,15 @@
 
 							<div class="banner-content">
 								<h4 class="banner-subtitle text-white">
-									<a href="#">New York Times Bestsellers</a>
+									<a >Thời gian dành cho những cuốn sách hay</a>
 								</h4>
 								<!-- End .banner-subtitle -->
 								<h3 class="banner-title text-white">
-									<a href="#">Bestselling Food <br>and Drink Books.
+									<a> Những cuốn sách tốt nhất
 									</a>
 								</h3>
 								<!-- End .banner-title -->
-								<a href="#" class="btn btn-outline-white-3 banner-link">Discover
-									Now<i class="icon-long-arrow-right"></i>
+								<a href="<c:url value='/web/blog'/>" class="btn btn-outline-white-3 banner-link">Đọc Ngay<i class="icon-long-arrow-right"></i>
 								</a>
 							</div>
 							<!-- End .banner-content -->
@@ -752,7 +745,7 @@
                         }'>
 					<article class="entry">
 						<figure class="entry-media">
-							<a href="single.html"> <img
+							<a href="<c:url value='/web/blog'/>"> <img
 								src="<c:url value='/template/web/assets/images/demos/demo-20/blog/post-1.jpg'/>"
 								alt="image desc">
 							</a>
@@ -761,19 +754,16 @@
 
 						<div class="entry-body">
 							<div class="entry-meta">
-								<a href="#">Nov 22, 2018</a>, 0 Comments
+								<a href="#">11-02-2021</a>, 0 Bình Luận
 							</div>
 							<!-- End .entry-meta -->
 
-							<h3 class="entry-title">
-								<a href="single.html">Aenean dignissim pellentesque felis.</a>
-							</h3>
+							
 							<!-- End .entry-title -->
 
 							<div class="entry-content">
-								<p>Morbi in sem quis dui placerat ornare. Pellentesque odio
-									nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.</p>
-								<a href="single.html" class="read-more">Continue read ...</a>
+								<p> Những gì sách dạy chúng ta cũng giống như lửa. Chúng ta lấy nó từ nhà hàng xóm, thắp nó trong nhà ta, đem nó truyền cho người khác và nó trở thành tài sản của tất cả mọi người. </p>
+								
 							</div>
 							<!-- End .entry-content -->
 						</div>
@@ -783,7 +773,7 @@
 
 					<article class="entry">
 						<figure class="entry-media">
-							<a href="single.html"> <img
+							<a href="<c:url value='/web/blog'/>"> <img
 								src="<c:url value='/template/web/assets/images/demos/demo-20/blog/post-2.jpg'/>"
 								alt="image desc">
 							</a>
@@ -792,21 +782,15 @@
 
 						<div class="entry-body">
 							<div class="entry-meta">
-								<a href="#">Dec 12, 2018</a>, 0 Comments
+								<a href="#">11-12-2020</a>, 0 Bình Luận
 							</div>
 							<!-- End .entry-meta -->
 
-							<h3 class="entry-title">
-								<a href="single.html">Donec nec justo eget felis facilisis
-									fermentum.</a>
-							</h3>
 							<!-- End .entry-title -->
 
 							<div class="entry-content">
-								<p>Donec odio. Quisque volutpat mattis eros. Nullam
-									malesuada erat ut Suspendisse urna nibh, viverra non, semper
-									suscipit.</p>
-								<a href="single.html" class="read-more">Continue read ...</a>
+								<p>Cuốn sách tốt nhất cho bạn là cuốn sách nói nhiều nhất với bạn vào lúc bạn đọc nó. Tôi không nói tới cuốn sách cho bạn nhiều bài học nhất mà là cuốn sách nuôi dưỡng tâm hồn bạn. Và điều đó phụ thuộc vào tuổi tác, trải nghiệm, nhu cầu về tâm lý và tinh thần.</p>
+								
 							</div>
 							<!-- End .entry-content -->
 						</div>
@@ -816,7 +800,7 @@
 
 					<article class="entry">
 						<figure class="entry-media">
-							<a href="single.html"> <img
+							<a href="<c:url value='/web/blog'/>"> <img
 								src="<c:url value='/template/web/assets/images/demos/demo-20/blog/post-3.jpg'/>"
 								alt="image desc">
 							</a>
@@ -825,19 +809,16 @@
 
 						<div class="entry-body">
 							<div class="entry-meta">
-								<a href="#">Dec 19, 2018</a>, 2 Comments
+								<a href="#">19-12-2019</a>, 2 Bình Luận
 							</div>
 							<!-- End .entry-meta -->
 
-							<h3 class="entry-title">
-								<a href="single.html">Aliquam porttitor mauris sit.</a>
-							</h3>
+							
 							<!-- End .entry-title -->
 
 							<div class="entry-content">
-								<p>Suspendisse urna nibh, viverra semper suscipit. posuere
-									a, pede. Morbi in sem quis dui placerat ornare.</p>
-								<a href="single.html" class="read-more">Continue read ...</a>
+								<p>Đằng sau sự thành công của một người đàn ông, là hình dáng của một người phụ nữ. Còn đằng sau sự thành công của bất kì ai là ít nhất một cuốn sách, hay cả một giá sách.</p>
+								
 							</div>
 							<!-- End .entry-content -->
 						</div>
@@ -847,7 +828,7 @@
 
 					<article class="entry">
 						<figure class="entry-media">
-							<a href="single.html"> <img
+							<a href="<c:url value='/web/blog'/>"> <img
 								src="<c:url value='/template/web/assets/images/demos/demo-20/blog/post-4.jpg'/>"
 								alt="image desc">
 							</a>
@@ -856,20 +837,14 @@
 
 						<div class="entry-body">
 							<div class="entry-meta">
-								<a href="#">Dec 19, 2018</a>, 2 Comments
+								<a href="#">02-02-2021</a>, 2 Bình Luận
 							</div>
 							<!-- End .entry-meta -->
 
-							<h3 class="entry-title">
-								<a href="single.html">Integer vitae libero ac risus egestas
-									placerat.</a>
-							</h3>
 							<!-- End .entry-title -->
 
 							<div class="entry-content">
-								<p>Lorem ipsum dolor sit amet, consecte tuer adipiscing
-									elit. Donec odio. Quisque volutpat mattis eros.</p>
-								<a href="single.html" class="read-more">Continue read ...</a>
+								<p>Sách là nguồn của cải quý báu của thế giới và là di sản xứng đáng của các thế hệ và các quốc gia.</p>
 							</div>
 							<!-- End .entry-content -->
 						</div>
