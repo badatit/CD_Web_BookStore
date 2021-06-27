@@ -60,16 +60,16 @@
 							<ul class="dropdown-links">
 							 <li>
 							<security:authorize access="hasAnyRole('ADMIN')">
-							 <a class="logout" href="${adminUrl}">Page Admin</a>
+							 <a class="logout" href="${adminUrl}">Trang Admin</a>
 							 </security:authorize>
 							 </li>
 							
 								<li>
 								<security:authorize access="isAuthenticated()">
 								 
-										<a href="<c:url value='/web/logout'/>">LogOut</a>
+										<a href="<c:url value='/web/logout'/>">Thoát</a>
 									</security:authorize> <security:authorize access="isAnonymous()">
-										<a href="<c:url value='/login'/>">Sign in / Sign up</a>
+										<a href="<c:url value='/login'/>">Đăng Nhập / Đăng Ký</a>
 									</security:authorize></li>
 							
 							</ul>
@@ -172,7 +172,7 @@
 									<div class="icon">
 										<i class="icon-user"></i>
 									</div>
-									<p>account</p>
+									<p>Tài Khoản</p>
 									</a>
 							</security:authorize>
 
@@ -186,7 +186,7 @@
 									<div class="icon">
 									<i class="icon-heart-o"></i> <span class="wishlist-count badge">${countFavo}</span>
 								</div>
-								<p>Wishlist</p>
+								<p>Yêu Thích</p>
 									
 								</a>
 							</c:if>
@@ -197,7 +197,7 @@
 								<div class="icon">
 									<i class="icon-heart-o"></i> <span class="wishlist-count badge">0</span>
 								</div>
-								<p>Wishlist</p>
+								<p>Yêu Thích</p>
 								</a>
 							</security:authorize>
 							
@@ -211,7 +211,7 @@
 										<i class="icon-shopping-cart"></i>
 										<span class="cart-count">0</span>
 									</div>
-									<p>Cart</p>
+									<p>Giỏ Hàng</p>
 								</a>
 							</div>
 							<!-- End .cart-dropdown -->
@@ -229,7 +229,7 @@
 										<i class="icon-shopping-cart"></i> <span class="cart-count"
 											id="sizeCart">${sizeCart}</span>
 									</div>
-									<p>Cart</p>
+									<p>Giỏ Hàng</p>
 								</a>
 
 								<div class="dropdown-menu dropdown-menu-right" id="bodyCart">
@@ -272,7 +272,7 @@
 
 									<div style="margin-left: 80px" class="dropdown-cart-action">
 										<a href="<c:url value='/web/cart/${userId}'/>"
-											class="btn btn-primary">View Cart</a>
+											class="btn btn-primary">Xem Giỏ Hàng</a>
 									</div>
 									<!-- End .dropdown-cart-total -->
 								</div>
@@ -296,7 +296,7 @@
 							<a href="#" class="dropdown-toggle" role="button"
 								data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false" data-display="static"
-								title="Browse Categories"> Categorys </a>
+								title="Browse Categories"> Thể Loại </a>
 
 							<div class="dropdown-menu">
 
@@ -322,17 +322,15 @@
 						<nav class="main-nav">
 							<ul class="menu sf-arrows">
 								<li class="megamenu-container active"><a
-									href="<c:url value='/web/home'/>">Home</a></li>
+									href="<c:url value='/web/home'/>">Trang Chủ</a></li>
 								<li><a href="<c:url value='/web/product?page=1&limit=9'/>"
-									class="sf-with-ul">Products</a></li>
+									class="sf-with-ul">Sản Phẩm</a></li>
 
-								<li><a href="#" class="sf-with-ul">Pages</a>
-
-									</li>
+								<li></li>
 								<li><a href="<c:url value='/web/blog'/>" class="sf-with-ul">Blog</a>
 
 									</li>
-								<li><a href="elements-list.html" class="sf-with-ul">Elements</a>
+								<li><a href="elements-list.html" class="sf-with-ul">Dịch Vụ</a>
 
 									</li>
 							</ul>
@@ -342,8 +340,8 @@
 					</div>
 
 					<div class="header-right">
-						<i class="la la-lightbulb-o"></i>
-						<p>Clearance Up to 30% Off</p>
+						<!-- <i class="la la-lightbulb-o"></i>
+						<p>Clearance Up to 30% Off</p> -->
 					</div>
 					<!-- End .header-right -->
 				</div>

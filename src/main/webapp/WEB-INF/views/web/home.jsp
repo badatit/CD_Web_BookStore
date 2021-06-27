@@ -205,14 +205,13 @@
 					<div class="container">
 						<div class="heading heading-flex">
 							<div class="heading-left">
-								<h2 class="title">Sales Products</h2>
+								<h2 class="title">Sản Phẩm Giảm Giá</h2>
 								<!-- End .title -->
 							</div>
 							<!-- End .heading-left -->
 
 							<div class="heading-right">
-								<a href="<c:url value='/web/product?page=1&limit=9'/>" class="title-link">View more
-									Products <i class="icon-long-arrow-right"></i>
+								<a href="<c:url value='/web/product?page=1&limit=9'/>" class="title-link">Xem Thêm<i class="icon-long-arrow-right"></i>
 								</a>
 							</div>
 							<!-- End .heading-right -->
@@ -257,7 +256,7 @@
 
 									<div class="product-body">
 										<div class="product-cat">
-											by <a href="<c:url value='/web/product/${item.id}' />"
+											bởi <a href="<c:url value='/web/product/${item.id}' />"
 												id="issuingCompany">${item.issuingCompany}</a>
 										</div>
 										<!-- End .product-cat -->
@@ -328,13 +327,13 @@
 		<div class="container">
 			<div class="heading heading-flex">
 				<div class="heading-left">
-					<h2 class="title">New Releases</h2>
+					<h2 class="title">Sản Phẩm Mới</h2>
 					<!-- End .title -->
 				</div>
 				<!-- End .heading-left -->
 
 				<div class="heading-right">
-					<a href="<c:url value='/web/product?page=1&limit=9'/>" class="title-link">View more Products <i
+					<a href="<c:url value='/web/product?page=1&limit=9'/>" class="title-link">Xem Thêm<i
 						class="icon-long-arrow-right"></i></a>
 				</div>
 				<!-- End .heading-right -->
@@ -436,7 +435,7 @@
 
 									<div class="product-body">
 										<div class="product-cat">
-											by <a href="<c:url value='/web/product/${item.id}' />"
+											bởi <a href="<c:url value='/web/product/${item.id}' />"
 												id="issuingCompany">${item.issuingCompany}</a>
 										</div>
 										<!-- End .product-cat -->
@@ -596,13 +595,13 @@
 				<div class="container">
 					<div class="heading heading-flex">
 						<div class="heading-left">
-							<h2 class="title">Picks From Our Experts</h2>
+							<h2 class="title">Lưa Chọn Dành Cho bạn</h2>
 							<!-- End .title -->
 						</div>
 						<!-- End .heading-left -->
 
 						<div class="heading-right">
-							<a href="<c:url value='/web/product?page=1&limit=9'/>" class="title-link">View more Products
+							<a href="<c:url value='/web/product?page=1&limit=9'/>" class="title-link">Xem Thêm
 								<i class="icon-long-arrow-right"></i>
 							</a>
 						</div>
@@ -651,7 +650,7 @@
 
 									<div class="product-body">
 										<div class="product-cat">
-											by <a href="<c:url value='/web/product/${item.id}' />"
+											bởi <a href="<c:url value='/web/product/${item.id}' />"
 												id="issuingCompany">${item.issuingCompany}</a>
 										</div>
 										<!-- End .product-cat -->
@@ -718,7 +717,7 @@
 
 		<div class="blog-posts bg-light pt-4 pb-4">
 			<div class="container">
-				<h2 class="title">From Our Blog</h2>
+				<h2 class="title">Từ Blog của chúng tôi</h2>
 				<!-- End .title-lg text-center -->
 
 				<div class="owl-carousel owl-simple" data-toggle="owl"
@@ -789,7 +788,7 @@
 							<!-- End .entry-title -->
 
 							<div class="entry-content">
-								<p>Cuốn sách tốt nhất cho bạn là cuốn sách nói nhiều nhất với bạn vào lúc bạn đọc nó. Tôi không nói tới cuốn sách cho bạn nhiều bài học nhất mà là cuốn sách nuôi dưỡng tâm hồn bạn. Và điều đó phụ thuộc vào tuổi tác, trải nghiệm, nhu cầu về tâm lý và tinh thần.</p>
+								<p>Ai đọc sách mà không biết được nhiều hơn những điều viết trong sách, người đó mới sử dụng sách có một nửa. Sách làm trí tuệ con người sâu sắc hơn và sáng sủa hơn.</p>
 								
 							</div>
 							<!-- End .entry-content -->
@@ -817,7 +816,7 @@
 							<!-- End .entry-title -->
 
 							<div class="entry-content">
-								<p>Đằng sau sự thành công của một người đàn ông, là hình dáng của một người phụ nữ. Còn đằng sau sự thành công của bất kì ai là ít nhất một cuốn sách, hay cả một giá sách.</p>
+								<p>Một cuốn sách thực sự hay nên đọc trong tuổi trẻ, rồi đọc lại khi đã trưởng thành, và một nửa lúc tuổi già, giống như một tòa nhà đẹp nên được chiêm ngưỡng trong ánh bình minh, nắng trưa và ánh trăng.</p>
 								
 							</div>
 							<!-- End .entry-content -->
@@ -844,7 +843,7 @@
 							<!-- End .entry-title -->
 
 							<div class="entry-content">
-								<p>Sách là nguồn của cải quý báu của thế giới và là di sản xứng đáng của các thế hệ và các quốc gia.</p>
+								<p>Những người đọc sách tuy chưa thành danh nhưng cũng đã có một tư cách cao thượng. Những người làm điều thiện, tuy không mong báo đáp nhưng tự trong lòng khoan khoái. </p>
 							</div>
 							<!-- End .entry-content -->
 						</div>
@@ -858,14 +857,14 @@
 		</div>
 		<!-- End .blog-posts -->
 
-		<div class="cta-newsletter text-center pt-6 pb-7">
+		<!-- <div class="cta-newsletter text-center pt-6 pb-7">
 			<div class="container">
 				<span class="cta-icon"><i class="icon-envelope"></i></span>
 				<h3 class="title">Subscribe for Our Newsletter</h3>
-				<!-- End .title -->
+				End .title
 				<p class="title-desc">Learn about new offers and get more deals
 					by joining our newsletter</p>
-				<!-- End .title-desc -->
+				End .title-desc
 
 				<form action="#">
 					<div class="input-group">
@@ -877,13 +876,13 @@
 								<span>SUBSCRIBE</span><i class="icon-long-arrow-right"></i>
 							</button>
 						</div>
-						<!-- .End .input-group-append -->
+						.End .input-group-append
 					</div>
-					<!-- .End .input-group -->
+					.End .input-group
 				</form>
 			</div>
-			<!-- End .container -->
-		</div>
+			End .container
+		</div> -->
 		<!-- End .cta-newsletter -->
 	</main>
 	<!-- End .main -->

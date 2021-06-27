@@ -29,19 +29,19 @@
 					<form  id="checkOutForm">
 						<div class="row">
 							<div class="col-lg-9">
-								<h2 class="checkout-title">Billing Details</h2>
+								<h2 class="checkout-title">Chi tiết thanh toán</h2>
 								<!-- End .checkout-title -->
 								<input type="hidden" id="id" value="${userDTO.id}" />
 
 								<div class="form-group">
-									<label>FullName</label> <input type="text" class="form-control"
+									<label>Họ Và Tên</label> <input type="text" class="form-control"
 										value="${userDTO.fullName }" name="fullName" id="fullName">
 									<p class="statusfullName"></p>
 									<p class="status"></p>
 								</div>
 
 								<div class="form-group">
-									<label>Address*</label> <input type="text" class="form-control"
+									<label>Địa Chỉ*</label> <input type="text" class="form-control"
 										value="${userDTO.address }" name="address" required
 										id="address">
 									<p class="statusaddress"></p>
@@ -49,27 +49,27 @@
 								</div>
 
 								<div class="form-group">
-									<label>Phone *</label> <input type="tel"
+									<label>Số Điện Thoại *</label> <input type="tel"
 										value="${userDTO.phoneNumber }" class="form-control"
 										name="Phone Number" id="phoneNumber" required>
 									<p class="statusphoneNumber"></p>
 										<p class="status"></p>
 								</div>
 								<div class="form-group">
-									<label>Email address *</label> <input type="email"
+									<label>Email *</label> <input type="email"
 										class="form-control" value="${userDTO.email }" required
 										id="email">
 									<p class="statusEmail"></p>
 										<p class="status"></p>
 								</div>
-								<label>Order notes (optional)</label>
+								<label>Lưa ý nhận hàng</label>
 								<textarea class="form-control" cols="30" rows="4"
 									placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
 							</div>
 							<!-- End .col-lg-9 -->
 							<aside class="col-lg-3">
 								<div class="summary">
-									<h3 class="summary-title">Your Order</h3>
+									<h3 class="summary-title">Đơn hàng của bạn</h3>
 									<!-- End .summary-title -->
 
 									<table class="table table-summary">
@@ -77,14 +77,14 @@
 
 										<tbody>
 											<tr>
-												<td>Shipping:</td>
-												<td><c:if test="${orderDTO.shipping == 0} ">Free shipping</c:if>
-													<c:if test="${orderDTO.shipping == 15.0}">Standart</c:if> <c:if
-														test="${orderDTO.shipping == 25.0}">Express</c:if></td>
+												<td>Hình Thức Vận Chuyển:</td>
+												<td><c:if test="${orderDTO.shipping == 0} ">Miễn Phí Vận Chuyển</c:if>
+													<c:if test="${orderDTO.shipping == 15.0}">Giao Hàng Tiết Kiệm</c:if> <c:if
+														test="${orderDTO.shipping == 25.0}">Giao Hàng Nhanh</c:if></td>
 											</tr>
 											<tr class="summary-total">
-												<td>Total:</td>
-												<td><span>${orderDTO.total}</span>VND <input
+												<td>Tổng Tiền:</td>
+												<td><span>${orderDTO.total}</span> VND <input
 													type="hidden" id="price" name="price"
 													value="${orderDTO.total}"></td>
 											</tr>
@@ -101,16 +101,13 @@
 													<a onclick="checkPay(1)" role="button"
 														data-toggle="collapse" href="#collapse-1"
 														aria-expanded="true" aria-controls="collapse-1">
-														Direct bank transfer </a>
+														Thanh Toán Khi Nhận Hàng</a>
 												</h2>
 											</div>
 											<!-- End .card-header -->
 											<div id="collapse-1" class="collapse show"
 												aria-labelledby="heading-1" data-parent="#accordion-payment">
-												<div class="card-body">Make your payment directly into
-													our bank account. Please use your Order ID as the payment
-													reference. Your order will not be shipped until the funds
-													have cleared in our account.</div>
+												<div class="card-body"></div>
 												<!-- End .card-body -->
 											</div>
 											<!-- End .collapse -->
@@ -132,10 +129,7 @@
 											<!-- End .card-header -->
 											<div id="collapse-4" class="collapse"
 												aria-labelledby="heading-4" data-parent="#accordion-payment">
-												<div class="card-body">Nullam malesuada erat ut
-													turpis. Suspendisse urna nibh, viverra non, semper
-													suscipit, posuere a, pede. Donec nec justo eget felis
-													facilisis fermentum.</div>
+												<div class="card-body"></div>
 												<!-- End .card-body -->
 											</div>
 											<!-- End .collapse -->

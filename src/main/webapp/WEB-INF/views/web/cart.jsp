@@ -23,10 +23,10 @@
 							<table class="table table-cart table-mobile" id="cartBody">
 								<thead>
 									<tr>
-										<th>Product</th>
-										<th>Price</th>
-										<th>Quantity</th>
-										<th>Total</th>
+										<th>Sản Phẩm</th>
+										<th>Giá</th>
+										<th>Số Lượng</th>
+										<th style="width: 100px;">Tổng Tiền</th>
 										<th></th>
 									</tr>
 								</thead>
@@ -81,13 +81,13 @@
 						<!-- End .col-lg-9 -->
 						<aside class="col-lg-3">
 							<div class="summary summary-cart">
-								<h3 class="summary-title">Cart Total</h3>
+								<h3 class="summary-title">Chi Tiết</h3>
 								<!-- End .summary-title -->
 
 								<table class="table table-summary">
 									<tbody>
 										<tr class="summary-subtotal">
-											<td>Subtotal:</td>
+											<td>Tổng Tiền Ban Đầu:</td>
 											<td><span class="sumprice"></span><span id="subTotal">
 												<fmt:formatNumber type="number"  groupingUsed="true" value="${sumPrice}"  />
 											
@@ -97,7 +97,7 @@
 										</tr>
 										<!-- End .summary-subtotal -->
 										<tr class="summary-shipping">
-											<td>Shipping:</td>
+											<td>Vận Chuyển:</td>
 											<td>&nbsp;</td>
 										</tr>
 
@@ -107,8 +107,7 @@
 													<input value="0" type="radio" onclick="myFunction()"
 														id="free-shipping" name="shipping"
 														class="custom-control-input" required="required">
-													<label class="custom-control-label" for="free-shipping">Free
-														Shipping</label>
+													<label class="custom-control-label" for="free-shipping">Miễn Phí Vận Chuyển:</label>
 												</div> <!-- End .custom-control -->
 											</td>
 											<td>0đ</td>
@@ -121,7 +120,7 @@
 													<input value="15.000" type="radio" onclick="myFunction()"
 														id="standart-shipping" name="shipping"
 														class="custom-control-input" required="required">
-													<label class="custom-control-label" for="standart-shipping">Standart:</label>
+													<label class="custom-control-label" for="standart-shipping">Giao Hàng Tiết Kiệm:</label>
 												</div> <!-- End .custom-control -->
 											</td>
 											<td>15.000đ</td>
@@ -134,7 +133,7 @@
 													<input value="25.000" type="radio" onclick="myFunction()"
 														id="express-shipping" name="shipping"
 														class="custom-control-input" required="required">
-													<label class="custom-control-label" for="express-shipping">Express:</label>
+													<label class="custom-control-label" for="express-shipping">Giao Hàng Nhanh:</label>
 												</div> <!-- End .custom-control -->
 											</td>
 											<td>25.000đ</td>
@@ -145,7 +144,7 @@
 										<!-- End .summary-shipping-estimate -->
 
 										<tr class="summary-total">
-											<td>Total:</td>
+											<td>Tổng:</td>
 											<td><span class="totalPrice" id="total">	
 											<c:set value="${sumPrice}"  var="names"></c:set> 
 											<fmt:formatNumber type="number" groupingUsed="true" value="${names}" />
@@ -159,14 +158,12 @@
 								<!-- End .table table-summary -->
 
 								<a onclick="addOrder()" 
-									class="btn btn-outline-primary-2 btn-order btn-block">PROCEED
-									TO CHECKOUT</a>
+									class="btn btn-outline-primary-2 btn-order btn-block">Thanh Toán</a>
 							</div>
 							<!-- End .summary -->
 
 							<a href="<c:url value='/web/product?page=1&limit=9'/>"
-								class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE
-									SHOPPING</span><i class="icon-refresh"></i></a>
+								class="btn btn-outline-dark-2 btn-block mb-3"><span>Tiếp Tục Mua Hàng</span><i class="icon-refresh"></i></a>
 						</aside>
 						<!-- End .col-lg-3 -->
 					</div>
