@@ -15,7 +15,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
@@ -71,11 +70,10 @@
 											<td class="product-col" style="width: 130px">${item.name}</td>
 											<td class="price-col" style="width: 126px" >${item.orderDate}</td>
 											<td class="quantity-col" style="text-align: center;">${item.amount}</td>
-											<td class="price-col" style="width: 110px;">${item.total}đ</td>
+											<td class="price-col" style="width: 110px;"><fmt:formatNumber type="number" groupingUsed="true"
+														value="${item.total}" />VND
 											<td class="remove-col">
 											<div class="product-title" style="text-align: center;width: 110px;">${item.status}</div>
-											<!-- <div><a href="#" class="btn btn-outline-dark-2"><span>UPDATE CART</span><i class="icon-refresh"></i></a></div> -->
-											
 											</td>
 											<td> 
 												<button type="button" onclick="orderDetails(${item.id})" class="btn btn-info btn-lg" data-toggle="modal" data-target="#assignmentBuildingModal" style="height: 50px;background: #15A78A"> Xem Chi Tiết</button>
@@ -128,7 +126,8 @@
 													</h3><!-- End .product-title -->
 												</div><!-- End .product -->
 											</td>
-											<td class="price-col" >${item.bookPrice}<span> VND</span></td>
+											<td class="price-col" >
+												<fmt:formatNumber type="number" groupingUsed="true" value="${item.bookPrice}"></fmt:formatNumber>VND</td>
 											<td class="remove-col">
 											
 											<a href="<c:url value='/web/product/${item.bookId}' />" class="btn btn-outline-dark-2" style="background: lavender;"><span>Chi Tiết Sản Phẩm</span></a>

@@ -37,7 +37,6 @@ public class SearchAPI {
 	
 	@PostMapping("/catalog")
 	public List<BookDTO> issuingcompanySearch(@RequestBody SearchBookDTO searchBookDTO ){
-		
 		Pageable pageable = new PageRequest(searchBookDTO.getPage()-1, searchBookDTO.getLimit());
 		List<BookDTO> lists = bookService.findAllPage(pageable, searchBookDTO);
 		System.out.println(searchBookDTO.toString());

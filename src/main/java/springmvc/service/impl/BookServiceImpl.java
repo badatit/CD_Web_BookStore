@@ -74,6 +74,7 @@ public class BookServiceImpl implements IBookService {
 				skip(destination.getImg2());
 				skip(destination.getImg3());
 				skip(destination.getImg4());
+				skip(destination.getCategory());
 			}
 		});
 		modelMapper.map(bookDTO, bookEntity);
@@ -137,11 +138,10 @@ public class BookServiceImpl implements IBookService {
 				bookDTO.setFavorite(null);
 			}else {
 				List<BookFavoriteEntity> bookFavoriteEntities = bookFavoriteRepository.findByUser(myUser.getId());
+				bookDTO.setFavorite(null);
 				for (BookFavoriteEntity bookFavoriteEntity : bookFavoriteEntities) {
 					if (bookFavoriteEntity.getBookEntity().getId() == item.getId()) {
 						bookDTO.setFavorite("OK");
-					}else {
-						bookDTO.setFavorite(null);
 					}
 				}
 			}
@@ -335,5 +335,10 @@ public class BookServiceImpl implements IBookService {
 			dtos.add(bookDTO);
 		}
 		return dtos;
+	}
+	@Override
+	public int getSizeSql() {
+		// TODO Auto-generated method stub
+		return bookRepository.getSizeSql();
 	}
 }

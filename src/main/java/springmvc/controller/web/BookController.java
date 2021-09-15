@@ -1,5 +1,6 @@
 package springmvc.controller.web;
 
+import java.awt.print.Book;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -19,6 +20,7 @@ import springmvc.dto.BookDTO;
 import springmvc.dto.CartDTO;
 import springmvc.dto.CategoryDTO;
 import springmvc.dto.MyUser;
+import springmvc.dto.request.BookSQLDTO;
 import springmvc.dto.request.HeaderDTO;
 import springmvc.dto.request.MiniCartDTO;
 import springmvc.dto.request.SearchBookDTO;
@@ -39,6 +41,7 @@ public class BookController {
 
 	@Autowired
 	private ICartService iCartService;
+	
 
 	@Autowired
 	private IBookFavoriteService iBookFavo;
@@ -51,15 +54,17 @@ public class BookController {
 		 * searchBookDTO.setLimit(9); }
 		 */
 		Pageable pageable = new PageRequest(searchBookDTO.getPage() - 1, searchBookDTO.getLimit());
-		int totalPages = (int) Math.ceil((double) bookService.getTotalItem() / searchBookDTO.getLimit());
-		mav.addObject("totalPages", totalPages);
 		int currentPage = searchBookDTO.getPage();
 		mav.addObject("currentPage", currentPage);
-
 		List<CategoryDTO> lists = iCategoryService.showCategorys();
 		List<BookDTO> listDTO = null;
 
 		listDTO = bookService.findAllPage(pageable, searchBookDTO);
+		System.out.println("tong so luong" + bookService.getSizeSql());
+		System.out.print(searchBookDTO.getLimit());
+		int totalPages = (int) Math.ceil((double) bookService.getSizeSql() / searchBookDTO.getLimit());
+		mav.addObject("totalPages", "9");
+		System.out.println(totalPages +"-----------------------------------");
 
 		List<String> listIssuingCompany = bookService.findAllIssuingcompany();
 		List<String> listCoverType = bookService.findAllCoverType();

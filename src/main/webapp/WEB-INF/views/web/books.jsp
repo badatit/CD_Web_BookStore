@@ -13,7 +13,7 @@
 <c:url var="APIBookFavorite" value="/api/bookfavorite" />
 <c:url var="Pricture"
 	value='/template/web/assets/images/products/cart/product-1.jpg' />
-	<c:url var="APIBookFavorite" value="/api/bookfavorite" />
+<c:url var="APIBookFavorite" value="/api/bookfavorite" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +27,7 @@
 			method="get" modelAttribute="searchBookDTO">
 			<form:input type="hidden" value="${currentPage}" id="page1"
 				name="page" path="page" />
-			<form:input type="hidden" value="" id="limit1" name="limit"
+			<form:input type="hidden" value="9" id="limit1" name="limit"
 				path="limit" />
 			<%-- <form:input type="hidden" value="${searchName}" id="searchName1" name="searchName" path="searchName" />
 			 <form:input type="hidden" value="${categoryName}" id="categoryName1" name="categoryName" path="categoryName" />  --%>
@@ -35,7 +35,8 @@
 				<input type="hidden" value="" id="searchName" name="searchName" />
 			</c:if>
 			<c:if test="${categoryId != null}">
-				<input type="hidden" value="" id="categoryId" name="categoryId" />
+				<input type="hidden" value="${categoryId}" id="categoryId"
+					name="categoryId" />
 			</c:if>
 
 
@@ -43,6 +44,20 @@
 
 			<div class="container">
 				<div class="row">
+					<nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+						<div class="container">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.html">Trang
+										Chủ </a></li>
+								<li class="breadcrumb-item"><a href="#">Sản Phẩm</a></li>
+								<li class="breadcrumb-item active" aria-current="page"><span
+									id="titelProduct">Tất Cả</span></li>
+							</ol>
+						</div>
+					</nav>
+				</div>
+				<div class="row">
+
 					<div class="col-lg-9">
 						<div class="toolbox">
 							<div class="toolbox-left"></div>
@@ -59,6 +74,11 @@
 						<div class="products mb-3">
 							<div class="row justify-content-center" id="productBody">
 								<h3 class="message">${message}</h3>
+								<c:if test="${books == '[]' }">
+									<img class="imgOpps" alt=""
+										src="https://muahangnhatonline.com/default/template/img/cart-empty.png">
+								</c:if>
+							
 								<c:forEach var="item" items="${books}">
 									<div class="col-6 col-md-4 col-lg-4">
 										<div class="product product-7 text-center">
@@ -71,7 +91,7 @@
 												</a>
 
 												<div class="product-action-vertical">
-													<c:if test="${item.favorite == null}">
+													<c:if test="${item.favorite == null || item.favorite == '' }">
 														<a onclick="addFavourite(${item.id})"
 															class="btn-product-icon btn-wishlist btn-expandable favorite_${item.id}">
 															<span class="messageFavorite_${item.id}">Thêm yêu
@@ -79,10 +99,10 @@
 														</a>
 													</c:if>
 													<c:if test="${item.favorite != null}">
-														<a  style="color: red;" onclick="addFavourite(${item.id})"
+														<a style="color: red;" onclick="addFavourite(${item.id})"
 															class="btn-product-icon btn-wishlist btn-expandable favorite_${item.id}">
-															<span  style="color: red;" class="messageFavorite_${item.id}">Đã yêu
-																thích</span>
+															<span style="color: red;"
+															class="messageFavorite_${item.id}">Đã yêu thích</span>
 														</a>
 													</c:if>
 												</div>
@@ -90,7 +110,8 @@
 
 												<div class="product-action">
 													<a class="btn-product btn-cart"
-														onclick="addCart(${item.id})"><span>add to cart</span></a>
+														onclick="addCart(${item.id})"><span>Thêm vào
+															giỏ hàng</span></a>
 												</div>
 												<!-- End .product-action -->
 											</figure>
@@ -121,7 +142,7 @@
 												</div>
 												<!-- End .rating-container -->
 
-												
+
 												<!-- End .product-nav -->
 											</div>
 											<!-- End .product-body -->
@@ -143,9 +164,6 @@
 					<!-- End .col-lg-9 -->
 					<aside class="col-lg-3 order-lg-first">
 						<div class="sidebar sidebar-shop">
-							<div class="widget widget-clean"></div>
-							<!-- End .widget widget-clean -->
-
 							<div class="widget widget-collapsible">
 								<h3 class="widget-title">
 									<a data-toggle="collapse" href="#widget-4" role="button"
@@ -374,6 +392,7 @@ $(document).ready(function() {
               						'<a onclick="deleteCart('+value.id+')" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>'+
               						'</div>');
               	}); 
+            		
 				},
 				error : function(error){
 					console.log(error)
@@ -431,7 +450,7 @@ $(document).ready(function() {
 		     						'</div>'+
 		     						
 		     						'<div class="product-action">'+
-		     						'<a  class="btn-product btn-cart" onclick="addCart('+value.id+')"><span>add to cart</span></a>'+
+		     						'<a  class="btn-product btn-cart" onclick="addCart('+value.id+')"><span>Thêm vào giỏ hàng</span></a>'+
 		     						'</div>'+
 		     						'</figure>'+
 		     						
@@ -454,6 +473,10 @@ $(document).ready(function() {
 		     						'</div>'+
 		     						'</div>');
 		                      	});
+		     					
+		     					if (data == '') {
+		     						$('#imgOpp').attr('src', "https://muahangnhatonline.com/default/template/img/cart-empty.png");
+								}
 		     				},
 		     				error : function(error){
 		     					console.log(error)
@@ -487,7 +510,7 @@ $(document).ready(function() {
 		     						'</div>'+
 		     						
 		     						'<div class="product-action">'+
-		     						'<a  class="btn-product btn-cart" onclick="addCart('+value.id+')"><span>add to cart</span></a>'+
+		     						'<a  class="btn-product btn-cart" onclick="addCart('+value.id+')"><span>Thêm vào giỏ hàng</span></a>'+
 		     						'</div>'+
 		     						'</figure>'+
 		     						
@@ -510,6 +533,9 @@ $(document).ready(function() {
 		     						'</div>'+
 		     						'</div>');
 		                      	});
+		     					if (data == '') {
+		     						$('#imgOpp').attr('src', "https://muahangnhatonline.com/default/template/img/cart-empty.png");
+								}
 		     				},
 		     				error : function(error){
 		     					console.log(error)
@@ -583,13 +609,14 @@ $(document).ready(function() {
     	var pageC = $('#page1').val();
     	var searchName = $('#searchName').val();
     	var category = $('#categoryId').val(); 
+    	var limit = $('#limit1').val();
         window.pagObj = $('#pagination').twbsPagination({
         	startPage : pageC,
-            totalPages: 10,
+            totalPages: totalPage,
             visiblePages: 9,
             onPageClick: function (event, page) { // 1 2 3
             	if (pageC != page ) {
-            		$('#limit1').val(9);
+            		$('#limit1').val(limit);
 					$('#page1').val(page); // 1 bam 2 thì 1 se thanh 2
 					$('#formSubmit').submit();
 				}
@@ -632,6 +659,25 @@ $(document).ready(function() {
 	 }
 	 
 	 
+</script>
+	<script>
+	var url_string = window.location.href;
+	var url = new URL(url_string);
+	var c = url.searchParams.get("categoryId");
+	if (c == 1) {
+		$('#titelProduct').text("");
+		$('#titelProduct').text("Kinh Tế");
+	}else if(c == 2){
+		$('#titelProduct').text("Chính Trị");
+	}else if(c == 3){
+		$('#titelProduct').text("Đời Sống - Kinh Tế");
+	}
+	else if(c == 4){
+		$('#titelProduct').text("Truyện Ngắn");
+	}else if(c == 5){
+		$('#titelProduct').text("Kiến Thức - Bách Khoa");
+	}
+
 </script>
 
 

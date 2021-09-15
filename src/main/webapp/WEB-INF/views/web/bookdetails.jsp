@@ -99,9 +99,7 @@
 								<!-- End .product-price -->
 
 								<div class="product-content">
-									<p>Sed egestas, ante et vulputate volutpat, eros pede
-										semper est, vitae luctus metus libero eu augue. Morbi purus
-										libero.</p>
+									<p>${bookId.productDescription}</p>
 								</div>
 								<!--End .product-content -->
 

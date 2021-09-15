@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Pageable;
 
+import springmvc.dto.request.BookSQLDTO;
 import springmvc.dto.request.SearchBookDTO;
 import springmvc.entity.BookEntity;
 import springmvc.repository.custom.BookRepositoryCustom;
@@ -17,7 +18,8 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-
+	
+	private String get_sql;
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<BookEntity> findAll(SearchBookDTO searchBookDTO) {
@@ -126,11 +128,18 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 			}
 			sql.append(")");
 		}
-		
+		get_sql = sql.toString();
 		sql.append(" limit " + pageable.getOffset() + "," + pageable.getPageSize());
 		
 		Query query = entityManager.createNativeQuery(sql.toString(), BookEntity.class);
 		return query.getResultList();
-		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public int getSizeSql() {
+		Query query = entityManager.createNativeQuery(get_sql, BookEntity.class);
+		List<BookEntity> list = query.getResultList();
+		return list.size();
 	}
 }

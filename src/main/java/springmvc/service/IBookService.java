@@ -33,4 +33,5 @@ public interface IBookService {
 	public long totalAmountOfBooksByActive();
 	public long totalAmountOfBooksByInactive();
 	public List<BookDTO> findBookByCategoryIdOfBookDetail(Long categoryId);
+	public int getSizeSql();
 }

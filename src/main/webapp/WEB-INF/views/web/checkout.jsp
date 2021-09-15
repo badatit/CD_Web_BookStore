@@ -84,7 +84,8 @@
 											</tr>
 											<tr class="summary-total">
 												<td>Tổng Tiền:</td>
-												<td><span>${orderDTO.total}</span> VND <input
+												<td><span><fmt:formatNumber type="number" groupingUsed="true"
+														value="${orderDTO.total}" /></span> VND <input
 													type="hidden" id="price" name="price"
 													value="${orderDTO.total}"></td>
 											</tr>

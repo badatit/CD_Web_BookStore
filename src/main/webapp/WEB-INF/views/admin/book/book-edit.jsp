@@ -58,7 +58,7 @@
 									<select id=coverType class="form-control" name="coverType">
 										<option selected value="">Choose...</option>
 										<c:forEach var="item" items="${coverTypes}">
-											<option value="${item.key}"
+											<option value="${item.value}"
 												${item.value == book.coverType  ? 'selected' : '' }>${item.value}</option>
 										</c:forEach>
 										<lable>${book.coverType}</lable>
@@ -106,10 +106,10 @@
 
 									<div class="col-lg-4">
 										<input type="file" name="img2" id="img2"> <img alt="" id="showimg2"
-											style="height: 140px; width: 105px; margin-top: 10px" src="">
+											style="height: 140px; width: 105px; margin-top: 10px" src="${book.img2}">
 									</div>
 								</div>
-							</div>
+							</div> 
 							<div class="form-group ">
 								<div>
 									<label for="img1" class="control-label col-lg-2">Chọn
@@ -117,7 +117,7 @@
 
 									<div class="col-lg-4">
 										<input type="file" name="img1" id="img3"> <img alt="" id="showimg3"
-											style="height: 140px; width: 105px; margin-top: 10px" src="">
+											style="height: 140px; width: 105px; margin-top: 10px" src="${book.img3}">
 									</div>
 								</div>
 								<div>
@@ -126,7 +126,7 @@
 
 									<div class="col-lg-4">
 										<input type="file" name="img1" id="img4"> <img alt="" id="showimg4"
-											style="height: 140px; width: 105px; margin-top: 10px" src="">
+											style="height: 140px; width: 105px; margin-top: 10px" src="${book.img4}">
 									</div>
 								</div>
 							</div>
@@ -199,7 +199,6 @@
 		rules : {
 			name : {
 				required : true,
-				remote : "${ApiUrl}/checkNameMatch",
 			},
 			price : {
 				required : true,
@@ -236,7 +235,6 @@
 		messages : {
 			name : {
 				required : "Vui lòng không để trống",
-				remote : "Tên bị trùng khớp. Vui lòng nhập lại !!!"
 			},
 			price : {
 				required : "Vui lòng không để trống"

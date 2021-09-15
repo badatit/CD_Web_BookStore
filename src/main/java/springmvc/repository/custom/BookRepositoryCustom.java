@@ -10,6 +10,7 @@ import springmvc.entity.BookEntity;
 public interface BookRepositoryCustom  {
 	public List<BookEntity> findAll(SearchBookDTO searchBookDTO);
 	public List<BookEntity> findAll(Pageable pageable,SearchBookDTO searchBookDTO);
+	public int getSizeSql();
 	
 
 }

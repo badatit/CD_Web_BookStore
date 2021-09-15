@@ -69,7 +69,6 @@
 			rules : {
 				name : {
 					required : true,
-					remote : "${addCategoryURL}/checkName"
 				},
 				status : {
 					required : true
@@ -79,7 +78,6 @@
 			messages : {
 				name : {
 					required : "Vui lòng không để trống",
-					remote : "Tên bị trùng khớp. Vui lòng nhập lại !!!"
 				},
 				status : "Vui lòng không để trống"
 
@@ -106,8 +104,7 @@
 			rules : {
 				name : {
 					required : true,
-					remote : "${addCategoryURL}/checkName"
-				},
+				},	
 				status : {
 					required : true
 				}
@@ -116,7 +113,6 @@
 			messages : {
 				name : {
 					required : "Vui lòng không để trống",
-					remote : "Tên bị trùng khớp. Vui lòng nhập lại !!!"
 				},
 				status : "Vui lòng không để trống"
 
