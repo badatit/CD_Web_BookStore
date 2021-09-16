@@ -20,7 +20,7 @@ public class CategoryEntity extends BaseEntity{
 	@Column(name ="status")
 	private String status;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "category",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "category",cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<BookEntity> listBooks =new ArrayList<>();
 
 	public String getName() {

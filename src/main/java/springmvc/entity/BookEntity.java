@@ -60,7 +60,7 @@ public class BookEntity extends BaseEntity {
 	private int quantity;
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY,cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
 	@JoinColumn(name="categoryid")
 	private CategoryEntity category;
 	
