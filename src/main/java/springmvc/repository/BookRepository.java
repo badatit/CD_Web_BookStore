@@ -47,4 +47,9 @@ public interface BookRepository extends JpaRepository<BookEntity, Long > ,BookRe
 	
 	@Query(value="select *  from book where categoryid=?1 ORDER BY RAND() limit 4" , nativeQuery = true)
 	public List<BookEntity> findBookByCategoryOfBookDetail(Long cateogoryId);
+	
+	@Query(value = "SELECT quantity from book where id= ?1" , nativeQuery = true)
+	public int countByQuantity(long bookId);
+	
+	
 }

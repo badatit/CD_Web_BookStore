@@ -96,6 +96,7 @@ public class CartServiceImpl implements ICartService {
 //		// get size cart
 		int sizeCart = cartRepository.countCartById(myUser.getId(), false);
 		cartDTO.setSizeCart(sizeCart);
+		cartDTO.setAmount( bookRepository.countByQuantity(cartDTO.getBookId())-cartDTO.getAmount());
 		return cartDTO;
 	}
 
@@ -215,6 +216,15 @@ public class CartServiceImpl implements ICartService {
 			result = cartEntity.getAmount() * cartEntity.getBookEntity().getPrice();
 		}
 		return result;
+	}
+
+	@Override
+	public int checkQuantity(int amount, long bookId) {
+		int in = amount - bookRepository.countByQuantity(bookId);
+		if ( in > 0) {
+			return in;
+		}
+		return 0;
 	}
 
 

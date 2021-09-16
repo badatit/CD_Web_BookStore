@@ -60,8 +60,8 @@ public class JPAConfig {
 		Properties properties = new Properties();
 //		properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
 //		properties.setProperty("hibernate.hbm2ddl.auto", "create");
-		properties.setProperty("hibernate.hbm2ddl.auto", "none");
-//		properties.setProperty("hibernate.hbm2ddl.auto", "update");
+//		properties.setProperty("hibernate.hbm2ddl.auto", "none");
+		properties.setProperty("hibernate.hbm2ddl.auto", "update");
 //		 bật tính năng lazy
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 		properties.setProperty("hibernate.show_sql", "true");

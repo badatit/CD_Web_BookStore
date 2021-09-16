@@ -22,6 +22,7 @@ import springmvc.converter.OrderConverter;
 import springmvc.dto.CategoryDTO;
 import springmvc.dto.MyUser;
 import springmvc.dto.OrderDTO;
+import springmvc.entity.BookEntity;
 import springmvc.entity.CartEntity;
 import springmvc.entity.CategoryEntity;
 import springmvc.entity.OrderEntity;
@@ -40,7 +41,7 @@ public class OrderServiceImpl implements IOrderService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private CartRepository cartRepository;
 
@@ -51,8 +52,9 @@ public class OrderServiceImpl implements IOrderService {
 
 	@Override
 	public OrderDTO save(OrderDTO orderDTO) {
+		OrderDTO dto = new OrderDTO();
 		MyUser myUser = SecurityUtils.getPrincipal();
-		int count =0;
+		int count = 0;
 		for (String item : orderDTO.getCartIds()) {
 			Long id = Long.valueOf(item);
 			CartEntity cartEntity = cartRepository.findOne(id);
@@ -70,7 +72,11 @@ public class OrderServiceImpl implements IOrderService {
 		entity.setTotal(orderDTO.getTotal());
 		entity.setAmount(count);
 		// save orderdetail
-		return orderConverter.converterToDTO(orderRepository.save(entity));
+		dto = orderConverter.converterToDTO(orderRepository.save(entity));
+//			if (dto != null) {
+//				BookEntity bookEntity = bookRepository.findOne(orderDTO.get)
+//			}
+		return dto;
 	}
 
 	@Override
@@ -105,7 +111,7 @@ public class OrderServiceImpl implements IOrderService {
 	@Transactional
 	public OrderDTO updateOrderStatus(OrderDTO orderDTO) {
 		OrderEntity orderEntity = orderRepository.findOne(orderDTO.getId());
-		ModelMapper modelMapper = new ModelMapper();	
+		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setFieldMatchingEnabled(true).setFieldAccessLevel(AccessLevel.PRIVATE);
 		modelMapper.addMappings(new PropertyMap<OrderDTO, OrderEntity>() {
 			@Override
@@ -124,11 +130,11 @@ public class OrderServiceImpl implements IOrderService {
 				skip(destination.getPhoneNumber());
 				skip(destination.getTotal());
 				skip(destination.getUser());
-				
+
 			}
 		});
 		modelMapper.map(orderDTO, orderEntity);
-		
+
 		return orderConverter.converterToDTO(orderRepository.save(orderEntity));
 	}
 
@@ -140,8 +146,5 @@ public class OrderServiceImpl implements IOrderService {
 		}
 		return status;
 	}
-
-
-	
 
 }

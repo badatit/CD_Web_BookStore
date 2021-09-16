@@ -17,10 +17,16 @@ public class OrderDTO extends AbstractDTO {
 	private String orderDate;
 	private String note;
 	private Long usersId;
-	
+	private int quantityAfter;
 	
 	
 
+	public int getQuantityAfter() {
+		return quantityAfter;
+	}
+	public void setQuantityAfter(int quantityAfter) {
+		this.quantityAfter = quantityAfter;
+	}
 	public String getMessage() {
 		return message;
 	}

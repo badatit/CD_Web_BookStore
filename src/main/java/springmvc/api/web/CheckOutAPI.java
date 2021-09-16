@@ -28,11 +28,11 @@ public class CheckOutAPI {
 	private ICartService cartService;
 
 	@GetMapping
-	public Long saveCheckOut(HttpSession session) {
+	public OrderDTO saveCheckOut(HttpSession session) {
 		OrderDTO dto = (OrderDTO) session.getAttribute("orderDTO");
 		dto = orderService.save(dto);
 		if (dto != null) {
-			return dto.getId();
+			return dto;
 		}
 		return null;
 	}

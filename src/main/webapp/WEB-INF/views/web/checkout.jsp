@@ -185,7 +185,11 @@
 				contentType : "application/json",
 				success : function(response) {
 					if (response != null) {
-						saveOrderDetail(response);
+					//	if (response.quantityAfter > 0) {
+							saveOrderDetail(response.id);
+						//}else{
+						//	alert('So luong chi con '+ response.quantityAfter);
+						//}
 					}
 				},
 				error : function(response) {

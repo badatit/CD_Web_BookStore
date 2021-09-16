@@ -93,5 +93,17 @@ public class CartAPI {
 		}
 		return result;
 	}
+	
+	//check quantity 
+	
+//	public int checkQuantity(int amount,long bookId) {
+//		return cartService.checkQuantity(amount, bookId);
+//	}
+	@GetMapping("/carts/checkQuantity")
+	public int checkQuantity() {
+		System.out.println("OOOOOO");
+		return 1;
+	}
+	
 
 }

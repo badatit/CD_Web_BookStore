@@ -283,36 +283,50 @@ function addCart(bookId,id) {
 	var data = {};
 	var qty_id =".amount_"+id;
 	var qty = $(qty_id).val();
-	
 	var id =id;  
-	 
 	data['bookId'] = bookId;
 	data['amount'] =qty;
 	data['id'] =id;
 	data['checkBookInCartPage'] = true;
-	   $.ajax({
-     type: "POST",
-	 url: "${APICartUrl}",
-     data: JSON.stringify(data),
-     dataType: "json",
-     contentType: "application/json",
-     success: function (response) {  
-     	$('#sizeCart').html(response.sizeCart);
-     	
-     	// call subtotal
-     	getSubTotal();
-     	getCart();
-     	//change cart when click + -
-    	 getOneCartChange(id);
-     	// function currency
-     	
-     },
-     
-     error: function (response) {
-    	 swal("Thất bại", "Sản phẩm vẫn an toàn :)", "error");
-     }
-  });
+		$.ajax({
+		     type: "POST",
+			 url: "${APICartUrl}",
+		     data: JSON.stringify(data),
+		     dataType: "json",
+		     contentType: "application/json",
+		     success: function (response) {  
+		    	 if (response.amount <= 0) {
+					alert('Số lượng chỉ còn 0 sản phẩm');
+				}
+		     	$('#sizeCart').html(response.sizeCart);
+		     	// call subtotal
+		     	getSubTotal();
+		     	getCart();
+		     	//change cart when click + -
+		    	getOneCartChange(id);
+		     	// function currency
+		     },
+		     
+		     error: function (response) {
+		    	 swal("Thất bại", "Sản phẩm vẫn an toàn :)", "error");
+		     }
+		  });
 }
+function getQuantity(){
+	$.ajax({
+		type : "GET",
+		url : "${APICartUrl}/checkQuantity",
+		dataType: "json",
+		contentType : "application/json",
+		success : function(response) {
+			return response;
+		},
+		error : function(response) {
+			 alert('Loi Quantity');
+		}
+	});
+};
+  
 
  function getSubTotal() {
 	 var radioValue = $("input[name='shipping']:checked").val();

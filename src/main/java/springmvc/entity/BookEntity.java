@@ -1,7 +1,6 @@
 package springmvc.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,9 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -60,8 +56,11 @@ public class BookEntity extends BaseEntity {
 	@Column(name = "img4")
 	private String img4;
 	
+	@Column(name ="quantity")
+	private int quantity;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinColumn(name="categoryid")
 	private CategoryEntity category;
 	
@@ -233,6 +232,15 @@ public class BookEntity extends BaseEntity {
 	public void setCategory(CategoryEntity category) {
 		this.category = category;
 	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	
 	
 	
 	

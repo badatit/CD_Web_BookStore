@@ -20,13 +20,16 @@ public class BookDTO extends AbstractDTO {
 	private String categoryName;
 	private String base64_1;
 	private String favorite;
+	private int quantity;
 	
 	
-	
-	
-	
-	
-	
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 
 	public String getFavorite() {
 		return favorite;

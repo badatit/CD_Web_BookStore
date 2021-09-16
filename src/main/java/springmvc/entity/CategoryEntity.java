@@ -3,6 +3,7 @@ package springmvc.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +20,7 @@ public class CategoryEntity extends BaseEntity{
 	@Column(name ="status")
 	private String status;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "category")
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "category",cascade = CascadeType.ALL)
 	private List<BookEntity> listBooks =new ArrayList<>();
 
 	public String getName() {

@@ -209,7 +209,7 @@
     				$.each(formData, function(index, v) {
     					data["" + v.name + ""] = v.value;
     				});
-    				 /* addingUser(data);  */
+    				 addingUser(data);  
     			});
     		}
     	});

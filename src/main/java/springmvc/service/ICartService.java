@@ -26,5 +26,7 @@ public interface ICartService {
 	// new function
 	public double subTotal();
 	public double changeAmountTotal(Long id);
+	
+	public int checkQuantity(int amount, long bookId);
 
 }
