@@ -65,10 +65,10 @@ public class BookEntity extends BaseEntity {
 	@JoinColumn(name="categoryid")
 	private CategoryEntity category;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "bookEntity")
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "bookEntity",cascade = CascadeType.ALL)
 	private List<CartEntity> cartEntities =new ArrayList<>();
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "bookEntity")
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "bookEntity",cascade = CascadeType.ALL)
 	private List<OrderDetailEntity> orderDetailEntities =new ArrayList<>();
 //	@ManyToMany(fetch = FetchType.LAZY)
 //	@JoinTable(name = "order_book",joinColumns = @JoinColumn(name = "bookid"),
