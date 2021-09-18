@@ -60,14 +60,14 @@ public class BookEntity extends BaseEntity {
 	private int quantity;
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY,cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="categoryid")
 	private CategoryEntity category;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "bookEntity")
+	@OneToMany(fetch = FetchType.LAZY,cascade= {CascadeType.PERSIST, CascadeType.REMOVE},mappedBy = "bookEntity")
 	private List<CartEntity> cartEntities =new ArrayList<>();
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "bookEntity")
+	@OneToMany(fetch = FetchType.LAZY,cascade= {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "bookEntity")
 	private List<OrderDetailEntity> orderDetailEntities =new ArrayList<>();
 //	@ManyToMany(fetch = FetchType.LAZY)
 //	@JoinTable(name = "order_book",joinColumns = @JoinColumn(name = "bookid"),

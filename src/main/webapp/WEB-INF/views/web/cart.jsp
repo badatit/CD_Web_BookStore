@@ -52,7 +52,7 @@
 											<td class="price-col">	<fmt:formatNumber type="number" groupingUsed="true" value="${item.price}"/></td>
 											<td class="quantity-col">
 												<div class="cart-product-quantity">
-													<button onclick="addCart(${item.bookId},${item.id})">
+													<button onclick="checkQuantity(${item.bookId},${item.id})">
 														<input type="number"
 															class="form-control amount_${item.id}"
 															value="${item.amount}" step="1" min="1" max="10"
@@ -208,7 +208,7 @@ function addOrder() {
 	
 	 var shipping = radioValue;
 	data['shipping'] = shipping;
-	data['total']=total;
+	data['total']=numberNotWithDot(total);
 	 $.ajax({
          type: 'post',
          url: '${APIOrderUrl}/saveOrders',
@@ -278,6 +278,27 @@ function saveOrderDetail(orderId){
      });
 }
 */
+function checkQuantity(bookId,id){
+	var qty_id =".amount_"+id;
+	var qty = $(qty_id).val();
+	$.ajax({
+		type : "GET",
+		url : "${APICartUrl}/checkQuantity?bookId="+bookId+"&quantity="+qty,
+		dataType: "json",
+		contentType : "application/json",
+		success : function(response) {
+			if (response < 0) {
+				alert('Số lượng chỉ còn 0 sản phẩm');
+				$(qty_id).val(qty-1);
+			}else{
+				addCart(bookId,id);
+			}
+		},
+		error : function(response) {
+			 alert('Loi Quantity');
+		}
+	});
+}
 function addCart(bookId,id) {
 	$("#cartMini").html('');
 	var data = {};
@@ -294,10 +315,7 @@ function addCart(bookId,id) {
 		     data: JSON.stringify(data),
 		     dataType: "json",
 		     contentType: "application/json",
-		     success: function (response) {  
-		    	 if (response.amount <= 0) {
-					alert('Số lượng chỉ còn 0 sản phẩm');
-				}
+		     success: function (response) {
 		     	$('#sizeCart').html(response.sizeCart);
 		     	// call subtotal
 		     	getSubTotal();
@@ -312,6 +330,7 @@ function addCart(bookId,id) {
 		     }
 		  });
 }
+
 function getQuantity(){
 	$.ajax({
 		type : "GET",
@@ -356,7 +375,7 @@ function getQuantity(){
 	         dataType: "json",
 	         contentType: "application/json",
 			success : function(data) {
-				$(idTotal).text(data);
+				$(idTotal).text(numberWithDot(data));
 			},
 			error : function(response) {
 				alert('loi change cart');
@@ -472,7 +491,7 @@ function getQuantity(){
 		         dataType: "json",
 		         contentType: "application/json",
 		         success : function(data){
-		        	 $('#total').html(data);
+		        	 $('#total').html(numberWithDot(data));
 					},
 					error : function(error){
 						console.log(error)
@@ -483,6 +502,16 @@ function getQuantity(){
 	  if (radioValue == 0) {
 		  $('#total').text(total);
 	}
+	}
+ function numberWithDot(x) {
+	    var parts = x.toString().split(".");
+	    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+	    return parts.join(".");
+	}
+function numberNotWithDot(x) {
+	    var parts = x.toString().split(".");
+	    
+	    return parts[0] +parts[1] + parts[2];
 	}
 
  

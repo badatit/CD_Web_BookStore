@@ -51,17 +51,17 @@ public class JPAConfig {
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/bookstore_hai?useSSL=false");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/bookstore?useSSL=false");
 		dataSource.setUsername("root");
-		dataSource.setPassword("210999");
+		dataSource.setPassword("1234");
 		return dataSource;
 	}
 	Properties additionalProperties() {
 		Properties properties = new Properties();
 //		properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
 //		properties.setProperty("hibernate.hbm2ddl.auto", "create");
-//		properties.setProperty("hibernate.hbm2ddl.auto", "none");
-		properties.setProperty("hibernate.hbm2ddl.auto", "update");
+		properties.setProperty("hibernate.hbm2ddl.auto", "none");
+//		properties.setProperty("hibernate.hbm2ddl.auto", "update");
 //		 bật tính năng lazy
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 		properties.setProperty("hibernate.show_sql", "true");

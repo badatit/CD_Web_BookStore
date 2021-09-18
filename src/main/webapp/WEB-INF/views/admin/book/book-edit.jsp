@@ -83,6 +83,13 @@
 								</div>
 							</div>
 							<div class="form-group ">
+								<label for="quantity" class="control-label col-lg-2">SKU</label>
+								<div class="col-lg-10">
+									<input class="form-control" type="number" id="quantity" name="quantity"
+										value="${book.quantity}" />
+								</div>
+							</div>
+							<div class="form-group ">
 								<label for="productDescription" class="control-label col-lg-2">Mô
 									Tả Sản Phẩm</label>
 								<div class="col-lg-10">

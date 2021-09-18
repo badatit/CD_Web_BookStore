@@ -330,9 +330,9 @@
 								<li><a href="<c:url value='/web/blog'/>" class="sf-with-ul">Blog</a>
 
 									</li>
-								<li><a href="elements-list.html" class="sf-with-ul">Dịch Vụ</a>
+							<!-- 	<li><a href="elements-list.html" class="sf-with-ul">Dịch Vụ</a>
 
-									</li>
+									</li> -->
 							</ul>
 							<!-- End .menu -->
 						</nav>

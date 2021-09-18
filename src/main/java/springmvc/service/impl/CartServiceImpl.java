@@ -220,11 +220,8 @@ public class CartServiceImpl implements ICartService {
 
 	@Override
 	public int checkQuantity(int amount, long bookId) {
-		int in = amount - bookRepository.countByQuantity(bookId);
-		if ( in > 0) {
-			return in;
-		}
-		return 0;
+		int in = bookRepository.countByQuantity(bookId)-amount;
+		return in;
 	}
 
 

@@ -100,9 +100,8 @@ public class CartAPI {
 //		return cartService.checkQuantity(amount, bookId);
 //	}
 	@GetMapping("/carts/checkQuantity")
-	public int checkQuantity() {
-		System.out.println("OOOOOO");
-		return 1;
+	public int checkQuantity(@RequestParam(value="bookId") Long bookId,@RequestParam(value="quantity") int quantity) {
+		return cartService.checkQuantity(quantity, bookId);
 	}
 	
 

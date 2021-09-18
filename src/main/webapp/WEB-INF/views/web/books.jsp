@@ -666,16 +666,18 @@ $(document).ready(function() {
 	var c = url.searchParams.get("categoryId");
 	if (c == 1) {
 		$('#titelProduct').text("");
-		$('#titelProduct').text("Kinh Tế");
+		$('#titelProduct').text("Tư Duy");
 	}else if(c == 2){
-		$('#titelProduct').text("Chính Trị");
+		$('#titelProduct').text("Kỹ Năng Sống");
 	}else if(c == 3){
-		$('#titelProduct').text("Đời Sống - Kinh Tế");
+		$('#titelProduct').text("Tiểu Thuyết");
 	}
 	else if(c == 4){
 		$('#titelProduct').text("Truyện Ngắn");
 	}else if(c == 5){
 		$('#titelProduct').text("Kiến Thức - Bách Khoa");
+	}else if(c==6){
+		$('#titelProduct').text("Làm Việc Kỹ Năng");
 	}
 
 </script>

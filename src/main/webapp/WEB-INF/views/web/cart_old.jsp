@@ -399,6 +399,16 @@
 		  				}
 		  			});
 			}
+			  function numberWithDot(x) {
+				    var parts = x.toString().split(".");
+				    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+				    return parts.join(".");
+				}
+			  function numberNotWithDot(x) {
+				    var parts = x.toString().split(".");
+				    
+				    return parts[0] +parts[1] + parts[2];
+				}
 </script>
 
 </body>
