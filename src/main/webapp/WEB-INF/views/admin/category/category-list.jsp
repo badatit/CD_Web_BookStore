@@ -90,7 +90,7 @@ document.getElementById('removeCategory').onclick = function(){
 		 deleteCategory(data);
      
     } else {
-      swal("Cancelled", "Your imaginary file is safe :)", "error");
+    	swal("Chưa Thực Hiện Xóa", "Dữ liệu vẫn an toàn", "error");
     }
 	});
 };

@@ -88,7 +88,7 @@
 									</div>
 									<!-- End .ratings -->
 									<a class="ratings-text" href="#product-review-link"
-										id="review-link">( 2 Reviews )</a>
+										id="review-link">( 2 đánh giá )</a>
 								</div>
 								<!-- End .rating-container -->
 
@@ -112,7 +112,7 @@
 										<!-- End .product-details-quantity -->
 
 										<a class="btn-product btn-cart"
-											onclick="addCart(${bookId.id})"><span>add to cart</span></a>
+											onclick="addCart(${bookId.id})"><span>Thêm vào giỏ hàng</span></a>
 									</div>
 									<!-- End .details-action-col -->
 
@@ -166,21 +166,21 @@
 					<ul class="nav nav-pills justify-content-center" role="tablist">
 						<li class="nav-item"><a class="nav-link active"
 							id="product-desc-link" data-toggle="tab" href="#product-desc-tab"
-							role="tab" aria-controls="product-desc-tab" aria-selected="true">Description</a>
+							role="tab" aria-controls="product-desc-tab" aria-selected="true">Mô tả</a>
 						</li>
 						<li class="nav-item"><a class="nav-link"
 							id="product-info-link" data-toggle="tab" href="#product-info-tab"
-							role="tab" aria-controls="product-info-tab" aria-selected="false">Additional
-								information</a></li>
+							role="tab" aria-controls="product-info-tab" aria-selected="false">Thêm thông tin
+								</a></li>
 						<li class="nav-item"><a class="nav-link"
 							id="product-shipping-link" data-toggle="tab"
 							href="#product-shipping-tab" role="tab"
-							aria-controls="product-shipping-tab" aria-selected="false">Shipping
-								& Returns</a></li>
+							aria-controls="product-shipping-tab" aria-selected="false">Vận chuyển
+								& Hoàn trả</a></li>
 						<li class="nav-item"><a class="nav-link"
 							id="product-review-link" data-toggle="tab"
 							href="#product-review-tab" role="tab"
-							aria-controls="product-review-tab" aria-selected="false">Reviews
+							aria-controls="product-review-tab" aria-selected="false">Đánh giá
 								(2)</a></li>
 					</ul>
 					<div class="tab-content">
@@ -350,7 +350,7 @@
 				</div>
 				<!-- End .product-details-tab -->
 
-				<h2 class="title text-center mb-4">You May Also Like</h2>
+				<h2 class="title text-center mb-4">Có thể bạn thích</h2>
 				<!-- End .title text-center -->
 				<div
 					class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow"
@@ -435,7 +435,7 @@
 									<!-- End .ratings-val -->
 								</div>
 								<!-- End .ratings -->
-								<span class="ratings-text">( 2 Reviews )</span>
+								<span class="ratings-text">( 2 đánh giá )</span>
 							</div>
 							<!-- End .rating-container -->
 							<!-- End .product-nav -->

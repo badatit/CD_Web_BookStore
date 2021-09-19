@@ -138,7 +138,7 @@
 														<!-- End .ratings-val -->
 													</div>
 													<!-- End .ratings -->
-													<span class="ratings-text">( 2 Reviews )</span>
+													<span class="ratings-text">( 2 đánh giá )</span>
 												</div>
 												<!-- End .rating-container -->
 

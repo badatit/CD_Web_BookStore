@@ -51,7 +51,7 @@
 								<div class="form-group">
 									<label>Số Điện Thoại *</label> <input type="tel"
 										value="${userDTO.phoneNumber }" class="form-control"
-										name="Phone Number" id="phoneNumber" required>
+										name="PhoneNumber" id="phoneNumber" required>
 									<p class="statusphoneNumber"></p>
 										<p class="status"></p>
 								</div>
@@ -63,8 +63,7 @@
 										<p class="status"></p>
 								</div>
 								<label>Lưa ý nhận hàng</label>
-								<textarea class="form-control" cols="30" rows="4"
-									placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+								<textarea class="form-control" cols="30" rows="4"></textarea>
 							</div>
 							<!-- End .col-lg-9 -->
 							<aside class="col-lg-3">
@@ -119,12 +118,12 @@
 										<div class="card">
 											<div class="card-header" id="heading-4">
 												<h2 class="card-title">
-													<a onclick="checkPay(2)" class="collapsed" role="button"
+													<!-- <a onclick="checkPay(2)" class="collapsed" role="button"
 														data-toggle="collapse" href="#collapse-4"
 														aria-expanded="false" aria-controls="collapse-4">
 														PayPal <small class="float-right paypal-link">What
 															is PayPal?</small>
-													</a>
+													</a> -->
 												</h2>
 											</div>
 											<!-- End .card-header -->
@@ -144,8 +143,8 @@
 									<input type="hidden" id="checkPayNumber" value="1">
 									<button id="btnCheckOut" type="submit"
 										class="btn btn-outline-primary-2 btn-order btn-block">
-										<span class="btn-text">Place Order</span> <span
-											class="btn-hover-text">Proceed to Checkout</span>
+										<span class="btn-text">Đặt hàng</span> <span
+											class="btn-hover-text">Tiến hàng đặt hàng</span>
 									</button>
 								</div>
 								<!-- End .summary -->

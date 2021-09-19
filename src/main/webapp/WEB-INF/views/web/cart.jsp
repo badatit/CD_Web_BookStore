@@ -186,7 +186,7 @@ function update() {
 	alert("Check box in Checked");
 }
 function addOrder() {
-	var subTotal =$('#subTotal').text();
+	var subTotal =$('#subTotal').text().trim();
 	 var radioValue = $("input[name='shipping']:checked").val();
 	 if (radioValue == null || subTotal == 0) {
 		 if (subTotal == 0) {
@@ -510,7 +510,9 @@ function getQuantity(){
 	}
 function numberNotWithDot(x) {
 	    var parts = x.toString().split(".");
-	    
+	    if(parts[2] === undefined) {
+	    	return parts[0] +parts[1];
+	    }
 	    return parts[0] +parts[1] + parts[2];
 	}
 

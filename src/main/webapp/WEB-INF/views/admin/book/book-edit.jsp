@@ -83,7 +83,7 @@
 								</div>
 							</div>
 							<div class="form-group ">
-								<label for="quantity" class="control-label col-lg-2">SKU</label>
+								<label for="quantity" class="control-label col-lg-2">Số Lượng</label>
 								<div class="col-lg-10">
 									<input class="form-control" type="number" id="quantity" name="quantity"
 										value="${book.quantity}" />

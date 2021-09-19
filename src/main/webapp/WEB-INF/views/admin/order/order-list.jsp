@@ -162,7 +162,7 @@
 													<figure class="product-media">
 														<a href="#"> <img
 															src=" <c:url value='/template/web/assets/images/products/cart/product-1.jpg'/>"
-															alt="Product image">
+															alt="Product image" >
 														</a>
 													</figure>
 													<!-- End .product-title -->
@@ -218,7 +218,7 @@ function findAllOrderDetail(orderId) {
 							'<td class="product-col">'+
 							'<div class="product" style="padding: 0px;">'+
 							'<figure class="product-media">'+
-							'<a href="#"> <img src="${picture}" alt="Product image"></a>'+
+							'<a href="#"> <img src="'+value.img+'" alt="Product image"style="width: 100px" ></a>'+
 							'</figure>'+
 							'</div>'+
 							'</div>'+

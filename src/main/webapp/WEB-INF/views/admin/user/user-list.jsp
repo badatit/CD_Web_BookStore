@@ -179,15 +179,15 @@ function openModalAsssignmentBuilding() {
 }
 document.getElementById('removeUser').onclick = function(){
 	swal({
-		title: "Are you sure?",
-		text: "You will not be able to recover this imaginary file!",
-		type: "warning",
-		showCancelButton: true,
-		confirmButtonColor: '#DD6B55',
-		confirmButtonText: 'Yes, delete it!',
-		cancelButtonText: "No, cancel plx!",
-		closeOnConfirm: false,
-		closeOnCancel: false
+		title : "Bạn có chắc chắn?",
+		text : "Bạn sẽ xóa khách hàng này khỏi dữ liệu!",
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonColor : '#DD6B55',
+		confirmButtonText : 'Vâng, Hãy Xóa!',
+		cancelButtonText : "Không, Đừng Xóa!",
+		closeOnConfirm : false,
+		closeOnCancel : false
 	},
 	function(isConfirm){
     if (isConfirm){
@@ -199,7 +199,7 @@ document.getElementById('removeUser').onclick = function(){
 		 deleteBook(data);
      
     } else {
-      swal("Cancelled", "Your imaginary file is safe :)", "error");
+    	swal("Chưa Thực Hiện Xóa", "Dữ liệu vẫn an toàn", "error");
     }
 	});
 };
